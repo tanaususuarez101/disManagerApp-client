@@ -1,0 +1,8 @@
+<div class="">
+  <h3 class="">Navegación</h3>
+  <ul class="list-group list-group-flush ">
+    <li *ngFor="let link of links" routerLink="{{link.path}}" class="list-group-item list-group-item-light app-nav" >
+      <a >{{link.name}}</a>
+    </li>
+  </ul>
+</div>

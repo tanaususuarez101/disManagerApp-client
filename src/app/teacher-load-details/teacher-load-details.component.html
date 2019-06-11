@@ -1,0 +1,24 @@
+<ul class="list-group list-group-flush">
+  <li class="list-group-item"><h3 class="text-muted">Juan del Pino Menfoza, curso 2018/2019</h3></li>
+  <li class="list-group-item">
+    <table class="table table-bordered">
+      <thead class="thead-light">
+      <tr>
+        <th *ngFor="let field of fields" scope="col" class="content-align">{{field}}</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let item of teacherLoads" class="content-align">
+        <td>{{item?.university_degree}}</td>
+        <td>{{item?.subject_name}}</td>
+        <td>{{item?.subject_course}}</td>
+        <td>{{item?.subject_type}}</td>
+        <td>{{item?.semester}}</td>
+        <td>{{item?.group_type}}</td>
+        <td>{{item?.group_cod}}</td>
+        <td>{{item?.request_hours}}</td>
+      </tr>
+      </tbody>
+    </table>
+  </li>
+</ul>

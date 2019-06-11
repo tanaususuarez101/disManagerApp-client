@@ -1,0 +1,48 @@
+<div class="app-content">
+  <h3 class="text-muted">Coordinador, curso 2018-2019</h3>
+  <div class="content-coordinator">
+    <h4>Coordinador de Asignaturas</h4>
+    <table class="table table-hover">
+      <thead>
+      <tr class="content-align">
+        <th *ngFor="let field of fields" scope="col" class="content-vertical">{{field}}</th>
+      </tr>
+      </thead>
+      <tbody>
+      <ng-container *ngFor="let item of coordinator">
+        <tr *ngIf="item?.subject_coordinate" class="select-row content-align">
+          <td>{{item?.university_degree_name}}</td>
+          <td>{{item?.subject_name}}</td>
+          <td>{{item?.knowledge_area}}</td>
+          <td>{{item?.type}}</td>
+          <td>{{item?.semester}}</td>
+          <td>{{item?.coordinate}}</td>
+        </tr>
+      </ng-container>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="content-coordinator">
+    <h4>Coordinador de Prácticas</h4>
+    <table class="table table-hover">
+      <thead>
+      <tr class="content-align">
+        <th *ngFor="let field of fields" scope="col" class="content-vertical">{{field}}</th>
+      </tr>
+      </thead>
+      <tbody>
+      <ng-container *ngFor="let item of coordinator">
+        <tr *ngIf="item?.practical_coordinate" class="select-row content-align">
+          <td>{{item?.university_degree_name}}</td>
+          <td>{{item?.subject_name}}</td>
+          <td>{{item?.knowledge_area}}</td>
+          <td>{{item?.type}}</td>
+          <td>{{item?.semester}}</td>
+          <td>{{item?.coordinate}}</td>
+        </tr>
+      </ng-container>
+      </tbody>
+    </table>
+  </div>
+</div>

@@ -1,0 +1,23 @@
+<div class="app-content">
+  <h3 class="text-muted">Carga docente, curso 2018-2019</h3>
+  <table class="table table-hover">
+    <thead>
+    <tr class="content-align">
+      <th *ngFor="let field of fields" scope="col" class="content-vertical">{{field}}</th>
+    </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of teacherloads" routerLink="/teacher-load-details/{{item.teacher_id}}" class="select-row content-align">
+        <td>{{item?.teacher_name}}</td>
+        <td>{{item?.area_name}}</td>
+        <td>{{item?.potential_A}}</td>
+        <td>{{item?.potential_B}}</td>
+        <td>{{item?.total_hours}}</td>
+        <td>{{item?.master_teacher}}</td>
+        <td>{{item?.doctorate_teacher}}</td>
+        <td>{{item?.practical_teacher}}</td>
+        <td>{{item?.unassigned_hours}}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
