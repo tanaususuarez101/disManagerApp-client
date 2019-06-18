@@ -1,13 +1,13 @@
 <ul class="list-group list-group-flush">
-  <li class="list-group-item"><h3>Álgebra, curso 2018/2019</h3></li>
+  <li class="list-group-item"><h3>{{groupDetails?.subject_name}}</h3></li>
   <li class="list-group-item">
     <div class="row">
       <div class="col col-title">Área de conocimiento</div>
       <div class="col col-title">Titulación</div>
     </div>
     <div class="row">
-      <div class="col">Informática y Sistemas</div>
-      <div class="col">Grado en Ingeniería Informática</div>
+      <div class="col">{{groupDetails?.knowledge_area_name}}</div>
+      <div class="col">{{groupDetails?.university_degree_name}}</div>
     </div>
   </li>
   <li class="list-group-item">
@@ -17,9 +17,9 @@
       <div class="col col-title">Horas</div>
     </div>
     <div class="row">
-      <div class="col">1</div>
-      <div class="col">Práctica aula</div>
-      <div class="col">60</div>
+      <div class="col">{{groupDetails?.group_cod}}</div>
+      <div class="col">{{groupDetails?.group_type}}</div>
+      <div class="col">{{groupDetails?.group_hours}}</div>
     </div>
   </li>
   <li class="list-group-item">
@@ -31,13 +31,9 @@
       </tr>
       </thead>
       <tbody>
-      <tr>
-        <td>Juan del Pino Menfoza</td>
-        <td>7.5</td>
-      </tr>
-      <tr>
-        <td>María José Santana</td>
-        <td>22</td>
+      <tr *ngFor="let teacher of groupDetails.teacher">
+        <td>{{teacher?.teacher_name}}</td>
+        <td>{{teacher?.assigned_hours}}</td>
       </tr>
       </tbody>
     </table>

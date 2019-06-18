@@ -1,25 +1,41 @@
 <div class="app-content">
-  <h3 class="text-muted">Demanda docente, curso 2018-2019</h3>
-  <table class="table table-hover table-sm borderless">
-    <thead>
-    <tr class="content-align">
-      <th *ngFor="let field of fields" scope="col" class="content-vertical">{{field}}</th>
-    </tr>
-    </thead>
-    <tbody>
-    <ng-container *ngFor="let item of teacherDemands">
-      <tr *ngFor="let item_group of item?.groups" routerLink="/teacher-demand-details/{{item_group.group_id}}"
-          (click)="detailsSubject(item.subject_cod)" class="select-row content-align">
-        <td>{{item?.university_degrees_name}}</td>
-        <td>{{item?.name}}</td>
-        <td>{{item?.course}}</td>
-        <td>{{item?.semester}}</td>
-        <td>{{item_group?.group_cod}}</td>
-        <td>{{item_group?.type}}</td>
-        <td>Null</td>
-        <td>Null</td>
+  <h3 class="text-muted">{{title}}</h3>
+  <div class="alert alert-light" role="alert">
+    Nota: Para acceder a cualquier asignatura click sobre la fila
+  </div>
+
+  <div class="row">
+    <div class="col">
+      <div class="form-group">
+        <input type="text" class="form-control" name="filterPost" placeholder="Buscar por asignatura ..." [(ngModel)]="filterSubject">
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col tableFixHead">
+
+      <table class="table table-striped ">
+      <thead>
+      <tr class="content-align">
+        <th *ngFor="let field of fields" scope="col" class="content-vertical">{{field}}</th>
       </tr>
-    </ng-container>
-    </tbody>
-  </table>
+      </thead>
+      <tbody>
+      <ng-container *ngFor="let item of teacherDemands | searchFilter: filterSubject">
+        <tr *ngFor="let item_group of item?.groups" routerLink="/teacher-demand-details/{{item?.subject_cod}}/{{item_group?.group_cod}}"
+            class="select-row content-align">
+          <td>{{item?.university_degrees_name}}</td>
+          <td>{{item?.name}}</td>
+          <td>{{item?.course}}</td>
+          <td>{{item?.semester}}</td>
+          <td>{{item_group?.group_cod}}</td>
+          <td>{{item_group?.type}}</td>
+          <td>Null</td>
+          <td>Null</td>
+        </tr>
+      </ng-container>
+      </tbody>
+    </table>
+    </div>
+  </div>
 </div>

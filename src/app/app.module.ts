@@ -16,6 +16,8 @@ import { TeacherDemandDetailsComponent } from './teacher-demand-details/teacher-
 import { TeacherLoadDetailsComponent } from './teacher-load-details/teacher-load-details.component';
 import { TeacherHistoryDetailsComponent } from './teacher-history-details/teacher-history-details.component';
 import { TeacherPDAComponent } from './teacher-pda/teacher-pda.component';
+import {FormsModule} from '@angular/forms';
+import { SearchFilterPipe } from './pipes/search-filter.pipe';
 
 @NgModule({
   declarations: [
@@ -30,13 +32,15 @@ import { TeacherPDAComponent } from './teacher-pda/teacher-pda.component';
     TeacherPDAComponent,
     TeacherDemandDetailsComponent,
     TeacherLoadDetailsComponent,
-    TeacherHistoryDetailsComponent
+    TeacherHistoryDetailsComponent,
+    SearchFilterPipe
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     RouterModule,
-    HttpClientModule
+    HttpClientModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

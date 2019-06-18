@@ -1,9 +1,11 @@
+
 h3{
   text-align: right;
   margin-bottom: 30px;
 }
-.select-row{
+.select-row:hover{
   cursor: pointer;
+  background: #eeeeee;
 }
 .content-align {
   text-align: center;
@@ -11,4 +13,15 @@ h3{
 }
 .content-vertical {
   vertical-align: middle;
+}
+
+
+.tableFixHead {
+  font-size: 0.9em;
+  overflow-y: auto; max-height: 35rem;
+  thead th { position: sticky; top: 0; }
+  table  { border-collapse: collapse; width: 100%; }
+  th, td { padding: 8px 16px; }
+  th     { background:#eee; }
+
 }
