@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {RestService} from '../rest.service';
 
 @Component({
   selector: 'app-teacher-pda',
@@ -7,19 +8,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TeacherPDAComponent implements OnInit {
 
+  title = 'Proyecto docente';
   fields = ['Titulación', 'Asignatura', 'Área de conocimiento', 'Coordinador', 'Estado'];
   teacherHistory = [];
 
-  constructor() { }
+  constructor(public rest: RestService) { }
 
   ngOnInit() {
-    this.teacherHistory = [
-      {university_degree_name: 'Grado en Traduc. e Interpretación: Inglés-Alemán', subject_name: 'INFORMÁTICA', knowledge_area: 'Info',
-        coordinator: 'Sosa Martín, Juan', state: 'Aprobado'},
-      {university_degree_name: 'Grado en Traduc. e Interpretación: Inglés-Alemán', subject_name: 'INFORMÁTICA', knowledge_area: 'Info',
-        coordinator: 'Pedra Dolores, María', state: 'Aprobado'},
-      {university_degree_name: 'Grado en Traduc. e Interpretación: Inglés-Alemán', subject_name: 'INFORMÁTICA', knowledge_area: 'Info',
-        coordinator: 'Martín Dolores, Carmen', state: 'Aprobado'},
-    ];
+    this.rest.getAllPDA().subscribe(
+      data => this.teacherHistory = data
+    );
   }
 }

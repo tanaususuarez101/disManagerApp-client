@@ -30,4 +30,10 @@ export class RestService {
   getUniversityDegree(universityDegreeCod): Observable<any> {
     return this.http.get(endpoint + '/university_degree/' + universityDegreeCod, httpOptions);
   }
+  getAllPDA(): Observable<any> {
+    return this.http.get( endpoint + '/pda', httpOptions);
+  }
+  getCoordinator(): Observable<any> {
+    return this.http.get(endpoint + '/coordinator', httpOptions);
+  }
 }

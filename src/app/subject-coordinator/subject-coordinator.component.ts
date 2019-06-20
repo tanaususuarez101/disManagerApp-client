@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {RestService} from '../rest.service';
 
 @Component({
   selector: 'app-subject-coordinator',
@@ -11,20 +12,12 @@ export class SubjectCoordinatorComponent implements OnInit {
   coordinator = [];
 
 
-  constructor() { }
+  constructor(public rest: RestService) { }
 
   ngOnInit() {
-    this.coordinator = [
-      {university_degree_name: 'Grado en Traduc. e Interpretación: Inglés-Alemán', subject_name: 'Informática',
-        knowledge_area: 'Informatica y computación', type: 'Obligatoria', semester: '16', coordinate: 'Juan, Del carmen Sosa',
-        subject_coordinate: false, practical_coordinate: true},
-      {university_degree_name: 'Grado en Traduc. e Interpretación: Inglés-Alemán', subject_name: 'Informática',
-        knowledge_area: 'Informatica y computación', type: 'Obligatoria', semester: '16', coordinate: 'Juan, Del carmen Sosa',
-        subject_coordinate: false, practical_coordinate: true},
-      {university_degree_name: 'Grado en Traduc. e Interpretación: Inglés-Alemán', subject_name: 'Informática',
-        knowledge_area: 'Informatica y computación', type: 'Obligatoria', semester: '16', coordinate: 'Juan, Del carmen Sosa',
-        subject_coordinate: true, practical_coordinate: false},
-    ];
+    this.rest.getCoordinator().subscribe(
+      data => this.coordinator = data
+    );
   }
 
 }
