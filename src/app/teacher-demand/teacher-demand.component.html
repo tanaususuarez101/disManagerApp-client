@@ -21,19 +21,25 @@
       </tr>
       </thead>
       <tbody>
-      <ng-container *ngFor="let item of teacherDemands | searchFilter: filterSubject">
-        <tr *ngFor="let item_group of item?.groups" routerLink="/teacher-demand-details/{{item?.subject_cod}}/{{item_group?.group_cod}}"
-            class="select-row content-align">
-          <td>{{item?.university_degrees_name}}</td>
-          <td>{{item?.name}}</td>
-          <td>{{item?.course}}</td>
-          <td>{{item?.semester}}</td>
-          <td>{{item_group?.group_cod}}</td>
-          <td>{{item_group?.type}}</td>
-          <td>Null</td>
-          <td>Null</td>
-        </tr>
-      </ng-container>
+
+      <tr *ngFor="let item of teacherDemands | searchFilter: filterSubject" routerLink="/teacher-demand-details/
+          {{item?.group_area_cod}}/{{item?.subject_cod}}/{{item?.group_cod}}" class="select-row content-align">
+        <td>{{item?.university_degree_name}}</td>
+        <td>{{item?.group_area_name}}</td>
+        <td>{{item?.subject_name}}</td>
+        <td>{{item?.subject_course}}</td>
+        <td>{{item?.subject_semester}}</td>
+        <td>{{item?.group_cod}}</td>
+        <td>{{item?.group_type}}</td>
+        <td>{{item?.group_hours}}</td>
+        <td
+          [ngClass]="{
+          'p-3 mb-2 bg-danger text-white': item?.cover_hours < 0,
+          'p-3 mb-2 bg-success text-white': item?.cover_hours == 0,
+          'p-3 mb-2 bg-warning text-dark': item?.cover_hours > 0
+          }"
+        >{{item?.cover_hours}}</td>
+      </tr>
       </tbody>
     </table>
     </div>

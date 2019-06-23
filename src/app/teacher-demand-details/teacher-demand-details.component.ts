@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
+import {RestService} from '../rest.service';
 
 @Component({
   selector: 'app-teacher-demand-details',
@@ -10,7 +11,8 @@ export class TeacherDemandDetailsComponent implements OnInit {
 
   groupDetails = {};
 
-  constructor(private route: ActivatedRoute
+  constructor(private route: ActivatedRoute,
+              public rest: RestService
   ) { }
 
   ngOnInit() {
@@ -18,8 +20,18 @@ export class TeacherDemandDetailsComponent implements OnInit {
   }
 
   private getTeacherDemant() {
+    const areaCod = +this.route.snapshot.paramMap.get('area_cod');
     const groupCod = +this.route.snapshot.paramMap.get('group_cod');
     const subjectCod = +this.route.snapshot.paramMap.get('subject_cod');
+    if (areaCod != null && groupCod != null && subjectCod != null) {
+      this.rest.getGroup(groupCod, subjectCod, areaCod).subscribe(
+        group => {
+          this.groupDetails = group;
+          console.log(this.groupDetails);
+        }
+      );
+    }
+    /*
     this.groupDetails = {
       university_degree_name: 'Grad. Ingeniería informatica',
       knowledge_area_name: 'Informática y sistema',
@@ -31,7 +43,8 @@ export class TeacherDemandDetailsComponent implements OnInit {
         {teacher_name: 'nombre del profesor 1', assigned_hours: 7.5},
         {teacher_name: 'nombre del profesor 2', assigned_hours: 22},
       ]
-    };
-    console.log('Demanda docente: ', groupCod, subjectCod);
+    };*/
+
+    console.log('Demanda docente: ', groupCod, subjectCod, areaCod);
   }
 }

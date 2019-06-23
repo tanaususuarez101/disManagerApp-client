@@ -18,17 +18,11 @@ const httpOptions = {
 export class RestService {
   constructor(private http: HttpClient) { }
 
-  getAllSubjects(): Observable<any> {
-    return this.http.get(endpoint + '/subject', httpOptions);
+  getGroups(): Observable<any> {
+    return this.http.get(endpoint + '/group', httpOptions);
   }
-  getSubject(subjectCod): Observable<any> {
-    return this.http.get(endpoint + '/subject/' + subjectCod, httpOptions);
-  }
-  getGroups(subjectCod): Observable<any> {
-    return this.http.get(endpoint + '/subject/group/' + subjectCod, httpOptions);
-  }
-  getUniversityDegree(universityDegreeCod): Observable<any> {
-    return this.http.get(endpoint + '/university_degree/' + universityDegreeCod, httpOptions);
+  getGroup(groupCod, subjectCod, areaCod): Observable<any> {
+    return this.http.get(endpoint + '/group/' + groupCod + '/' + subjectCod + '/' + areaCod, httpOptions);
   }
   getAllPDA(): Observable<any> {
     return this.http.get( endpoint + '/pda', httpOptions);

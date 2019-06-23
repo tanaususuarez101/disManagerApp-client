@@ -32,8 +32,8 @@
       </thead>
       <tbody>
       <tr *ngFor="let teacher of groupDetails.teacher">
-        <td>{{teacher?.teacher_name}}</td>
-        <td>{{teacher?.assigned_hours}}</td>
+        <td>{{teacher?.teacher_surname}}, {{teacher?.teacher_name}}</td>
+        <td>{{teacher?.teacher_assigned}}</td>
       </tr>
       </tbody>
     </table>

@@ -20,7 +20,7 @@ const routes: Routes = [
   { path: 'subject-coordinator', component: SubjectCoordinatorComponent},
   { path: 'teacher-history', component: TeacherHistoryComponent},
   { path: 'teacher-PDA', component: TeacherPDAComponent},
-  { path: 'teacher-demand-details/:subject_cod/:group_cod', component: TeacherDemandDetailsComponent},
+  { path: 'teacher-demand-details/:area_cod/:subject_cod/:group_cod', component: TeacherDemandDetailsComponent},
   { path: 'teacher-load-details/:id', component: TeacherLoadDetailsComponent},
   { path: 'teacher-history-details/:id', component: TeacherHistoryDetailsComponent}
 ];

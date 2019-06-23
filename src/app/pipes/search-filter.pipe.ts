@@ -12,10 +12,10 @@ export class SearchFilterPipe implements PipeTransform {
     }
     const resultSubjects = [];
     for (const post of value) {
-
-      if (post.name.toLowerCase().indexOf(args.toLowerCase()) > -1) {
+      console.log(value, args);
+      if (post.subject_name.toLowerCase().indexOf(args.toLowerCase()) > -1) {
         resultSubjects.push(post);
-      } else if(post.university_degrees_name.toLowerCase().indexOf(args.toLowerCase()) > -1) {
+      } else if(post.university_degree_name.toLowerCase().indexOf(args.toLowerCase()) > -1) {
         resultSubjects.push(post);
       }
     }
