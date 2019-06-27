@@ -1,19 +1,33 @@
 <div class="app-content">
   <h3 class="text-muted">{{title}}</h3>
-  <div class="alert alert-light" role="alert">
-    Nota: Para acceder a cualquier asignatura click sobre la fila
-  </div>
+  <div class="alert alert-light" role="alert">Nota: Para acceder a cualquier asignatura click sobre la fila</div>
 
   <div class="row">
     <div class="col">
       <div class="form-group">
-        <input type="text" class="form-control" name="filterPost" placeholder="Buscar por asignatura o titulación..." [(ngModel)]="filterSubject">
+        <input type="text" class="form-control" name="text" placeholder="Buscar por asignatura o titulación..."
+               [(ngModel)]="filterSubject">
       </div>
     </div>
   </div>
+
+  <div class="row">
+    <div class="col form-group" >
+      <div class="custom-control custom-radio custom-control-inline">
+        <input type="radio" id="customRadioInline1" class="custom-control-input"
+               [(ngModel)]="filterOption" value="full" checked>
+        <label class="custom-control-label" for="customRadioInline1">Todas</label>
+      </div>
+      <div class="custom-control custom-radio custom-control-inline">
+        <input type="radio" id="customRadioInline2" class="custom-control-input"
+               [(ngModel)]="filterOption" value="notfull">
+        <label class="custom-control-label" for="customRadioInline2">Solo horas sin cubir</label>
+      </div>
+    </div>
+  </div>
+
   <div class="row">
     <div class="col tableFixHead">
-
       <table class="table table-striped ">
       <thead>
       <tr class="content-align">
@@ -22,7 +36,7 @@
       </thead>
       <tbody>
 
-      <tr *ngFor="let item of teacherDemands | searchFilter: filterSubject" routerLink="/teacher-demand-details/
+      <tr *ngFor="let item of teacherDemands | searchFilter: filterSubject | hoursFilter: filterOption" routerLink="/teacher-demand-details/
           {{item?.group_area_cod}}/{{item?.subject_cod}}/{{item?.group_cod}}" class="select-row content-align">
         <td>{{item?.university_degree_name}}</td>
         <td>{{item?.group_area_name}}</td>

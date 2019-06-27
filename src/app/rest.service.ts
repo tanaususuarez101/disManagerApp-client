@@ -30,4 +30,12 @@ export class RestService {
   getCoordinator(): Observable<any> {
     return this.http.get(endpoint + '/coordinator', httpOptions);
   }
+
+  getTutorial(): Observable<any>  {
+    return this.http.get(endpoint + '/tutorial', httpOptions);
+  }
+
+  getTeacherLoad(): Observable<any>  {
+    return this.http.get(endpoint + '/teacher_load', httpOptions);
+  }
 }

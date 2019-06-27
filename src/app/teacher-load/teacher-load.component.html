@@ -1,4 +1,4 @@
-<h3 class="text-muted">Carga docente, curso 2018-2019</h3>
+<h3 class="text-muted">{{title}}</h3>
 <div class="tableFixHead">
   <table class="table table-striped">
     <thead>
@@ -8,15 +8,20 @@
     </thead>
     <tbody>
       <tr *ngFor="let item of teacherloads" routerLink="/teacher-load-details/{{item.teacher_id}}" class="select-row content-align">
-        <td>{{item?.teacher_name}}</td>
-        <td>{{item?.area_name}}</td>
-        <td>{{item?.potential_A}}</td>
-        <td>{{item?.potential_B}}</td>
-        <td>{{item?.total_hours}}</td>
-        <td>{{item?.master_teacher}}</td>
-        <td>{{item?.doctorate_teacher}}</td>
-        <td>{{item?.practical_teacher}}</td>
-        <td>{{item?.unassigned_hours}}</td>
+        <td>{{item?.teacher_surnames}}, {{item?.teacher_name}}</td>
+        <td>{{item?.knowledge_area_name}}</td>
+        <td>{{item?.potential}}</td>
+        <!-- <td>{{item?.potential_A}}</td> -->
+        <!--<td>{{item?.potential_B}}</td> -->
+        <td>{{item?.cover_hours}}</td>
+        <!-- <td>{{item?.master_teacher}}</td> -->
+        <!-- <td>{{item?.doctorate_teacher}}</td> -->
+        <!-- <td>{{item?.practical_teacher}}</td> -->
+        <td [ngClass]="{
+          'p-3 mb-2 bg-danger text-white': item?.unassigned_hours < 0,
+          'p-3 mb-2 bg-success text-white': item?.unassigned_hours == 0,
+          'p-3 mb-2 bg-warning text-dark': item?.unassigned_hours > 0
+          }">{{item?.unassigned_hours}}</td>
       </tr>
     </tbody>
   </table>

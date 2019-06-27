@@ -1,5 +1,5 @@
+<h3 class="text-muted">{{title}}</h3>
 <div class="tableFixHead app-content">
-  <h3 class="text-muted">{{title}}</h3>
   <table class="table table-striped">
     <thead>
     <tr class="content-align">
@@ -12,7 +12,12 @@
       <td>{{item?.subject_name}}</td>
       <td>{{item?.knowledge_area_name}}</td>
       <td>{{item?.teacher_surnames}}, {{item?.teacher_name}}</td>
-      <td>{{item?.status}}</td>
+      <td
+        [ngClass]="{
+          'p-3 mb-2 bg-danger text-white': item?.status == 'suspendido',
+          'p-3 mb-2 bg-success text-white': item?.status == 'aprobado'
+          }"
+      >{{item?.status}}</td>
     </tr>
     </tbody>
   </table>

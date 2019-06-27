@@ -9,6 +9,7 @@ export class TeacherHistoryComponent implements OnInit {
 
   fields = ['Titulación', 'Asignatura', 'Tipo', 'Semestre'];
   teacherHistory = [];
+  title = 'Historial docente';
 
   constructor() { }
 

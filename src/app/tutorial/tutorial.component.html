@@ -1,5 +1,5 @@
 <div class=" tableFixHead app-content">
-  <h3 class="text-muted">Tutorias docente, curso 2018-2019</h3>
+  <h3 class="text-muted">{{title}}</h3>
   <table class="table table-striped">
     <thead>
     <tr class="content-align">
@@ -7,12 +7,17 @@
     </tr>
     </thead>
     <tbody>
-    <tr *ngFor="let item of teacherDemands" class=" content-align">
-      <td>{{item?.teacher_name}}</td>
-      <td>{{item?.area_name}}</td>
-      <td>{{item?.total_hours}}</td>
-      <td>{{item?.selected_hours}}</td>
-      <td>{{item?.unassigned_hours}}</td>
+    <tr *ngFor="let item of teachertutorial" class=" content-align">
+      <td>{{item?.teacher_surnames}}, {{item?.teacher_name}}</td>
+      <td>{{item?.knowledge_area_name}}</td>
+      <td>{{item?.tutorial_hours}}</td>
+      <td>{{item?.cover_hours}}</td>
+      <td [ngClass]="{
+          'p-3 mb-2 bg-danger text-white': item?.unassigned_hours < 0,
+          'p-3 mb-2 bg-success text-white': item?.unassigned_hours == 0,
+          'p-3 mb-2 bg-warning text-dark': item?.unassigned_hours > 0
+          }"
+      >{{item?.unassigned_hours}}</td>
     </tr>
     </tbody>
   </table>

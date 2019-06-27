@@ -10,6 +10,7 @@ export class SubjectCoordinatorComponent implements OnInit {
 
   fields = ['Titulación', 'Asignatura', 'Área de conocimiento', 'Tipo', 'Semestre', 'Coordinador'];
   coordinator = [];
+  title = 'Coordinadores';
 
 
   constructor(public rest: RestService) { }

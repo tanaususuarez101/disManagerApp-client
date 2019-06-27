@@ -12,6 +12,7 @@ export class TeacherDemandComponent implements OnInit {
   fields = ['Titulación', 'Área', 'Asignatura', 'Curso', 'Semestre', 'Grupo', 'Tipo', 'Horas', 'Horas sin cubrir'];
   teacherDemands = [];
   filterSubject: any;
+  filterOption: any;
 
   constructor(public rest: RestService) { }
 
@@ -48,6 +49,4 @@ export class TeacherDemandComponent implements OnInit {
       }
     );
   }
-
-
 }
