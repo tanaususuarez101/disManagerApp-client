@@ -38,4 +38,8 @@ export class RestService {
   getTeacherLoad(): Observable<any>  {
     return this.http.get(endpoint + '/teacher_load', httpOptions);
   }
+
+  getGroupTeacher(id: number): Observable<any> {
+    return this.http.get(endpoint + '/teacher_load/' + id, httpOptions);
+  }
 }

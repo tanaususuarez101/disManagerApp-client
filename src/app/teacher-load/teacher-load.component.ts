@@ -15,6 +15,7 @@ export class TeacherLoadComponent implements OnInit {
     'Docencia Pr. externas', 'Horas a cubrir'];*/
   fields = ['Profesor', 'Área', 'Potencial', 'Horas cubiertas', 'Horas sin cubrir'];
   title = 'Carga docente';
+  filterTeacher: any;
 
   ngOnInit() {
     this.rest.getTeacherLoad().subscribe(

@@ -19,6 +19,7 @@ import { TeacherPDAComponent } from './teacher-pda/teacher-pda.component';
 import {FormsModule} from '@angular/forms';
 import { SearchFilterPipe } from './pipes/search-filter.pipe';
 import { HoursFilterPipe } from './pipes/hours-filter.pipe';
+import { SearchTeacherPipe } from './pipes/search-teacher.pipe';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,8 @@ import { HoursFilterPipe } from './pipes/hours-filter.pipe';
     TeacherLoadDetailsComponent,
     TeacherHistoryDetailsComponent,
     SearchFilterPipe,
-    HoursFilterPipe
+    HoursFilterPipe,
+    SearchTeacherPipe
   ],
   imports: [
     BrowserModule,
