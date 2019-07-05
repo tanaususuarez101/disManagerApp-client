@@ -38,3 +38,11 @@ Esta aplicación debe facilitar la interacción con las bases de datos de la ULP
 
 **El foco del TFT se centrará específicamente en el desarrollo de una aplicación web que permita gestionar la Ordenación Docente del Departamento de Informática y Sistemas.**
 
+# Install Jquery
+``
+  npm install --save-dev @types/jquery
+``
+
+## Install Material
+``
+``

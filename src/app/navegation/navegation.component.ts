@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 
 @Component({
   selector: 'app-navegation',
@@ -7,7 +7,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NavegationComponent implements OnInit {
 
-  links = [
+  @Output() request = new EventEmitter();
+
+  linkPDO = [
     {name: 'Demanda docente', path: '/teacher-demand'},
     {name: 'Carga docente', path: '/teacher-load'},
     {name: 'Tutorías', path: '/tutorial'},
@@ -15,9 +17,17 @@ export class NavegationComponent implements OnInit {
     {name: 'Historial docente', path: '/teacher-history'},
     {name: 'Proyecto docente', path: '/teacher-PDA'},
   ];
+  linkUser = [
+    {name: 'Perfil', path: ''},
+    {name: 'Mis Asignaturas', path: ''},
+    {name: 'Mis Solicitudes', path: ''}
+  ];
   constructor() { }
 
   ngOnInit() {
+  }
+  logout() {
+    this.request.emit(false);
   }
 
 }

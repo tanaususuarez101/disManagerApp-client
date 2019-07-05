@@ -1,0 +1,23 @@
+<div class="container">
+  <div class="row">
+    <div class="col"></div>
+    <div class="col-6">
+      <h2>Iniciar sessión</h2>
+      <form [formGroup]="loginForm" (ngSubmit)="confirmLogin()">
+        <div class="form-group">
+          <label for="exampleInputEmail1">Usuario</label>
+          <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+                 placeholder="Introduce el usuario" formControlName="username">
+          <small id="emailHelp" class="form-text text-muted">Nunca compartiremos tu usuario con nadie más.</small>
+        </div>
+        <div class="form-group">
+          <label for="exampleInputPassword1">Contraseña</label>
+          <input type="password" class="form-control" id="exampleInputPassword1" formControlName="password" placeholder="Password">
+        </div>
+        <button type="submit" class="btn btn-primary">Acceder</button>
+      </form>
+    </div>
+    <div class="col"></div>
+  </div>
+
+</div>

@@ -10,9 +10,11 @@ import {TeacherPDAComponent} from './teacher-pda/teacher-pda.component';
 import {TeacherDemandDetailsComponent} from './teacher-demand-details/teacher-demand-details.component';
 import {TeacherLoadDetailsComponent} from './teacher-load-details/teacher-load-details.component';
 import {TeacherHistoryDetailsComponent} from './teacher-history-details/teacher-history-details.component';
+import {LoginComponent} from './login/login.component';
 
 
 const routes: Routes = [
+  { path: 'login', component: LoginComponent},
   { path: '', component: TeacherDemandComponent },
   { path: 'teacher-demand', component: TeacherDemandComponent },
   { path: 'teacher-load', component: TeacherLoadComponent },

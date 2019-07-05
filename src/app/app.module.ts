@@ -16,10 +16,12 @@ import { TeacherDemandDetailsComponent } from './teacher-demand-details/teacher-
 import { TeacherLoadDetailsComponent } from './teacher-load-details/teacher-load-details.component';
 import { TeacherHistoryDetailsComponent } from './teacher-history-details/teacher-history-details.component';
 import { TeacherPDAComponent } from './teacher-pda/teacher-pda.component';
-import {FormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { SearchFilterPipe } from './pipes/search-filter.pipe';
 import { HoursFilterPipe } from './pipes/hours-filter.pipe';
 import { SearchTeacherPipe } from './pipes/search-teacher.pipe';
+import { GroupSolicitationFormComponent } from './group-solicitation-form/group-solicitation-form.component';
+import { LoginComponent } from './login/login.component';
 
 @NgModule({
   declarations: [
@@ -37,14 +39,17 @@ import { SearchTeacherPipe } from './pipes/search-teacher.pipe';
     TeacherHistoryDetailsComponent,
     SearchFilterPipe,
     HoursFilterPipe,
-    SearchTeacherPipe
+    SearchTeacherPipe,
+    GroupSolicitationFormComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     RouterModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

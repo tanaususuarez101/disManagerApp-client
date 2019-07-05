@@ -1,6 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {RestService} from '../rest.service';
+
+declare var $: any;
 
 @Component({
   selector: 'app-teacher-demand-details',
@@ -11,9 +13,9 @@ export class TeacherDemandDetailsComponent implements OnInit {
 
   groupDetails = {};
 
+
   constructor(private route: ActivatedRoute,
-              public rest: RestService
-  ) { }
+              public rest: RestService) { }
 
   ngOnInit() {
     this.getTeacherDemant();
@@ -27,24 +29,17 @@ export class TeacherDemandDetailsComponent implements OnInit {
       this.rest.getGroup(groupCod, subjectCod, areaCod).subscribe(
         group => {
           this.groupDetails = group;
-          console.log(this.groupDetails);
         }
       );
     }
-    /*
-    this.groupDetails = {
-      university_degree_name: 'Grad. Ingeniería informatica',
-      knowledge_area_name: 'Informática y sistema',
-      subject_name: 'Álgebra',
-      group_cod: 1,
-      group_type: 'práctica de aula',
-      group_hours: 60,
-      teacher: [
-        {teacher_name: 'nombre del profesor 1', assigned_hours: 7.5},
-        {teacher_name: 'nombre del profesor 2', assigned_hours: 22},
-      ]
-    };*/
+  }
 
-    console.log('Demanda docente: ', groupCod, subjectCod, areaCod);
+  showRequest(event): void {
+    if (event) {
+      $('#alert-success').addClass('show');
+      this.getTeacherDemant();
+    } else {
+      $('#alert-danger').addClass('show');
+    }
   }
 }
