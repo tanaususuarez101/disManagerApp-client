@@ -1,8 +1,7 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {AuthenticationService} from '../authentication.service';
-import {FormBuilder} from '@angular/forms';
+import {FormBuilder, Validators} from '@angular/forms';
 import {StorageService} from '../storage.service';
-import {Route} from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -11,6 +10,7 @@ import {Route} from '@angular/router';
 })
 export class LoginComponent implements OnInit {
   @Output() request = new EventEmitter();
+  private submitted: boolean;
   loginForm: any;
 
   constructor(public storage: StorageService,
@@ -21,20 +21,26 @@ export class LoginComponent implements OnInit {
     this.createLoginForm();
   }
 
+  get f() { return this.loginForm.controls; }
+
   confirmLogin() {
+    this.submitted = true;
+
+    // stop here if form is invalid
+    if (this.loginForm.invalid) {
+      return;
+    }
     this.auth.login(this.loginForm.value).subscribe(
       token => {
-        console.log(token.token);
         this.storage.setCurrentUser(token.token);
         this.request.emit(true);
-        console.log(this.storage.isAuthenticated());
       }
     );
   }
   createLoginForm() {
     this.loginForm = this.formBuilder.group({
-      username: '',
-      password: '',
+      username: ['', Validators.required],
+      password: ['', Validators.required],
     });
   }
 }

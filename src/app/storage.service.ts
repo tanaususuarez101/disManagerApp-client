@@ -1,21 +1,23 @@
 import { Injectable } from '@angular/core';
-import {Router} from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
 })
 export class StorageService {
 
-  constructor(private router: Router) {}
+  constructor() {}
 
   setCurrentUser(token): void {
+    console.log('token recibido:', token);
     window.localStorage.setItem('currentUser', JSON.stringify(token));
+    console.log('token guardado:', this.getCurrentUser());
   }
   removeCurrentUser(): void {
     window.localStorage.removeItem('currentUser');
   }
   getCurrentUser() {
-    return window.localStorage.getItem('currentUser');
+    return window.localStorage.getItem('currentUser').replace(/["']/g, "");
+
   }
   isAuthenticated(): boolean {
     return (this.getCurrentUser() != null) ? true : false;

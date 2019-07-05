@@ -1,4 +1,5 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
+import {StorageService} from '../storage.service';
 
 @Component({
   selector: 'app-navegation',
@@ -22,12 +23,13 @@ export class NavegationComponent implements OnInit {
     {name: 'Mis Asignaturas', path: ''},
     {name: 'Mis Solicitudes', path: ''}
   ];
-  constructor() { }
+  constructor(public storage: StorageService) { }
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
+
   logout() {
     this.request.emit(false);
+    this.storage.removeCurrentUser();
   }
 
 }
