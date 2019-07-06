@@ -20,7 +20,6 @@ export class TeacherDemandComponent implements OnInit {
     this.rest.getGroups().subscribe(
       subjects => {
         this.teacherDemands = subjects;
-        console.log(this.teacherDemands);
       }
     );
   }

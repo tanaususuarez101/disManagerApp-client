@@ -30,6 +30,7 @@ export class NavegationComponent implements OnInit {
   logout() {
     this.request.emit(false);
     this.storage.removeCurrentUser();
+    this.storage.removeUser();
   }
 
 }

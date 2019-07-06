@@ -31,8 +31,10 @@ export class LoginComponent implements OnInit {
       return;
     }
     this.auth.login(this.loginForm.value).subscribe(
-      token => {
-        this.storage.setCurrentUser(token.token);
+      data => {
+        console.log(data);
+        this.storage.setCurrentUser(data.token);
+        this.storage.setUser(data.user);
         this.request.emit(true);
       }
     );

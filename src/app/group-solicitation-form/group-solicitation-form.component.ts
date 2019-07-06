@@ -1,6 +1,7 @@
 import {Component, Input, OnChanges, ViewChild, ElementRef, Output, EventEmitter} from '@angular/core';
 import {FormBuilder} from '@angular/forms';
 import {RestService} from '../rest.service';
+import {StorageService} from '../storage.service';
 
 declare var $: any;
 
@@ -15,10 +16,16 @@ export class GroupSolicitationFormComponent implements OnChanges {
   @Output() statusRequest = new EventEmitter();
   @ViewChild('closeBtn') closeBtn: ElementRef;
   solicitationForm: any;
+  teacherName: any;
 
-  constructor(public rest: RestService, private formBuilder: FormBuilder) {}
+  constructor(public rest: RestService,
+              private formBuilder: FormBuilder,
+              private storage: StorageService) {}
 
   ngOnChanges() {
+    const user = this.storage.getUser();
+    console.log(user)
+    this.teacherName = user['name'];
     this.createForm();
   }
 
@@ -34,7 +41,6 @@ export class GroupSolicitationFormComponent implements OnChanges {
       group_cod: this.data.group_cod,
       subject_cod: this.data.subject_cod,
       area_cod: this.data.knowledge_area_cod,
-      teacher_dni: '44742833',
       hours: this.solicitationForm.get('hours').value
     }).subscribe(
       data => {
