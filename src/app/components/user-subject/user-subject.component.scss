@@ -1,0 +1,61 @@
+h3 {
+  text-align: right;
+  margin-bottom: 1.7rem;
+  margin-top: 0.2rem;
+}
+.select-row:hover{
+  cursor: pointer;
+  background: #eeeeee;
+}
+.content-align {
+  text-align: center;
+}
+.content-vertical {
+  vertical-align: middle;
+}
+.row-title {
+  display: inline-flex;
+  p {
+    margin: 0 .2rem 0 .4rem  !important;
+    padding: .2rem 0 .2rem 0;
+  }
+
+}
+.selected_teacher_load {
+
+
+
+
+}
+.separation {
+  border-top: 1px solid rgba(0,0,0,.1);
+  margin-top: 1.5rem;
+  margin-bottom: 1.5rem;
+
+  margin-right: -0.95rem !important;
+  margin-left: -0.95rem !important;
+}
+.select-imput-number {
+  max-width: 2.5rem;
+  border: 1px solid lightgrey;
+}
+.tableFixHead {
+  font-size: 0.7em;
+  padding-right: 5px;
+  overflow-y: auto; max-height: 25rem;
+  padding-left: 0;
+  margin-bottom: 2.5rem;
+  thead th { position: sticky; top: 0; }
+  table  {
+    border-collapse: collapse;
+    width: 100%;
+  }
+  th, td { padding: 8px 16px; }
+  th     { background:#eee; }
+
+}
+
+
+/* Just common table stuff. Really. */
+
+

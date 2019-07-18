@@ -1,0 +1,48 @@
+
+
+body {
+  background: #002e67;
+  width: 100%;
+  background: linear-gradient(to bottom, #002e67 0%,#42648e 100%);
+  .container{
+    padding-top: 5rem;
+    padding-bottom: 10rem;
+  }
+
+}
+
+.card-signin {
+  border: 0;
+  border-radius: 1rem;
+  box-shadow: 0 0.5rem 1rem 0 rgba(0, 0, 0, 0.1);
+}
+
+.card-signin .card-title {
+  margin-bottom: 2rem;
+  font-weight: 300;
+  font-size: 1.5rem;
+}
+
+.card-signin .card-body {
+  padding: 2rem;
+}
+
+.form-signin {
+  width: 100%;
+}
+
+.form-signin .btn {
+  font-size: 80%;
+  border-radius: .5rem;
+  letter-spacing: .1rem;
+  font-weight: bold;
+  padding: 0.3rem;
+  background: linear-gradient(to bottom, #002e67 0%,#42648e 100%);;
+}
+.card-title {
+  letter-spacing: .05rem;
+  color: black;
+  font-weight: bold;
+}
+
+

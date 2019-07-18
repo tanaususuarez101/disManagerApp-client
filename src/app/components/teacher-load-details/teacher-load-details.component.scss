@@ -1,0 +1,28 @@
+h3 {
+  text-align: right;
+  margin-bottom: 30px;
+}
+
+.select-row{
+  cursor: pointer;
+}
+.content-align {
+  text-align: center;
+}
+.content-vertical {
+  vertical-align: middle;
+}
+
+.tableFixHead {
+  font-size: 0.7em;
+  padding-right: 5px;
+  overflow-y: auto; max-height: 35rem;
+  thead th { position: sticky; top: 0; }
+  table  {
+    border-collapse: collapse;
+    width: 100%;
+  }
+  th, td { padding: 8px 16px; }
+  th     { background:#eee; }
+
+}

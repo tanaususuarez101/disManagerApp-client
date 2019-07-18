@@ -1,0 +1,51 @@
+<body>
+<div class="container">
+  <div class="row">
+    <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
+      <div class="card card-signin my-5">
+        <div class="card-body">
+          <h5 class="card-title text-center">Inicio de sessión</h5>
+          <div id="alert-login"></div>
+          <form class="form-signin" [formGroup]="loginForm" (ngSubmit)="confirmLogin()">
+
+            <label class="sr-only" >Username</label>
+            <div class="input-group mb-2 mr-sm-2">
+              <div class="input-group-prepend">
+                <div class="input-group-text">
+                  <fa name="fas fa-user"></fa>
+                </div>
+              </div>
+              <input type="text" class="form-control" placeholder="Usuario" formControlName="username"
+                     [ngClass]="{ 'is-invalid': submitted && f.username?.errors }"
+                     required autofocus>
+              <div *ngIf="submitted && f.username?.errors" class="invalid-feedback">
+                <div *ngIf="f.username?.errors.required">Se requiere nombre de usuario</div>
+              </div>
+            </div>
+
+            <div class="input-group mb-2 mr-sm-2">
+              <div class="input-group-prepend">
+                <div class="input-group-text">
+                  <fa name="fas fa-unlock-alt"></fa>
+                </div>
+              </div>
+              <input type="password" class="form-control"  placeholder="Contraseña"
+                     formControlName="password" required autofocus
+                     [ngClass]="{ 'is-invalid': submitted && f.password?.errors }">
+              <div *ngIf="submitted && f.password?.errors" class="invalid-feedback">
+                <div *ngIf="f.password?.errors.required">Se requiere contraseña</div>
+              </div>
+            </div>
+
+            <hr class="my-4">
+            <button class="btn btn-primary btn-lg btn-block text-uppercase" type="submit">Entrar</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+
+
+

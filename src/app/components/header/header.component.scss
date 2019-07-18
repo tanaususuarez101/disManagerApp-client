@@ -1,0 +1,36 @@
+.header-images-dis{
+  height: 3.7rem;
+}
+
+.header-images-ulpgc {
+  height: 3.7rem;
+}
+
+.nav-header{
+  position: fixed;
+  z-index: 10;
+  top:0;
+  right:0;
+  left:0;
+}
+
+.navbar {
+  padding: .5rem 1.9rem;
+}
+
+@media screen and (max-device-width: 480px) {
+  .phone-logo {
+    display: inline-flex;
+  }
+  .full-logo {
+    display: none;
+  }
+}
+@media screen and (min-device-width: 480px) {
+  .phone-logo {
+    display: none;
+  }
+  .full-logo {
+    display: inline-flex;
+  }
+}

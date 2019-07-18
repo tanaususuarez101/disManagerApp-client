@@ -1,0 +1,74 @@
+<h3 class="text-muted">{{user?.teacher_name}} {{user?.teacher_surnames}}</h3>
+<div class="card mb-3">
+  <div class="row">
+    <div class="col-sm-12 col-md-12 col-lg-3">
+      <img src="assets/img/user-default.jpg" class="card-img" alt="">
+    </div>
+    <div class="col-sm-12 col-md-12 col-lg-9">
+      <div class="card-body">
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item text-right"><span class="pull-left text-muted">DNI</span>{{user?.dni}}</li>
+          <li class="list-group-item text-right"><span class="pull-left text-muted">Nombre de usuario</span>{{user?.teacher_username}}</li>
+          <li class="list-group-item text-right">
+            <span class="pull-left text-muted">Area de conocimiento</span>{{user?.area_name}} - {{user?.area_cod}}
+          </li>
+          <li class="list-group-item text-right">
+            <span class="pull-left text-muted">Categoría profesional</span> null
+          </li>
+          <li class="list-group-item text-right"><span class="pull-left text-muted">Potencial</span>{{user?.teacher_potential}} h</li>
+          <li class="list-group-item text-right"><span class="pull-left text-muted">Horas de tutorias</span>{{user?.tutorial_hours}} h</li>
+          <li class="list-group-item text-right">
+            <a class="card-link app-btn" data-toggle="modal" data-target="#changerPasswordModal">
+            Cambiar contraseña
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
+
+<!-- Modal -->
+<div class="modal fade" id="changerPasswordModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <form [formGroup]="passwordForm" (ngSubmit)="changerPassword()">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalCenterTitle">Cambiar contraseña</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+            <div class="form-group">
+              <label for="password">Nueva contraseña</label>
+              <input type="password" class="form-control" id="password" placeholder="Contraseña"
+                     [ngClass]="{ 'is-invalid': submitted && f.password.errors }"
+                     formControlName="password" autofocus required
+              >
+              <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
+                <div *ngIf="f.password.errors.required">Contraseña requerida</div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="repeatPassword">Repita la contraseña</label>
+              <input type="password" class="form-control" id="repeatPassword" placeholder="Confirme de contraseña"
+                     [ngClass]="{ 'is-invalid': submitted && f.passwordConfirm.errors }"
+                     formControlName="passwordConfirm" autofocus required
+              >
+              <div *ngIf="submitted && f.passwordConfirm.errors" class="invalid-feedback">
+                <div *ngIf="f.passwordConfirm.errors.required">Confirmación requerida</div>
+              </div>
+            </div>
+            <div *ngIf="message" class="{{classAlert}}">{{message}}</div>
+        </div>
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-success">Cambiar contraseña</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

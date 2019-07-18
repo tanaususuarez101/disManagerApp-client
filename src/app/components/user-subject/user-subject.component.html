@@ -1,0 +1,122 @@
+<h3 class="text-muted">Mi Carga docente</h3>
+
+<div class="container">
+
+  <div class="row-title">
+    <h4><em>Carga docente seleccionada</em></h4>
+    <p class="text-muted">{{fullSelected}}/{{user?.teacher_potential}} Horas</p>
+  </div>
+  <hr class="separation">
+
+  <div *ngIf="SelectedGroup.length == 0" class="row">
+    <div class="alert alert-warning" role="alert">
+      <p>
+        <strong>CUIDADO!</strong>
+        Aún no tienes asignado ningún grupo. Por favor, seleccione el grupo y el número de horas que desea impartir en
+        la tabla que se encuentra de bajo.
+      </p>
+    </div>
+    <hr class="separation">
+  </div>
+
+  <div *ngIf="SelectedGroup.length > 0" class="row">
+
+    <div class="col">
+      <div class="row">
+        <button class="btn btn-link" (click)="confirmSelection()">Confirmar selección</button>
+      </div>
+      <div class="row tableFixHead">
+        <table class="table table-striped ">
+          <thead>
+          <tr class="content-align">
+            <th *ngFor="let field of fields" scope="col" class="content-vertical">{{field}}</th>
+            <th scope="col" class="content-vertical">Confirmado</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let item of SelectedGroup " class="select-row content-align">
+            <td>{{item?.university_name}}</td>
+            <td>{{item?.area_name}}</td>
+            <td>{{item?.subject_name}}</td>
+            <td>{{item?.subject_course}}</td>
+            <td>{{item?.subject_semester}}</td>
+            <td>{{item?.group_cod}}</td>
+            <td>{{item?.group_type}}</td>
+            <td>{{item?.group_hours}}</td>
+            <td
+              [ngClass]="{
+                'p-3 mb-2 bg-danger text-white': item?.cover_hours < 0,
+                'p-3 mb-2 bg-success text-white': item?.cover_hours == 0,
+                'p-3 mb-2 bg-warning text-dark': item?.cover_hours > 0
+                }"
+            >{{item?.cover_hours}}</td>
+            <td>{{item?.selected_hours}}</td>
+            <td>{{item?.confirmed}}</td>
+          </tr>
+
+          </tbody>
+        </table>
+      </div>
+
+    </div>
+  </div>
+
+
+  <div class="row-title">
+    <h4 class="float-left"><em>Carga docente disponible</em></h4>
+  </div>
+  <hr class="separation">
+
+  <div class="row">
+    <div class="col ">
+      <div class="row">
+        <button
+          class="btn btn-link"
+          (click)="selectedGroups()"
+          data-toggle="tooltip" data-placement="bottom" title="Solo se añadirán los grupos con las horas seleccionadas superior a 0"
+        >Añadir Carga docente
+        </button>
+      </div>
+      <div class="row tableFixHead">
+        <table class="table table-striped ">
+
+          <thead>
+          <tr class="content-align">
+            <th *ngFor="let field of fields" scope="col" class="content-vertical">{{field}}</th>
+          </tr>
+          </thead>
+
+          <tbody>
+          <ng-container *ngFor="let item of group">
+            <tr *ngIf="item?.area_cod == user?.area_cod" class="select-row content-align">
+              <td>{{item?.university_name}}</td>
+              <td>{{item?.area_name}}</td>
+              <td>{{item?.subject_name}}</td>
+              <td>{{item?.subject_course}}</td>
+              <td>{{item?.subject_semester}}</td>
+              <td>{{item?.group_cod}}</td>
+              <td>{{item?.group_type}}</td>
+              <td>{{item?.group_hours}}</td>
+              <td
+                [ngClass]="{
+                'p-3 mb-2 bg-danger text-white': item?.cover_hours < 0,
+                'p-3 mb-2 bg-success text-white': item?.cover_hours == 0,
+                'p-3 mb-2 bg-warning text-dark': item?.cover_hours > 0
+                }"
+              >{{item?.cover_hours}}</td>
+              <td><input type="number" class="select-imput-number"
+                         value="{{item?.selected_hours}}" min="0" max="{{item?.group_hours}}"
+                         [(ngModel)]="item.selected_hours"
+              ></td>
+            </tr>
+          </ng-container>
+          </tbody>
+
+        </table>
+      </div>
+
+    </div>
+  </div>
+
+
+</div>
