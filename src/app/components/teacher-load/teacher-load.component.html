@@ -19,8 +19,8 @@
     <tbody>
       <tr *ngFor="let item of teacherloads | searchTeacher: filterTeacher" routerLink="/dashboard/teacher-load-details/{{item.teacher_dni}}" class="select-row content-align">
         <td>{{item?.teacher_surnames}}, {{item?.teacher_name}}</td>
-        <td>{{item?.knowledge_area_name}}</td>
-        <td>{{item?.potential}}</td>
+        <td>{{item?.area_name}}</td>
+        <td>{{item?.teacher_potential}}</td>
         <td>{{item?.cover_hours}}</td>
         <td>{{item?.cover_hours}}</td>
         <td [ngClass]="{

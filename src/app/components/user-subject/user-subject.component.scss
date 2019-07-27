@@ -13,6 +13,10 @@ h3 {
 .content-vertical {
   vertical-align: middle;
 }
+.icon-times {
+  font-size: 1.5rem;
+}
+
 .row-title {
   display: inline-flex;
   p {
@@ -21,12 +25,7 @@ h3 {
   }
 
 }
-.selected_teacher_load {
 
-
-
-
-}
 .separation {
   border-top: 1px solid rgba(0,0,0,.1);
   margin-top: 1.5rem;
@@ -35,10 +34,7 @@ h3 {
   margin-right: -0.95rem !important;
   margin-left: -0.95rem !important;
 }
-.select-imput-number {
-  max-width: 2.5rem;
-  border: 1px solid lightgrey;
-}
+
 .tableFixHead {
   font-size: 0.7em;
   padding-right: 5px;
@@ -55,7 +51,5 @@ h3 {
 
 }
 
-
-/* Just common table stuff. Really. */
 
 

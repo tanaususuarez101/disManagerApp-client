@@ -36,18 +36,7 @@ export class RestService {
         'x-access-token': this.auth.getToken()
       })
     };
-    return this.http.get(this.endpoint + '/group/' + groupCod + '/' + subjectCod + '/' + areaCod, httpOptions);
-  }
-
-  getGroupUser(): Observable<any> {
-    const httpOptions = {
-      headers: new HttpHeaders({
-        'Access-Control-Allow-Origin': '*',
-        'Content-Type': 'application/json',
-        'x-access-token': this.auth.getToken()
-      })
-    };
-    return this.http.get(this.endpoint + '/user_groups', httpOptions);
+    return this.http.get(this.endpoint + '/group/' + areaCod + '/' + subjectCod + '/' + groupCod, httpOptions);
   }
 
   getAllPDA(): Observable<any> {
@@ -89,7 +78,7 @@ export class RestService {
     return this.http.get(this.endpoint + '/tutorial', httpOptions);
   }
 
-  getTeacherLoad(): Observable<any>  {
+  getTeacherLoads(): Observable<any>  {
     const httpOptions = {
       headers: new HttpHeaders({
         'Access-Control-Allow-Origin': '*',
@@ -103,7 +92,7 @@ export class RestService {
       );
   }
 
-  getGroupTeacher(id: number): Observable<any> {
+  getTeacherLoad(dni): Observable<any> {
     const httpOptions = {
       headers: new HttpHeaders({
         'Access-Control-Allow-Origin': '*',
@@ -111,20 +100,8 @@ export class RestService {
         'x-access-token': this.auth.getToken()
       })
     };
-    return this.http.get(this.endpoint + '/teacher_load/' + id, httpOptions);
+    return this.http.get(this.endpoint + '/teacher_load/' + dni, httpOptions);
   }
-
-  postImpart(data): Observable<any> {
-    const httpOptions = {
-      headers: new HttpHeaders({
-        'Access-Control-Allow-Origin': '*',
-        'Content-Type': 'application/json',
-        'x-access-token': this.auth.getToken()
-      })
-    };
-    return this.http.post(this.endpoint + '/impart', JSON.stringify(data), httpOptions);
-  }
-
 
   postTeacherLoad(data): Observable<any> {
     const httpOptions = {
@@ -135,5 +112,16 @@ export class RestService {
       })
     };
     return this.http.post(this.endpoint + '/teacher_load', JSON.stringify(data), httpOptions);
+  }
+
+  postUser(data): Observable<any> {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Access-Control-Allow-Origin': '*',
+        'Content-Type': 'application/json',
+        'x-access-token': this.auth.getToken()
+      })
+    };
+    return this.http.post(this.endpoint + '/sign-in', JSON.stringify(data), httpOptions);
   }
 }

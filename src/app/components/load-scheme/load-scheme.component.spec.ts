@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { TeacherHistoryComponent } from './teacher-history.component';
+import { LoadSchemeComponent } from './load-scheme.component';
 
-describe('TeacherHistoryComponent', () => {
-  let component: TeacherHistoryComponent;
-  let fixture: ComponentFixture<TeacherHistoryComponent>;
+describe('LoadSchemeComponent', () => {
+  let component: LoadSchemeComponent;
+  let fixture: ComponentFixture<LoadSchemeComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ TeacherHistoryComponent ]
+      declarations: [ LoadSchemeComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(TeacherHistoryComponent);
+    fixture = TestBed.createComponent(LoadSchemeComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

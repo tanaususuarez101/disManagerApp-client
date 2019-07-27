@@ -1,7 +1,7 @@
 <div class="app-content">
   <h3 class="text-muted">{{title}}</h3>
+  <h4>Coordinador de Asignaturas</h4>
   <div class="content-coordinator tableFixHead">
-    <h4>Coordinador de Asignaturas</h4>
     <table class="table table-hover">
       <thead>
       <tr class="content-align">
@@ -10,9 +10,9 @@
       </thead>
       <tbody>
         <tr *ngFor="let item of coordinator?.subject" class="select-row content-align">
-          <td>{{item?.university_degree_name}}</td>
+          <td>{{item?.university_name}}</td>
           <td>{{item?.subject_name}}</td>
-          <td>{{item?.knowledge_area_name}}</td>
+          <td>{{item?.area_name}}</td>
           <td>{{item?.subject_type}}</td>
           <td>{{item?.subject_semester}}</td>
           <td>{{item?.teacher_surnames}}, {{item?.teacher_name}}</td>
@@ -31,9 +31,9 @@
       </thead>
       <tbody>
       <tr *ngFor="let item of coordinator?.practice" class="select-row content-align">
-        <td>{{item?.university_degree_name}}</td>
+        <td>{{item?.university_name}}</td>
         <td>{{item?.subject_name}}</td>
-        <td>{{item?.knowledge_area_name}}</td>
+        <td>{{item?.area_name}}</td>
         <td>{{item?.subject_type}}</td>
         <td>{{item?.subject_semester}}</td>
         <td>{{item?.teacher_surnames}}, {{item?.teacher_name}}</td>

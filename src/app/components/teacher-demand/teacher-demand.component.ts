@@ -20,10 +20,6 @@ export class TeacherDemandComponent implements OnInit {
 
   ngOnInit() {
     this.rest.getGroups()
-      .subscribe(
-      subjects => {
-        this.teacherDemands = subjects;
-      }
-    );
+      .subscribe(subjects =>    this.teacherDemands = subjects);
   }
 }

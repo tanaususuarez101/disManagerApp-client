@@ -1,4 +1,6 @@
-<h3 class="text-muted">{{user?.teacher_name}} {{user?.teacher_surnames}}</h3>
+
+<h3 class="text-muted">Perfil</h3>
+
 <div class="card mb-3">
   <div class="row">
     <div class="col-sm-12 col-md-12 col-lg-3">
@@ -7,16 +9,30 @@
     <div class="col-sm-12 col-md-12 col-lg-9">
       <div class="card-body">
         <ul class="list-group list-group-flush">
-          <li class="list-group-item text-right"><span class="pull-left text-muted">DNI</span>{{user?.dni}}</li>
-          <li class="list-group-item text-right"><span class="pull-left text-muted">Nombre de usuario</span>{{user?.teacher_username}}</li>
-          <li class="list-group-item text-right">
-            <span class="pull-left text-muted">Area de conocimiento</span>{{user?.area_name}} - {{user?.area_cod}}
+          <li *ngIf="user?.teacher_dni" class="list-group-item text-right" >
+            <span class="pull-left text-muted">DNI</span>{{user?.teacher_dni}}
           </li>
-          <li class="list-group-item text-right">
+          <li *ngIf="user?.teacher_name" class="list-group-item text-right" >
+            <span class="pull-left text-muted">DNI</span>{{user?.teacher_name}}
+          </li>
+          <li *ngIf="user?.teacher_surnames" class="list-group-item text-right" >
+            <span class="pull-left text-muted">DNI</span>{{user?.teacher_surnames}}
+          </li>
+          <li *ngIf="user?.username" class="list-group-item text-right">
+            <span class="pull-left text-muted">Nombre de usuario</span>{{user?.username}}
+          </li>
+          <li *ngIf="user?.area_name" class="list-group-item text-right">
+            <span class="pull-left text-muted">Area de conocimiento</span>{{user?.area_name}} - cod: {{user?.area_cod}}
+          </li>
+          <li *ngIf="true" class="list-group-item text-right">
             <span class="pull-left text-muted">Categoría profesional</span> null
           </li>
-          <li class="list-group-item text-right"><span class="pull-left text-muted">Potencial</span>{{user?.teacher_potential}} h</li>
-          <li class="list-group-item text-right"><span class="pull-left text-muted">Horas de tutorias</span>{{user?.tutorial_hours}} h</li>
+          <li *ngIf="user?.teacher_potential" class="list-group-item text-right">
+            <span class="pull-left text-muted">Potencial</span>{{user?.teacher_potential}} h
+          </li>
+          <li *ngIf="user?.tutorial_hours" class="list-group-item text-right">
+            <span class="pull-left text-muted">Horas de tutorias</span>{{user?.tutorial_hours}} h
+          </li>
           <li class="list-group-item text-right">
             <a class="card-link app-btn" data-toggle="modal" data-target="#changerPasswordModal">
             Cambiar contraseña

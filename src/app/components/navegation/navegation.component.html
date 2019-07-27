@@ -6,15 +6,36 @@
       <fa name="fas fa-power-off" class="float-right power-off" data-toggle="modal" data-target="#session-confirm"></fa>
     </div>
 
-
     <li class="list-group-item">
       <a class="list-group-item-light app-list-header" data-toggle="collapse" href="#item-1">
         <fa name="fas fa-user"></fa>
         <div>Mi cuenta</div>
       </a>
-      <div id="item-1" class="collapse show">
+      <div id="item-1" class="collapse">
         <ul class="list-group list-group-flush" >
-          <li *ngFor="let link of linkUser" routerLink="{{link.path}}" class="list-group-item app-list"
+          <li routerLink="/dashboard/profile" class="list-group-item app-list"
+              routerLinkActive="router-link-active">
+            <a class="">Perfil</a>
+          </li>
+
+          <ng-container *ngIf="user?.teacher_dni">
+            <li *ngFor="let link of userlink" routerLink="{{link.path}}" class="list-group-item app-list"
+                routerLinkActive="router-link-active">
+              <a class="">{{link.name}}</a>
+            </li>
+          </ng-container>
+        </ul>
+      </div>
+    </li>
+
+    <li class="list-group-item" *ngIf="user?.isAdmin">
+      <a class="list-group-item-light app-list-header" data-toggle="collapse" href="#item-2">
+        <fa name="fas fa-database"></fa>
+        <div>Administración</div>
+      </a>
+      <div id="item-2" class="collapse">
+        <ul class="list-group list-group-flush" >
+          <li *ngFor="let link of adminlink" routerLink="{{link.path}}" class="list-group-item app-list"
               routerLinkActive="router-link-active">
             <a class="">{{link.name}}</a>
           </li>
@@ -23,13 +44,13 @@
     </li>
 
     <li class="list-group-item">
-      <a class="list-group-item-light app-list-header" data-toggle="collapse" href="#item-2">
+      <a class="list-group-item-light app-list-header" data-toggle="collapse" href="#item-3">
         <fa name="fas fa-bars"></fa>
         <div>PDO</div>
       </a>
-      <div id="item-2" class="collapse">
+      <div id="item-3" class="collapse show">
         <ul class="list-group list-group-flush">
-          <li *ngFor="let link of linkPDO" routerLink="{{link.path}}" routerLinkActive="router-link-active" class="list-group-item app-list" >
+          <li *ngFor="let link of PDOlink" routerLink="{{link.path}}" routerLinkActive="router-link-active" class="list-group-item app-list" >
             <a class="">{{link.name}}</a>
           </li>
         </ul>
@@ -38,7 +59,6 @@
 
   </ul>
 </div>
-
 
 <!-- session confirm modal -->
 <div class="modal fade" id="session-confirm" tabindex="-1" role="dialog" aria-labelledby="ModalCenterTitle" aria-hidden="true">

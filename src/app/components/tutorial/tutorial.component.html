@@ -9,7 +9,7 @@
     <tbody>
     <tr *ngFor="let item of teachertutorial" class=" content-align">
       <td>{{item?.teacher_surnames}}, {{item?.teacher_name}}</td>
-      <td>{{item?.knowledge_area_name}}</td>
+      <td>{{item?.area_name}}</td>
       <td>{{item?.tutorial_hours}}</td>
       <td>{{item?.cover_hours}}</td>
       <td [ngClass]="{

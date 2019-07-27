@@ -26,9 +26,11 @@ export class TeacherDemandDetailsComponent implements OnInit {
     const groupCod = +this.route.snapshot.paramMap.get('group_cod');
     const subjectCod = +this.route.snapshot.paramMap.get('subject_cod');
     if (areaCod != null && groupCod != null && subjectCod != null) {
-      this.rest.getGroup(groupCod, subjectCod, areaCod).subscribe(
+      this.rest.getGroup(groupCod, subjectCod, areaCod)
+        .subscribe(
         group => {
           this.groupDetails = group;
+          console.log(group);
         }
       );
     }

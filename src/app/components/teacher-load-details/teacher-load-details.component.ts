@@ -20,8 +20,11 @@ export class TeacherLoadDetailsComponent implements OnInit {
 
   private teacherLoad() {
     const id = +this.route.snapshot.paramMap.get('id');
-    this.rest.getGroupTeacher(id).subscribe(
-      data => this.teacherLoads = data
+    this.rest.getTeacherLoad(id).subscribe(
+      data => {
+        this.teacherLoads = data;
+        console.log(data);
+      }
     );
   }
 }

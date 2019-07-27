@@ -11,24 +11,25 @@ declare var $: any;
 })
 export class NavegationComponent implements OnInit {
 
-  @Output() request = new EventEmitter();
+  user = this.auth.getUser();
 
-  linkPDO = [
+  PDOlink = [
     {name: 'Demanda docente', path: '/dashboard/teacher-demand'},
     {name: 'Carga docente', path: '/dashboard/teacher-load'},
     {name: 'Tutorías', path: '/dashboard/tutorial'},
     {name: 'Coordinador de Asignatura', path: '/dashboard/subject-coordinator'},
-    {name: 'Historial docente', path: '/dashboard/teacher-history'},
     {name: 'Proyecto docente', path: '/dashboard/teacher-PDA'},
   ];
-  linkUser = [
-    {name: 'Perfil', path: '/dashboard/profile'},
+  userlink = [
     {name: 'Mi Tutoría', path: '/dashboard/user-tutorial'},
     {name: 'Mi Solicitud', path: '/dashboard/user-request'},
     {name: 'Mi Coordinación', path: '/dashboard/user-coordinator'},
     {name: 'Mi Carga docente', path: '/dashboard/user-subject'}
   ];
-
+  adminlink = [
+    {name: 'Cargar esquema', path: '/dashboard/load-scheme'},
+    {name: 'Añadir usuario', path: '/dashboard/user-signup'}
+  ];
 
   constructor(private auth: AuthenticationService, private router: Router) { }
 

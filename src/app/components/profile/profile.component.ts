@@ -17,12 +17,15 @@ export class ProfileComponent implements OnInit {
   private message: string;
   private classAlert: string;
 
+
+
   constructor(private auth: AuthenticationService,
               private  formBuilder: FormBuilder) { }
 
   ngOnInit() {
     this.createLoginForm();
     this.user = this.auth.getUser();
+    console.log(this.user)
   }
 
   changerPassword() {

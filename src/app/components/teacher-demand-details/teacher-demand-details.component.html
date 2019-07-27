@@ -13,8 +13,8 @@
   </div>
 
   <div class="row">
-    <div class="col">{{groupDetails?.knowledge_area_name}}</div>
-    <div class="col">{{groupDetails?.university_degree_name}}</div>
+    <div class="col">{{groupDetails?.area_name}}</div>
+    <div class="col">{{groupDetails?.university_name}}</div>
   </div>
 
   <hr class="separation">
@@ -39,13 +39,15 @@
       <tr class="">
         <th scope="col">Profesor</th>
         <th scope="col">Horas en solicitud</th>
+        <th scope="col">Estado</th>
       </tr>
 
       </thead>
       <tbody>
       <tr *ngFor="let teacher of groupDetails?.teacher">
-        <td>{{teacher?.teacher_surname}}, {{teacher?.teacher_name}}</td>
-        <td>{{teacher?.teacher_assigned}}</td>
+        <td>{{teacher?.teacher_surnames}}, {{teacher?.teacher_name}}</td>
+        <td>{{teacher?.assigned_hours}}</td>
+        <td>{{teacher?.state_solicitation}}</td>
       </tr>
       </tbody>
     </table>
