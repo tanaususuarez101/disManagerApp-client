@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
-import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {HttpClient, HttpEvent, HttpHeaders} from '@angular/common/http';
 import {Observable, pipe} from 'rxjs';
 import {AuthenticationService} from './authentication.service';
-import {filter, map, repeat, tap, find} from 'rxjs/operators';
+import {filter, map, repeat, tap, find, catchError} from 'rxjs/operators';
 
 
 @Injectable({
@@ -123,5 +123,32 @@ export class RestService {
       })
     };
     return this.http.post(this.endpoint + '/sign-in', JSON.stringify(data), httpOptions);
+  }
+
+  postListTeacher(fileToUpload: File): Observable <any> {
+    const formData = new FormData();
+    formData.append('file', fileToUpload, fileToUpload.name);
+    return this.http.post(this.endpoint + '/upload_teacher', formData,
+      {
+        headers: new HttpHeaders({
+          'Access-Control-Allow-Origin': '*',
+          'x-access-token': this.auth.getToken()
+        }),
+        observe: 'events',
+        reportProgress: true
+      });
+  }
+
+  postLoadScheme(fileToUpload: File): Observable<any> {
+    const formData = new FormData();
+    formData.append('file', fileToUpload, fileToUpload.name);
+    return this.http.post(this.endpoint + '/upload_database', formData,
+      {
+        headers: new HttpHeaders({
+          'Access-Control-Allow-Origin': '*',
+          'x-access-token': this.auth.getToken()
+        }),
+        observe: 'events',
+        reportProgress: true});
   }
 }

@@ -11,7 +11,7 @@
         <fa name="fas fa-user"></fa>
         <div>Mi cuenta</div>
       </a>
-      <div id="item-1" class="collapse">
+      <div id="item-1" class="collapse show">
         <ul class="list-group list-group-flush" >
           <li routerLink="/dashboard/profile" class="list-group-item app-list"
               routerLinkActive="router-link-active">
@@ -33,7 +33,7 @@
         <fa name="fas fa-database"></fa>
         <div>Administración</div>
       </a>
-      <div id="item-2" class="collapse">
+      <div id="item-2" class="collapse show">
         <ul class="list-group list-group-flush" >
           <li *ngFor="let link of adminlink" routerLink="{{link.path}}" class="list-group-item app-list"
               routerLinkActive="router-link-active">

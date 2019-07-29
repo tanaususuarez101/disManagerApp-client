@@ -23,7 +23,11 @@
 
     <div class="col">
       <div class="row">
-        <button class="btn btn-link" (click)="confirmSelection()">Confirmar selección</button>
+        <button type="submit" class="btn btn-link" (click)="confirmSelection()">
+          <fa name="fas fa-upload"></fa>
+          Confirmar selección
+        </button>
+        <!-- <button class="btn btn-link" >Confirmar selección</button> -->
       </div>
       <div class="row tableFixHead">
         <table class="table table-striped ">
@@ -80,7 +84,10 @@
           class="btn btn-link"
           (click)="addSelectedGroups()"
           data-toggle="tooltip" data-placement="bottom" title="Solo se añadirán los grupos con las horas seleccionadas superior a 0"
-        >Actualizar carga docente
+        >
+          <fa name="fas fa-sync-alt"></fa>
+          <i class="fas fa-sync"></i>
+          Actualizar carga docente
         </button>
       </div>
       <div class="row tableFixHead">

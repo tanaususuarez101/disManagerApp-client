@@ -1,7 +1,31 @@
 <div class="title">
   <h3 class="text-muted">{{title}}</h3>
 </div>
-<form [formGroup]="signInForm" (ngSubmit)="addNewUser()">
+<div class="form-group">
+  <div class="custom-control custom-radio custom-control-inline">
+    <input class="custom-control-input" type="radio" name="exampleRadios" id="exampleRadios1"
+           [value]="true"
+           [(ngModel)]="onlyUser"
+    >
+    <label class="custom-control-label" for="exampleRadios1">
+      Añadir usuario/profesor
+    </label>
+  </div>
+  <div class="custom-control custom-radio custom-control-inline">
+    <input class="custom-control-input" type="radio" name="exampleRadios" id="exampleRadios2"
+           [value]="false"
+           [(ngModel)]="onlyUser"
+    >
+    <label class="custom-control-label" for="exampleRadios2">
+      Importar lista de profesores
+    </label>
+  </div>
+</div>
+
+
+<!-- TODO - AÑADIR VALIDACIÓN DE FORMULARIOS -->
+
+<form *ngIf="onlyUser" [formGroup]="signInForm" (ngSubmit)="addNewUser()">
   <div class="form-row">
     <div class="form-group col-md-6">
       <label for="inputEmail4">Nombre de usuario</label>
@@ -13,26 +37,27 @@
     </div>
   </div>
 
-  <div class="form-group row">
-    <div class="col-sm-12">
-      <div class="form-check">
-        <input class="form-check-input" type="checkbox" id="gridCheck1" formControlName="admin"
-        >
-        <label class="form-check-label" for="gridCheck1">Administrador</label>
+
+  <div class="form-group custom-control-inline">
+      <div class="custom-control custom-checkbox custom-control-inline">
+        <input class="custom-control-input" type="checkbox" id="gridCheck1" formControlName="admin">
+        <label class="custom-control-label" for="gridCheck1">Administrador</label>
       </div>
-      <div class="form-check">
-        <input class="form-check-input" type="checkbox" id="gridCheck2" value="true"
+
+      <div class="custom-control custom-checkbox custom-control-inline">
+        <input class="custom-control-input" type="checkbox" id="gridCheck2"
                [checked]="isTeacher"
-               [(ngModel)]="isTeacher"
-               [ngModelOptions]="{standalone: true}"
-               (ngModelChange)="createLoginForm()"
+               (change)="selectedTeacher($event)"
         >
-        <label class="form-check-label" for="gridCheck2">Profesor</label>
+        <label class="custom-control-label" for="gridCheck2">Profesor</label>
       </div>
-    </div>
   </div>
 
+
   <ng-container *ngIf="isTeacher" >
+    <div class="alert alert-light" role="alert">
+      Si el profesor ya está registrado, solo es necesario rellenar el campo <strong>DNI.</strong>
+    </div>
     <div class="form-row">
       <div class="form-group col-md-5">
         <label for="inputName">Nombre</label>
@@ -50,20 +75,19 @@
 
 
     <div class="form-row">
-      <div class="form-group col-md-4">
+      <div class="form-group col-md-3">
         <label for="inputPotential">Potencial</label>
         <input type="text" class="form-control" id="inputPotential" formControlName="potential">
       </div>
 
-      <div class="form-group col-md-4">
+      <div class="form-group col-md-3">
         <label for="inputhourstutorial">Horas de tutorias</label>
         <input type="text" class="form-control" id="inputhourstutorial" formControlName="tutorial_hours">
       </div>
 
-      <div class="form-group col-md-4">
+      <div class="form-group col-md-6">
         <label for="inputKnowledgeArea">Área de Conocimiento</label>
         <select id="inputKnowledgeArea" class="form-control" formControlName="area_cod">
-
           <option value="35" selected>Arquitectura Y Tecnología de Computadores(35)</option>
           <option value="75">Ciencia De La Comp. E Intel. Artificial (75)</option>
           <option value="570">Lenguajes Y Sistemas Informáticos (570)</option>
@@ -75,11 +99,39 @@
 
   <div class="form-group row">
     <div class="col-sm-10">
-      <button type="submit" class="btn btn-link">Añadir</button>
+      <button type="submit" class="btn btn-primary">
+        <fa name="fas fa-upload"></fa>
+        Añadir
+      </button>
     </div>
   </div>
 
+</form>
 
+<form *ngIf="!onlyUser" (ngSubmit)="ploadFileToActivity()">
 
+  <div class="row">
+    <div class="col-10 custom-file">
+      <input type="file" class="custom-file-input" lang="es"
+             id="file"
+             (change)="handleFileInput($event.target['files'])"
+      >
+      <label class="custom-file-label" for="file" id="fileLabel">Elegir archivo</label>
+    </div>
+    <div class="col-2">
+      <button type="submit" class="btn btn-primary">
+        <fa name="fas fa-upload"></fa>
+        Cargar lista
+      </button>
+    </div>
+  </div>
 
+  <div class="row" *ngIf="activedLoad">
+    <div class="app-bar col-12">
+      <label>Subiendo fichero...</label>
+      <div class="progress">
+        <div class="progress-bar bg-info" role="progressbar" [ngStyle]="{'width.%':uploadByte}" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">{{uploadByte}}%</div>
+      </div>
+    </div>
+  </div>
 </form>

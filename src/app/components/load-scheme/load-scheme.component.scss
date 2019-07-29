@@ -1,0 +1,17 @@
+h3 {
+  text-align: right;
+  margin-bottom: 1.7rem;
+  margin-top: 0.2rem;
+}
+.custom-file-label::after {
+  content: 'Buscar';
+}
+.app-bar {
+  margin-top: 1.2rem;
+  padding-right: 1.5rem;
+  padding-left: 0;
+  .bg-info {
+    background: #466b99 !important;
+  }
+}
+
