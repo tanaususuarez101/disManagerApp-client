@@ -30,6 +30,10 @@ import { UserCoordinatorComponent } from './components/user-coordinator/user-coo
 import { UserTutorialComponent } from './components/user-tutorial/user-tutorial.component';
 import { LoadSchemeComponent } from './components/load-scheme/load-scheme.component';
 import { UserSignupComponent } from './components/user-signup/user-signup.component';
+import { LoadPdaComponent } from './components/load-pda/load-pda.component';
+import { LoadDataComponent } from './components/load-data/load-data.component';
+import { LoadTeacherDataComponent } from './components/load-teacher-data/load-teacher-data.component';
+import { TutorialDetailsComponent } from './components/tutorial-details/tutorial-details.component';
 
 @NgModule({
   declarations: [
@@ -57,6 +61,10 @@ import { UserSignupComponent } from './components/user-signup/user-signup.compon
     UserTutorialComponent,
     LoadSchemeComponent,
     UserSignupComponent,
+    LoadPdaComponent,
+    LoadDataComponent,
+    LoadTeacherDataComponent,
+    TutorialDetailsComponent,
   ],
   imports: [
     BrowserModule,

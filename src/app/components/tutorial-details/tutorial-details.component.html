@@ -1,0 +1,80 @@
+<h3 class="text-muted">{{title}}</h3>
+
+<div class="row">
+  <div class="col-sm-12 col-md-12 col-lg-6">
+    <h4 class="col-12">Primer semestre</h4>
+    <hr class="h-auto">
+    <table class="table table-bordered align-content-center" >
+      <thead>
+      <tr>
+        <th *ngFor="let col of fieldDay" scope="col" style="text-align: center">{{col}}</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <th>Lunes</th>
+        <td *ngIf="selected?.first_semester?.monday.length > 0">{{selected?.first_semester?.monday}}</td>
+        <td *ngIf="!selected?.first_semester?.monday.length > 0"> - </td>
+      </tr>
+      <tr>
+        <th>Martes</th>
+        <td *ngIf="selected?.first_semester?.tuesday.length > 0">{{selected?.first_semester?.tuesday}}</td>
+        <td *ngIf="!selected?.first_semester?.tuesday.length > 0"> - </td>
+      </tr>
+      <tr>
+        <th>Miércoles</th>
+        <td *ngIf="selected?.first_semester?.wednesday.length > 0">{{selected?.first_semester?.wednesday}}</td>
+        <td *ngIf="!selected?.first_semester?.wednesday.length > 0"> - </td>
+      </tr>
+      <tr>
+        <th>Jueves</th>
+        <td *ngIf="selected?.first_semester?.thursday.length > 0">{{selected?.first_semester?.thursday}}</td>
+        <td *ngIf="!selected?.first_semester?.thursday.length > 0"> - </td>
+      </tr>
+      <tr>
+        <th>Viernes</th>
+        <td *ngIf="selected?.first_semester?.friday.length > 0">{{selected?.first_semester?.friday}}</td>
+        <td *ngIf="!selected?.first_semester?.friday.length > 0"> - </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="col-sm-12 col-md-12 col-lg-6">
+    <h4 class="col-12">Segundo semestre</h4>
+    <hr class="h-auto">
+    <table class="table table-bordered align-content-center" >
+      <thead>
+      <tr>
+        <th *ngFor="let col of fieldDay" scope="col" style="text-align: center">{{col}}</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <th>Lunes</th>
+        <td *ngIf="selected?.second_semester?.monday.length > 0">{{selected?.second_semester?.monday}}</td>
+        <td *ngIf="!selected?.second_semester?.monday.length > 0"> - </td>
+      </tr>
+      <tr>
+        <th>Martes</th>
+        <td *ngIf="selected?.second_semester?.tuesday.length > 0">{{selected?.second_semester?.tuesday}}</td>
+        <td *ngIf="!selected?.second_semester?.tuesday.length > 0"> - </td>
+      </tr>
+      <tr>
+        <th>Miércoles</th>
+        <td *ngIf="selected?.second_semester?.wednesday.length > 0">{{selected?.second_semester?.wednesday}}</td>
+        <td *ngIf="!selected?.second_semester?.wednesday.length > 0"> - </td>
+      </tr>
+      <tr>
+        <th>Jueves</th>
+        <td *ngIf="selected?.second_semester?.thursday.length > 0">{{selected?.second_semester?.thursday}}</td>
+        <td *ngIf="!selected?.second_semester?.thursday.length > 0"> - </td>
+      </tr>
+      <tr>
+        <th>Viernes</th>
+        <td *ngIf="selected?.second_semester?.friday.length > 0">{{selected?.second_semester?.friday}}</td>
+        <td *ngIf="!selected?.second_semester?.friday.length > 0"> - </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

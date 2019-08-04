@@ -16,15 +16,16 @@ export class TutorialComponent implements OnInit {
   constructor(public rest: RestService, private router: Router) { }
 
   ngOnInit() {
-    this.rest.getTutorial().subscribe(
+    this.rest.getAllTutorial().subscribe(
       data => this.teachertutorial = data,
       err => {
-        if (err.status == 401) {
+        if (err.status === 401) {
           this.router.navigate(['/login']);
         }
       }
     );
 
   }
+
 
 }

@@ -1,23 +1,23 @@
 import { Component, OnInit } from '@angular/core';
-import {RestService} from '../../services/rest.service';
 import {HttpEventType} from '@angular/common/http';
+import {RestService} from '../../services/rest.service';
 
 @Component({
-  selector: 'app-load-scheme',
-  templateUrl: './load-scheme.component.html',
-  styleUrls: ['./load-scheme.component.scss']
+  selector: 'app-load-teacher-data',
+  templateUrl: './load-teacher-data.component.html',
+  styleUrls: ['./load-teacher-data.component.scss']
 })
-export class LoadSchemeComponent implements OnInit {
-  title = 'Cargar esquema en la base de datos';
-  private fileToUpload: any;
-  private uploadByte = 0;
-  private activedLoad = false;
-  private fileLabelName = 'Elegir esquema';
+export class LoadTeacherDataComponent implements OnInit {
+  activedLoad: any;
+  uploadByte: any;
+  private fileToUpload: File;
+  private fileLabelName = 'Elegir lista de profesores';
 
   constructor(private rest: RestService) { }
 
   ngOnInit() {
   }
+
 
   handleFileInput(files: FileList) {
     this.fileToUpload = files.item(0);
@@ -26,12 +26,13 @@ export class LoadSchemeComponent implements OnInit {
     } else {
       document.getElementById('fileLabel').innerHTML = this.fileLabelName;
       this.activedLoad = false;
+      console.log(this.activedLoad);
     }
   }
 
   ploadFileToActivity() {
     this.activedLoad = true;
-    this.rest.postLoadScheme(this.fileToUpload)
+    this.rest.postListTeacher(this.fileToUpload)
       .subscribe(
         event => {
           if (event.type === HttpEventType.UploadProgress) {

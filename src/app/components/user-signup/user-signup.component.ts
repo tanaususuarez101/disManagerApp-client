@@ -26,7 +26,6 @@ export class UserSignupComponent implements OnInit {
     this.createUserForm();
   }
   selectedTeacher(event) {
-    console.log(event.target.checked);
     this.isTeacher = event.target.checked;
     this.createUserForm();
   }

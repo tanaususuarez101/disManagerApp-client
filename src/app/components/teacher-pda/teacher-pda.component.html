@@ -14,8 +14,8 @@
       <td>{{item?.teacher_surnames}}, {{item?.teacher_name}}</td>
       <td
         [ngClass]="{
-          'p-3 mb-2 bg-danger text-white': item?.status == 'suspendido',
-          'p-3 mb-2 bg-success text-white': item?.status == 'aprobado'
+          'p-3 mb-2 bg-danger text-white': item?.pda_status == 'suspendido',
+          'p-3 mb-2 bg-success text-white': item?.pda_status == 'aprobado'
           }"
       >{{item?.pda_status}}</td>
     </tr>

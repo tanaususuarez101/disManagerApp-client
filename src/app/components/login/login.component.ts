@@ -48,7 +48,6 @@ export class LoginComponent implements OnInit {
     this.auth.login(this.loginForm.value)
       .subscribe(
       data => {
-        console.log('Login', data);
         this.auth.setToken(data.token);
         this.auth.setUser(data.user);
         this.router.navigate(['/dashboard/teacher-demand']);

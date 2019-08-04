@@ -1,37 +1,27 @@
 import { Component, OnInit } from '@angular/core';
-import {RestService} from '../../services/rest.service';
 import {HttpEventType} from '@angular/common/http';
+import {RestService} from '../../services/rest.service';
 
 @Component({
-  selector: 'app-load-scheme',
-  templateUrl: './load-scheme.component.html',
-  styleUrls: ['./load-scheme.component.scss']
+  selector: 'app-load-pda',
+  templateUrl: './load-pda.component.html',
+  styleUrls: ['./load-pda.component.scss']
 })
-export class LoadSchemeComponent implements OnInit {
-  title = 'Cargar esquema en la base de datos';
+export class LoadPdaComponent implements OnInit {
+  title = 'Carga de PDA';
   private fileToUpload: any;
   private uploadByte = 0;
   private activedLoad = false;
-  private fileLabelName = 'Elegir esquema';
+  private fileLabelName = 'Elegir lista de PDA';
 
   constructor(private rest: RestService) { }
 
   ngOnInit() {
   }
 
-  handleFileInput(files: FileList) {
-    this.fileToUpload = files.item(0);
-    if (this.fileToUpload != null) {
-      document.getElementById('fileLabel').innerHTML = this.fileToUpload['name'];
-    } else {
-      document.getElementById('fileLabel').innerHTML = this.fileLabelName;
-      this.activedLoad = false;
-    }
-  }
-
   ploadFileToActivity() {
     this.activedLoad = true;
-    this.rest.postLoadScheme(this.fileToUpload)
+    this.rest.postLoadPda(this.fileToUpload)
       .subscribe(
         event => {
           if (event.type === HttpEventType.UploadProgress) {
@@ -47,5 +37,15 @@ export class LoadSchemeComponent implements OnInit {
           alert('ERROR al guardar');
           return;
         });
+  }
+
+  handleFileInput(files: FileList) {
+    this.fileToUpload = files.item(0);
+    if (this.fileToUpload != null) {
+      document.getElementById('fileLabel').innerHTML = this.fileToUpload['name'];
+    } else {
+      document.getElementById('fileLabel').innerHTML = this.fileLabelName;
+      this.activedLoad = false;
+    }
   }
 }

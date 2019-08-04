@@ -1,3 +1,275 @@
-<p>
-  user-tutorial works!
-</p>
+<h3 class="text-muted">
+  {{title}}
+</h3>
+
+<div class="row">
+  <div class="col-sm-12 col-md-12 col-lg-6">
+    <h4 class="col-12">Primer semestre</h4>
+    <hr class="h-auto">
+    <table class="table table-bordered align-content-center" >
+      <thead>
+      <tr>
+        <th *ngFor="let col of fieldDay" scope="col" style="text-align: center">{{col}}</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <th>Lunes</th>
+        <td *ngIf="selected?.first_semester?.monday.length > 0">{{selected?.first_semester?.monday}}</td>
+        <td *ngIf="!selected?.first_semester?.monday.length > 0"> - </td>
+      </tr>
+      <tr>
+        <th>Martes</th>
+        <td *ngIf="selected?.first_semester?.tuesday.length > 0">{{selected?.first_semester?.tuesday}}</td>
+        <td *ngIf="!selected?.first_semester?.tuesday.length > 0"> - </td>
+      </tr>
+      <tr>
+        <th>Miércoles</th>
+        <td *ngIf="selected?.first_semester?.wednesday.length > 0">{{selected?.first_semester?.wednesday}}</td>
+        <td *ngIf="!selected?.first_semester?.wednesday.length > 0"> - </td>
+      </tr>
+      <tr>
+        <th>Jueves</th>
+        <td *ngIf="selected?.first_semester?.thursday.length > 0">{{selected?.first_semester?.thursday}}</td>
+        <td *ngIf="!selected?.first_semester?.thursday.length > 0"> - </td>
+      </tr>
+      <tr>
+        <th>Viernes</th>
+        <td *ngIf="selected?.first_semester?.friday.length > 0">{{selected?.first_semester?.friday}}</td>
+        <td *ngIf="!selected?.first_semester?.friday.length > 0"> - </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="col-sm-12 col-md-12 col-lg-6">
+    <h4 class="col-12">Segundo semestre</h4>
+    <hr class="h-auto">
+    <table class="table table-bordered align-content-center" >
+      <thead>
+      <tr>
+        <th *ngFor="let col of fieldDay" scope="col" style="text-align: center">{{col}}</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <th>Lunes</th>
+        <td *ngIf="selected?.second_semester?.monday.length > 0">{{selected?.second_semester?.monday}}</td>
+        <td *ngIf="!selected?.second_semester?.monday.length > 0"> - </td>
+      </tr>
+      <tr>
+        <th>Martes</th>
+        <td *ngIf="selected?.second_semester?.tuesday.length > 0">{{selected?.second_semester?.tuesday}}</td>
+        <td *ngIf="!selected?.second_semester?.tuesday.length > 0"> - </td>
+      </tr>
+      <tr>
+        <th>Miércoles</th>
+        <td *ngIf="selected?.second_semester?.wednesday.length > 0">{{selected?.second_semester?.wednesday}}</td>
+        <td *ngIf="!selected?.second_semester?.wednesday.length > 0"> - </td>
+      </tr>
+      <tr>
+        <th>Jueves</th>
+        <td *ngIf="selected?.second_semester?.thursday.length > 0">{{selected?.second_semester?.thursday}}</td>
+        <td *ngIf="!selected?.second_semester?.thursday.length > 0"> - </td>
+      </tr>
+      <tr>
+        <th>Viernes</th>
+        <td *ngIf="selected?.second_semester?.friday.length > 0">{{selected?.second_semester?.friday}}</td>
+        <td *ngIf="!selected?.second_semester?.friday.length > 0"> - </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-12">
+    <button type="submit" class="btn btn-primary" (click)="showTutorialModal()">
+      Añadir tutorías
+      <span class="badge badge-primary">{{selected?.hours}} / {{user.tutorial_hours}} horas</span>
+    </button>
+
+  </div>
+</div>
+
+<!--
+  Modal for add new tutorial hours
+-->
+
+
+<div class="modal" tabindex="-1" role="dialog" id="tutorialModal" >
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">
+            Horarios de tutorias
+            <p class="text-muted">{{selected?.hours}}/{{user?.tutorial_hours}} Horas</p>
+          </h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+
+
+          <div class="row">
+            <div class="col-6">
+              <div class="row align-items-center">
+                <div class="col-5">Lunes</div>
+                <select class="col-7 custom-select" (change)="onChange($event.target?.value, 'monday', 'first')">
+                  <option *ngFor="let hour of hoursOption">{{hour}}</option>
+                </select>
+
+                <div class="container-hours">
+                  <span class="badge badge-info" *ngFor=" let hour of formTutorial?.first_semester?.monday">
+                    {{hour}}
+                    <span class="circle" aria-hidden="true" (click)="onChangeDelete(hour, 'monday', 'first')">&times;</span>
+                  </span>
+                </div>
+              </div>
+
+              <div class="row align-items-center">
+                <div class="col-5">Martes</div>
+                <select class="col-7 custom-select" (change)="onChange($event.target?.value, 'tuesday', 'first')">
+                  <option *ngFor="let hour of hoursOption">{{hour}}</option>
+                </select>
+
+                <div class="container-hours">
+                  <span class="badge badge-info" *ngFor=" let hour of formTutorial?.first_semester?.tuesday">
+                    {{hour}}
+                    <span class="circle" aria-hidden="true" (click)="onChangeDelete(hour, 'tuesday', 'first')">&times;</span>
+                  </span>
+                </div>
+              </div>
+
+              <div class="row align-items-center">
+                <div class="col-5">Miércoles</div>
+                <select class="col-7 custom-select" (change)="onChange($event.target?.value, 'wednesday', 'first')">
+                  <option *ngFor="let hour of hoursOption">{{hour}}</option>
+                </select>
+
+                <div class="container-hours">
+                  <span class="badge badge-info" *ngFor=" let hour of formTutorial?.first_semester?.wednesday">
+                    {{hour}}
+                    <span class="circle" aria-hidden="true" (click)="onChangeDelete(hour, 'wednesday', 'first')">&times;</span>
+                  </span>
+                </div>
+              </div>
+
+              <div class="row align-items-center">
+                <div class="col-5">Jueves</div>
+                <select class="col-7 custom-select" (change)="onChange($event.target?.value, 'thursday', 'first')">
+                  <option *ngFor="let hour of hoursOption">{{hour}}</option>
+                </select>
+
+                <div class="container-hours">
+                  <span class="badge badge-info" *ngFor=" let hour of formTutorial?.first_semester?.thursday">
+                    {{hour}}
+                    <span class="circle" aria-hidden="true" (click)="onChangeDelete(hour, 'thursday', 'first')">&times;</span>
+                  </span>
+                </div>
+              </div>
+              <div class="row align-items-center">
+                <div class="col-5">Viernes</div>
+                <select class="col-7 custom-select" (change)="onChange($event.target?.value, 'friday', 'first')">
+                  <option *ngFor="let hour of hoursOption">{{hour}}</option>
+                </select>
+
+                <div class="container-hours">
+                  <span class="badge badge-info" *ngFor=" let hour of formTutorial?.first_semester?.friday">
+                    {{hour}}
+                    <span class="circle" aria-hidden="true" (click)="onChangeDelete(hour, 'friday', 'first')">&times;</span>
+                  </span>
+                </div>
+              </div>
+
+
+            </div>
+            <div class="col-6">
+
+
+              <div class="row align-items-center">
+                <div class="col-5">Lunes</div>
+                <select class="col-7 custom-select" (change)="onChange($event.target?.value, 'monday', 'second')">
+                  <option *ngFor="let hour of hoursOption">{{hour}}</option>
+                </select>
+
+                <div class="container-hours">
+                  <span class="badge badge-info" *ngFor=" let hour of formTutorial?.second_semester?.monday">
+                    {{hour}}
+                    <span class="circle" aria-hidden="true" (click)="onChangeDelete(hour, 'monday', 'second')">&times;</span>
+                  </span>
+                </div>
+              </div>
+
+
+              <div class="row align-items-center">
+                <div class="col-5">Martes</div>
+                <select class="col-7 custom-select" (change)="onChange($event.target?.value, 'tuesday', 'second')">
+                  <option *ngFor="let hour of hoursOption">{{hour}}</option>
+                </select>
+
+                <div class="container-hours">
+                  <span class="badge badge-info" *ngFor=" let hour of formTutorial?.second_semester?.tuesday">
+                    {{hour}}
+                    <span class="circle" aria-hidden="true" (click)="onChangeDelete(hour, 'tuesday', 'second')">&times;</span>
+                  </span>
+                </div>
+              </div>
+
+
+              <div class="row align-items-center">
+                <div class="col-5">Miércoles</div>
+                <select class="col-7 custom-select" (change)="onChange($event.target?.value, 'wednesday', 'second')">
+                  <option *ngFor="let hour of hoursOption">{{hour}}</option>
+                </select>
+
+                <div class="container-hours">
+                  <span class="badge badge-info" *ngFor=" let hour of formTutorial?.second_semester?.wednesday">
+                    {{hour}}
+                    <span class="circle" aria-hidden="true" (click)="onChangeDelete(hour, 'wednesday', 'second')">&times;</span>
+                  </span>
+                </div>
+              </div>
+
+
+              <div class="row align-items-center">
+                <div class="col-5">Jueves</div>
+                <select class="col-7 custom-select" (change)="onChange($event.target?.value, 'thursday', 'second')">
+                  <option *ngFor="let hour of hoursOption">{{hour}}</option>
+                </select>
+
+                <div class="container-hours">
+                  <span class="badge badge-info" *ngFor=" let hour of formTutorial?.second_semester?.thursday">
+                    {{hour}}
+                    <span class="circle" aria-hidden="true" (click)="onChangeDelete(hour, 'thursday', 'second')">&times;</span>
+                  </span>
+                </div>
+              </div>
+
+              <div class="row align-items-center">
+                <div class="col-5">Viernes</div>
+                <select class="col-7 custom-select" (change)="onChange($event.target?.value, 'friday', 'second')">
+                  <option *ngFor="let hour of hoursOption">{{hour}}</option>
+                </select>
+
+                <div class="container-hours">
+                  <span class="badge badge-info" *ngFor=" let hour of formTutorial?.second_semester?.friday">
+                    {{hour}}
+                    <span class="circle" aria-hidden="true" (click)="onChangeDelete(hour, 'friday', 'second')">&times;</span>
+                  </span>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary" (click)="sendTutorialDay()">Guardar</button>
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        </div>
+    </div>
+  </div>
+</div>

@@ -19,6 +19,9 @@ import {UserCoordinatorComponent} from './components/user-coordinator/user-coord
 import {UserTutorialComponent} from './components/user-tutorial/user-tutorial.component';
 import {LoadSchemeComponent} from './components/load-scheme/load-scheme.component';
 import {UserSignupComponent} from './components/user-signup/user-signup.component';
+import {LoadPdaComponent} from './components/load-pda/load-pda.component';
+import {LoadDataComponent} from './components/load-data/load-data.component';
+import {TutorialDetailsComponent} from './components/tutorial-details/tutorial-details.component';
 
 
 const routes: Routes = [
@@ -31,12 +34,15 @@ const routes: Routes = [
       { path: 'teacher-demand', component: TeacherDemandComponent, canActivate: [AuthGuard] },
       { path: 'teacher-load', component: TeacherLoadComponent, canActivate: [AuthGuard] },
       { path: 'tutorial', component: TutorialComponent, canActivate: [AuthGuard] },
+      { path: 'tutorial-details/:id', component: TutorialDetailsComponent, canActivate: [AuthGuard]},
       { path: 'subject-coordinator', component: SubjectCoordinatorComponent, canActivate: [AuthGuard]},
       { path: 'teacher-PDA', component: TeacherPDAComponent, canActivate: [AuthGuard]},
       { path: 'teacher-demand-details/:area_cod/:subject_cod/:group_cod', component: TeacherDemandDetailsComponent,
         canActivate: [AuthGuard]},
       { path: 'teacher-load-details/:id', component: TeacherLoadDetailsComponent, canActivate: [AuthGuard]},
       { path: 'load-scheme', component: LoadSchemeComponent, canActivate: [AuthGuard]},
+      { path: 'load-pda', component: LoadPdaComponent, canActivate: [AuthGuard]},
+      { path: 'load-data', component: LoadDataComponent, canActivate: [AuthGuard]},
       { path: 'user-signup', component: UserSignupComponent, canActivate: [AuthGuard]},
       { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard]},
       { path: 'user-subject', component: MySubjectComponent, canActivate: [AuthGuard]},

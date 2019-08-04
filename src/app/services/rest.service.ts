@@ -67,7 +67,7 @@ export class RestService {
       );
   }
 
-  getTutorial(): Observable<any>  {
+  getAllTutorial(): Observable<any>  {
     const httpOptions = {
       headers: new HttpHeaders({
         'Access-Control-Allow-Origin': '*',
@@ -77,7 +77,16 @@ export class RestService {
     };
     return this.http.get(this.endpoint + '/tutorial', httpOptions);
   }
-
+  getTutorial(dni): Observable<any>  {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Access-Control-Allow-Origin': '*',
+        'Content-Type': 'application/json',
+        'x-access-token': this.auth.getToken()
+      })
+    };
+    return this.http.get(this.endpoint + '/tutorial/' + dni, httpOptions);
+  }
   getTeacherLoads(): Observable<any>  {
     const httpOptions = {
       headers: new HttpHeaders({
@@ -150,5 +159,29 @@ export class RestService {
         }),
         observe: 'events',
         reportProgress: true});
+  }
+
+  postLoadPda(fileToUpload: File) {
+    const formData = new FormData();
+    formData.append('file', fileToUpload, fileToUpload.name);
+    return this.http.post(this.endpoint + '/upload_pda', formData,
+      {
+        headers: new HttpHeaders({
+          'Access-Control-Allow-Origin': '*',
+          'x-access-token': this.auth.getToken()
+        }),
+        observe: 'events',
+        reportProgress: true});
+  }
+
+  postTutorial(data): Observable<any> {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Access-Control-Allow-Origin': '*',
+        'Content-Type': 'application/json',
+        'x-access-token': this.auth.getToken()
+      })
+    };
+    return this.http.post(this.endpoint + '/tutorial', JSON.stringify(data), httpOptions);
   }
 }
