@@ -33,7 +33,18 @@
 
   <hr class="separation">
 
-  <div class="row">
+  <div *ngIf="groupDetails?.teacher.length == 0" class="row">
+    <div class="col-12">
+    <div class="alert alert-warning" role="alert">
+      <p>
+        Este grupo aún no tiene ningún profesor asignado.
+      </p>
+    </div>
+    <hr class="separation">
+    </div>
+  </div>
+
+  <div class="row" *ngIf="groupDetails?.teacher?.length > 0">
     <table class="table table-bordered">
       <thead>
       <tr class="">

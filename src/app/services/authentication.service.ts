@@ -50,7 +50,7 @@ export class AuthenticationService {
         'x-access-token': token
       })
     };
-    return this.http.get(endpoint + '/teacher', httpHeaderToken);
+    return this.http.get(endpoint + '/user', httpHeaderToken);
   }
 
   setToken(token): void {

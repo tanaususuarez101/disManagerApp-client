@@ -13,9 +13,7 @@ h3 {
 .content-vertical {
   vertical-align: middle;
 }
-.icon-times {
-  font-size: 1.5rem;
-}
+
 
 .row-title {
   display: inline-flex;
@@ -37,18 +35,26 @@ h3 {
 .tableFixHead {
   font-size: 0.7em;
   padding-right: 5px;
-  overflow-y: auto; max-height: 25rem;
+  overflow-y: auto; max-height: 35rem;
   padding-left: 0;
   margin-bottom: 2.5rem;
-  thead th { position: sticky; top: 0; }
+  thead th { position: sticky; top: -1px; }
   table  {
     border-collapse: collapse;
     width: 100%;
   }
   th, td { padding: 8px 16px; }
   th     { background:#eee; }
-
 }
 
+.text-danger {
+  font-size: 1.5rem;
+  color: grey !important;
+
+}
+.text-danger:hover {
+  color: red !important;
+  cursor: pointer;
+}
 
 

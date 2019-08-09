@@ -13,10 +13,9 @@ declare var $: any;
 export class LoginComponent implements OnInit {
   private submitted: boolean;
   loginForm: any;
+  private activateLoad: boolean;
 
-  constructor(public auth: AuthenticationService,
-              private formBuilder: FormBuilder,
-              private router: Router) { }
+  constructor(public auth: AuthenticationService, private formBuilder: FormBuilder, private router: Router) { }
 
   ngOnInit() {
     this.createLoginForm();
@@ -24,15 +23,9 @@ export class LoginComponent implements OnInit {
     if (token) {
       this.auth.getCurrent(token)
         .subscribe(
-          data => {
-            this.router.navigate(['dashboard/teacher-demand']);
-          },
-          err => {
-            console.log('Sessión caducada');
-          }
+          data => this.router.navigate(['dashboard/teacher-demand']),
+          err => {}
         );
-    } else {
-      console.log('Usuario no registrado');
     }
   }
 
@@ -45,6 +38,7 @@ export class LoginComponent implements OnInit {
     if (this.loginForm.invalid) {
       return;
     }
+    this.activateLoad = true;
     this.auth.login(this.loginForm.value)
       .subscribe(
       data => {
@@ -54,6 +48,7 @@ export class LoginComponent implements OnInit {
 
       },
       error => {
+        this.activateLoad = false;
         const element = document.getElementById('alert-login');
         if (element != null) {
           element.innerHTML = '<div class="alert alert-danger alert-dismissible fade show" role="alert">\n' +

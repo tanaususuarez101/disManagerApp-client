@@ -38,7 +38,10 @@
             </div>
 
             <hr class="my-4">
-            <button class="btn btn-link btn-lg btn-block text-uppercase" type="submit">Entrar</button>
+            <button class="btn btn-link btn-lg btn-block text-uppercase" type="submit">
+              Entrar
+              <i *ngIf="activateLoad" class="fa fa-spinner fa-spin" style="font-size:24px"></i>
+            </button>
           </form>
         </div>
       </div>

@@ -13,142 +13,114 @@ declare const $: any;
 })
 export class MySubjectComponent implements OnInit {
 
-  group: any = [];
-  fieldsAvailable = ['Titulación', 'Área', 'Asignatura', 'Curso', 'Semestre', 'Grupo', 'Tipo', 'Horas', 'Horas sin cubrir', 'H. Seleccionadas'];
-  fieldProvitional = ['Titulación', 'Área', 'Asignatura', 'Grupo', 'Tipo', 'Horas', 'Horas sin cubrir', 'H. Seleccionadas', 'Confirmado', 'Estado', 'Eliminar'];
   user: any;
-  selectedGroup: any = [];
+  fieldsAvailable = ['Titulación', 'Área', 'Asignatura', 'Curso', 'Semestre', 'Grupo', 'Tipo', 'Horas', 'Horas sin cubrir', 'H. Seleccionadas'];
+  fieldTeacherGroups = ['Titulación', 'Área', 'Asignatura', 'Grupo', 'Tipo', 'Horas', 'Horas sin cubrir', 'H. Seleccionadas', 'Estado', 'Eliminar'];
+  groups: any = [];
+  teacherGroupsConfirm = [];
   selectedHours = 0;
+  changerActiveLoad = false;
+  changeMade = false;
+
 
 
   constructor(private rest: RestService, private router: Router, private auth: AuthenticationService) { }
 
   ngOnInit() {
-    $('body').tooltip({ selector: '[data-toggle=tooltip]' });
+    //$('body').tooltip({ selector: '[data-toggle=tooltip]' });
     this.user = this.auth.getUser();
+    this.loadGroups();
+  }
+
+  private loadGroups() {
     this.rest.getGroups()
       .pipe(
         map(data => {
           return data.map(element => {
-            return {
-              area_cod: element.area_cod,
-              area_name: element.area_name,
-              group_cod: element.group_cod,
-              group_type: element.group_type,
-              group_hours: element.group_hours,
-              subject_cod: element.subject_cod,
-              subject_name: element.subject_name,
-              subject_semester: element.subject_semester,
-              subject_course: element.subject_course,
-              subject_type: element.subject_type,
-              university_name: element.university_name,
-              cover_hours: element.cover_hours,
-              cover_hours_calculator: element.cover_hours,
-              impart_hours : '0',
-              confirmed: false,
-              state_solicitation: ''
-            };
+            element.impart_hours = 0;
+            element.cover_hours_provitional = element.group_cover_hours;
+            return element;
           });
         })
       )
-      .subscribe(
-        groups => {
-          this.group = groups;
-        }
-      );
-
+      .subscribe(groups =>  {
+        this.groups = groups;
+        this.loadTeacher();
+      });
+  }
+  private loadTeacher() {
     this.rest.getTeacherLoad(this.user.teacher_dni)
       .pipe(
         map(data => {
           return data.groups.map(element => {
-            return {
-              area_cod: element.area_cod,
-              area_name: element.area_name,
-              group_cod: element.group_cod,
-              group_type: element.group_type,
-              group_hours: element.group_hours,
-              subject_cod: element.subject_cod,
-              subject_name: element.subject_name,
-              subject_semester: element.subject_semester,
-              subject_course: element.subject_course,
-              subject_type: element.subject_type,
-              university_name: element.university_name,
-              cover_hours: element.cover_hours,
-              cover_hours_calculator: element.cover_hours,
-              impart_hours : element.assigned_hours,
-              confirmed: true,
-              state_solicitation: element.state_solicitation
-            };
+            element.confirmed = true;
+            element.impart_hours = element.assigned_hours;
+            element.deleteActiveLoad = false;
+            return element;
           });
         })
       )
-      .subscribe(groupConfirmed => {
-
-        this.selectedGroup = groupConfirmed;
-        for (let i in groupConfirmed) {
-          for (let j in this.group) {
-            if (groupConfirmed[i] === this.group[j]) {
-              this.group[i] = groupConfirmed[i];
-              this.selectedGroup = groupConfirmed[i];
-            }
+      .subscribe(data => {
+        this.teacherGroupsConfirm = data;
+        this.groups = this.groups.filter(teacherGroups => {
+          for (const group of data) {
+            if (group.area_cod === teacherGroups.area_cod && group.subject_cod === teacherGroups.subject_cod
+              && group.group_cod === teacherGroups.group_cod) { return false; }
           }
-        }
+          return true;
+        });
+        this.calculatorHoursImpart();
       });
   }
 
-  addSelectedGroups() {
-
-    for (let i in this.selectedGroup) {
-      if (this.selectedGroup[i].impart_hours <= 0) {
-        this.deleterGroup(this.selectedGroup[i]);
-      }
-    }
-
-    for (const i in this.group) {
-      if (this.group[i].impart_hours > 0 ) {
-        this.selectedGroup.push(this.group[i]);
-      }
-      this.group[i].cover_hours_calculator = this.group[i].cover_hours + this.group[i].impart_hours;
-    }
-    this.resetSelectedHours();
-  }
-
-  private resetSelectedHours() {
-    this.selectedHours = 0;
-    for (let i in this.selectedGroup) {
-      this.selectedHours += this.selectedGroup[i].impart_hours;
-    }
-  }
-
   confirmSelection() {
-    const groupConfirm = [];
-    for (let i in this.group) {
-      if (!this.group[i].confirmed && this.group[i].impart_hours > 0) {
-        groupConfirm.push({
-          area_cod: this.group[i].area_cod,
-          subject_cod: this.group[i].subject_cod,
-          group_cod: this.group[i].group_cod,
-          selected_hours: this.group[i].impart_hours
-        });
-      }
-    }
-    this.rest.postTeacherLoad(groupConfirm)
+    this.changeMade = false;
+    this.changerActiveLoad = true;
+    const sendData = this.groups
+      .filter(value => value.impart_hours > 0 )
+      .map(value => {
+        return {
+          area_cod: value.area_cod,
+          subject_cod: value.subject_cod,
+          group_cod: value.group_cod,
+          impart_hours: value.impart_hours
+        };
+      });
+    this.rest.postTeacherLoad(sendData)
       .subscribe(
-        data => console.log('Respuesta:', data)
+        result => {
+          this.loadTeacher();
+          this.changerActiveLoad = false;
+      },
+        err => {
+          alert('ERROR: GRUPO AÑADIDO A LA CARGA DOCENTE');
+          this.changerActiveLoad = false;
+        }
       );
   }
 
-  deleterGroup(obj: any) {
-    console.log('delete pulsado');
-    this.selectedGroup = this.selectedGroup.filter(item => {
-      console.log(obj === item);
-      if (obj === item) {
-        item.impart_hours = 0;
-        return false;
-      } else {
-        return true;
-      }
-    });
-    this.resetSelectedHours();
+  deleterGroup(element: any) {
+    element.deleteActiveLoad = true;
+    this.rest.deleteLoadTeacher(element.area_cod, element.subject_cod, element.group_cod)
+      .subscribe(
+        data => {
+          this.loadGroups();
+        },
+          err => {
+          element.deleteActiveLoad = false;
+          alert('ERROR: ' + err.message);
+        });
+  }
+
+  clickChanger($event) {
+    this.changeMade = true;
+    for (const group of this.groups) { group.cover_hours_provitional = group.group_cover_hours + group.impart_hours; }
+    this.calculatorHoursImpart();
+  }
+
+  calculatorHoursImpart() {
+    this.selectedHours = 0;
+    for (const group of this.groups) { this.selectedHours += +group.impart_hours; }
+    for (const group of this.teacherGroupsConfirm) { this.selectedHours += +group.impart_hours; }
   }
 }

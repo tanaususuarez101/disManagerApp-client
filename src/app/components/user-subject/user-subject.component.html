@@ -4,66 +4,65 @@
 
   <div class="row-title">
     <h4><em>Carga docente seleccionada</em></h4>
-    <p class="text-muted">{{selectedHours}}/{{user?.teacher_potential}} Horas</p>
   </div>
   <hr class="separation">
 
-  <div *ngIf="selectedGroup.length == 0" class="row">
+  <div class="row" *ngIf="teacherGroupsConfirm.length == 0">
     <div class="alert alert-warning" role="alert">
       <p>
         <strong>CUIDADO!</strong>
-        Aún no tienes asignado ningún grupo. Por favor, seleccione el grupo y el número de horas que desea impartir en
-        la tabla que se encuentra de bajo.
+        Aún no tienes seleccionadas ningun número de horas de impartición. Por favor, seleccione el grupo y el número de horas que desea impartir en
+        la tabla que se encuentra de más bajo.
       </p>
     </div>
     <hr class="separation">
   </div>
 
-  <div *ngIf="selectedGroup.length > 0" class="row">
+
+  <div class="row" *ngIf="teacherGroupsConfirm.length > 0">
 
     <div class="col">
-      <div class="row">
-        <button type="submit" class="btn btn-link" (click)="confirmSelection()">
-          <fa name="fas fa-upload"></fa>
-          Confirmar selección
-        </button>
-        <!-- <button class="btn btn-link" >Confirmar selección</button> -->
-      </div>
+
       <div class="row tableFixHead">
         <table class="table table-striped ">
           <thead>
           <tr class="content-align">
-            <th *ngFor="let field of fieldProvitional" scope="col" class="content-vertical">{{field}}</th>
+            <th *ngFor="let field of fieldTeacherGroups " scope="col" class="align-middle">{{field}}</th>
           </tr>
           </thead>
           <tbody>
-              <tr *ngFor="let item of selectedGroup " class="select-row content-align">
+            <ng-container *ngFor="let item of teacherGroupsConfirm | ordenBySubject">
+              <tr class=" content-align">
 
-                <td>{{item?.university_name}}</td>
-                <td>{{item?.area_name}}</td>
-                <td>{{item?.subject_name}}</td>
-                <td>{{item?.group_cod}}</td>
-                <td>{{item?.group_type}}</td>
-                <td>{{item?.group_hours}}</td>
+                <td class="align-middle">{{item?.university_name}}</td>
+                <td class="align-middle">{{item?.area_name}}</td>
+                <td class="align-middle">{{item?.subject_name}}</td>
+                <td class="align-middle">{{item?.group_cod}}</td>
+                <td class="align-middle">{{item?.group_type}}</td>
+                <td class="align-middle">{{item?.group_hours}}</td>
                 <td
                   [ngClass]="{
-                  'p-3 mb-2 bg-danger text-white': item?.cover_hours_calculator < 0,
-                  'p-3 mb-2 bg-success text-white': item?.cover_hours_calculator == 0,
-                  'p-3 mb-2 bg-warning text-dark': item?.cover_hours_calculator > 0
+                  'align-middle p-3 mb-2 bg-danger text-white': item?.group_cover_hours < 0,
+                  'align-middle p-3 mb-2 bg-success text-white': item?.group_cover_hours == 0,
+                  'align-middle p-3 mb-2 bg-warning text-dark': item?.group_cover_hours > 0
                   }"
-                >{{item?.cover_hours_calculator}}</td>
-                <td>
+                >{{item?.group_cover_hours}}</td>
+                <td class="align-middle">
                   <input class="form-control" type="text" placeholder="{{item?.impart_hours}}" readonly>
                 </td>
-                <td>
+                <!--
+                <td class="align-middle">
                   <p *ngIf="item?.confirmed">Sí</p>
                   <p *ngIf="!item?.confirmed">No</p>
                 </td>
-                <td>
-                  <p>{{item?.state_solicitation}}</p>
+                -->
+                <td class="align-middle">{{item?.state_solicitation}}</td>
+                <td class="align-middle">
+                  <fa *ngIf="!item.deleteActiveLoad" class="text-danger" name="fas fa-times" (click)="deleterGroup(item)"></fa>
+                  <i *ngIf="item.deleteActiveLoad" class="fa fa-spin">&#xf021;</i>
                 </td>
-                <td><fa class="text-danger icon-times" name="fas fa-times" (click)="deleterGroup(item)"></fa></td>
               </tr>
+            </ng-container>
           </tbody>
         </table>
       </div>
@@ -74,54 +73,54 @@
 
   <div class="row-title">
     <h4 class="float-left"><em>Carga docente disponible</em></h4>
+    <p class="text-muted">{{selectedHours}}/{{user?.teacher_potential}} Horas</p>
+    <button type="button" class="btn btn-link" (click)="confirmSelection()">
+      <i *ngIf="!changerActiveLoad" class="fa">&#xf021;</i>
+      <i *ngIf="changerActiveLoad" class="fa fa-spin">&#xf021;</i>
+      Guardar cambios
+    </button>
   </div>
+
+
   <hr class="separation">
 
   <div class="row">
     <div class="col ">
-      <div class="row">
-        <button
-          class="btn btn-link"
-          (click)="addSelectedGroups()"
-          data-toggle="tooltip" data-placement="bottom" title="Solo se añadirán los grupos con las horas seleccionadas superior a 0"
-        >
-          <fa name="fas fa-sync-alt"></fa>
-          <i class="fas fa-sync"></i>
-          Actualizar carga docente
-        </button>
-      </div>
+
       <div class="row tableFixHead">
         <table class="table table-striped ">
 
           <thead>
           <tr class="content-align">
-            <th *ngFor="let field of fieldsAvailable" scope="col" class="content-vertical">{{field}}</th>
+            <th *ngFor="let field of fieldsAvailable" scope="col" class="align-middle">{{field}}</th>
           </tr>
           </thead>
 
           <tbody>
-          <ng-container *ngFor="let item of group">
-            <tr *ngIf="item?.area_cod == user?.area_cod" class="select-row content-align">
-              <td>{{item?.university_name}}</td>
-              <td>{{item?.area_name}}</td>
-              <td>{{item?.subject_name}}</td>
-              <td>{{item?.subject_course}}</td>
-              <td>{{item?.subject_semester}}</td>
-              <td>{{item?.group_cod}}</td>
-              <td>{{item?.group_type}}</td>
-              <td>{{item?.group_hours}}</td>
+          <ng-container *ngFor="let item of groups | ordenBySubject">
+            <tr *ngIf="item?.area_cod == user?.area_cod" class="content-align">
+              <td class="align-middle">{{item?.university_name}}</td>
+              <td class="align-middle">{{item?.area_name}}</td>
+              <td class="align-middle">{{item?.subject_name}}</td>
+              <td class="align-middle">{{item?.subject_course}}</td>
+              <td class="align-middle">{{item?.subject_semester}}</td>
+              <td class="align-middle">{{item?.group_cod}}</td>
+              <td class="align-middle">{{item?.group_type}}</td>
+              <td class="align-middle">{{item?.group_hours}}</td>
               <td
                 [ngClass]="{
-                'p-3 mb-2 bg-danger text-white': item?.cover_hours < 0,
-                'p-3 mb-2 bg-success text-white': item?.cover_hours == 0,
-                'p-3 mb-2 bg-warning text-dark': item?.cover_hours > 0
+                'align-middle p-3 mb-2 bg-danger text-white': item?.cover_hours_provitional < 0,
+                'align-middle p-3 mb-2 bg-success text-white': item?.cover_hours_provitional == 0,
+                'align-middle p-3 mb-2 bg-warning text-dark': item?.cover_hours_provitional > 0
                 }"
-              >{{item?.cover_hours}}</td>
-              <td><input type="number" class="form-control"
+              >{{item?.cover_hours_provitional}}</td>
+              <td class="align-middle">
+                <input type="number" class="form-control"
                          step='1'
                          value="{{item?.impart_hours}}" min="0" max="{{item?.group_hours}}"
                          [(ngModel)]="item.impart_hours"
-              ></td>
+                         (change)="clickChanger($event.target)">
+              </td>
             </tr>
           </ng-container>
           </tbody>

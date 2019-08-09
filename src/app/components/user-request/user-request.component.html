@@ -1,6 +1,49 @@
 <h3 class="text-muted">Solicitudes</h3>
-<div class="row">
+
+<div class="row-title">
+  <h4 class="float-left"><em>Carga docente</em></h4>
+  <p class="text-muted">{{selectedHours}}/{{user?.teacher_potential}} Horas</p>
+</div>
+
+<hr class="separation">
+
+<div class="row" *ngIf="teacherGroupsConfirm.length == 0">
+  <div class="alert alert-warning" role="alert">
+    <p>
+      <strong>CUIDADO!</strong>
+      Aún no tienes seleccionadas ningun número de horas de impartición. Por favor, seleccione el grupo y el número de horas que desea impartir en
+      la tabla que se encuentra de más bajo.
+    </p>
+  </div>
+  <hr class="separation">
+</div>
+
+<div class="row" *ngIf="teacherGroupsConfirm.length > 0">
+
   <div class="col">
+
+    <div class="row tableFixHead">
+      <table class="table table-striped ">
+        <thead>
+        <tr class="content-align">
+          <th *ngFor="let field of fieldTeacherGroups " scope="col" class="align-middle">{{field}}</th>
+        </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of teacherGroupsConfirm | ordenBySubject">
+            <td>{{item?.university_name}}</td>
+            <td>{{item?.area_name}}</td>
+            <td>{{item?.subject_name}}</td>
+            <td>{{item?.group_cod}}</td>
+            <td>{{item?.group_hours}}</td>
+            <td>
+              <input class="form-control" style="text-align:center;" type="text" placeholder="{{item?.impart_hours}}" readonly>
+            </td>
+            <td>{{item?.state_solicitation}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
 
   </div>
 </div>

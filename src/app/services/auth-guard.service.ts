@@ -11,13 +11,17 @@ export class AuthGuard implements CanActivate {
   constructor(private auth: AuthenticationService, private router: Router) { }
 
   canActivate() {
-    if (this.auth.getUser()) {
-      // login TRUE
-      return true;
-    } else {
-      this.router.navigate(['/login']);
-      return false;
-    }
 
+    this.auth.getCurrent(this.auth.getToken())
+      .subscribe(
+        data => {
+        },
+        err => {
+          alert('Sessión caducada, por favor, vuelva a iniciarla');
+          this.router.navigate(['/login']);
+          this.auth.logout();
+        }
+      );
+    return true;
   }
 }

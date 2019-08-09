@@ -49,11 +49,11 @@
         <td>{{item?.group_hours}}</td>
         <td
           [ngClass]="{
-          'p-3 mb-2 bg-danger text-white': item?.cover_hours < 0,
-          'p-3 mb-2 bg-success text-white': item?.cover_hours == 0,
-          'p-3 mb-2 bg-warning text-dark': item?.cover_hours > 0
+          'p-3 mb-2 bg-danger text-white': item?.group_cover_hours < 0,
+          'p-3 mb-2 bg-success text-white': item?.group_cover_hours == 0,
+          'p-3 mb-2 bg-warning text-dark': item?.group_cover_hours > 0
           }"
-        >{{item?.cover_hours}}</td>
+        >{{item?.group_cover_hours}}</td>
       </tr>
       </tbody>
     </table>

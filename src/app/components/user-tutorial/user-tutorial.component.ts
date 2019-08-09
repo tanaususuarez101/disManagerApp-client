@@ -65,7 +65,7 @@ export class UserTutorialComponent implements OnInit {
   }
 
   onChange(deviceValue, day, semester) {
-    if (deviceValue == '-') {
+    if (deviceValue === '-') {
       return;
     }
     if (semester === 'first') {

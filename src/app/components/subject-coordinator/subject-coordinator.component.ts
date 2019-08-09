@@ -11,6 +11,7 @@ export class SubjectCoordinatorComponent implements OnInit {
 
   fields = ['Titulación', 'Asignatura', 'Área de conocimiento', 'Tipo', 'Semestre', 'Coordinador'];
   coordinator = [];
+  responsible = [];
   title = 'Coordinadores';
 
 
@@ -18,7 +19,20 @@ export class SubjectCoordinatorComponent implements OnInit {
 
   ngOnInit() {
     this.rest.getCoordinator().subscribe(
-      data => this.coordinator = data,
+      data => {
+        console.log(data);
+        this.coordinator = data;
+      },
+      err => {
+        if (err.status === '401') {
+          this.router.navigate(['/login']);
+        }
+      }
+    );
+    this.rest.getResponsible().subscribe(
+      data => {
+        this.responsible = data;
+      },
       err => {
         if (err.status === '401') {
           this.router.navigate(['/login']);

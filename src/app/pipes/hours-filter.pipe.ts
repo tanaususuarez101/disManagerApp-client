@@ -12,7 +12,7 @@ export class HoursFilterPipe implements PipeTransform {
     if (args === 'notfull') {
       const resultSubjects = [];
       for (const post of value) {
-        if (post.cover_hours < 0) {
+        if (post.group_cover_hours < 0) {
           resultSubjects.push(post);
         }
       }

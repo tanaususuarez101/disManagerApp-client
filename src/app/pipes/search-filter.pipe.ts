@@ -6,6 +6,7 @@ import { Pipe, PipeTransform } from '@angular/core';
 export class SearchFilterPipe implements PipeTransform {
 
   transform(value: any, args?: any): any {
+
     if (args == null || args === '' || args.length < 3) {
       return value;
     }
@@ -13,7 +14,7 @@ export class SearchFilterPipe implements PipeTransform {
     for (const post of value) {
       if (post.subject_name.toLowerCase().indexOf(args.toLowerCase()) > -1) {
         resultSubjects.push(post);
-      } else if (post.university_degree_name.toLowerCase().indexOf(args.toLowerCase()) > -1) {
+      } else if (post.university_name.toLowerCase().indexOf(args.toLowerCase()) > -1) {
         resultSubjects.push(post);
       }
     }

@@ -1,3 +1,54 @@
-<p>
-  user-coordinator works!
-</p>
+<div class="app-content">
+  <h3 class="text-muted">{{title}}</h3>
+  <div class="content-coordinator tableFixHead">
+    <table class="table table-hover">
+      <thead>
+      <tr class="content-align">
+        <th *ngFor="let field of fields" scope="col" class="content-vertical">{{field}}</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let subject of subjects" class="select-row content-align">
+        <td>{{subject?.university_name}}</td>
+        <td>{{subject?.subject_name}}</td>
+        <td>{{subject?.area_name}}</td>
+        <td>{{subject?.subject_semester}}</td>
+
+        <td *ngIf="subject?.coordinator_dni">
+          <ng-container *ngIf="subject?.coordinator_dni === user?.teacher_dni">
+            <input type="checkbox" name="radioCoordinator" (change)="selectedCoordinator($event.target, subject)" checked>
+          </ng-container>
+          <ng-container *ngIf="subject?.coordinator_dni != user?.teacher_dni">
+            <input type="checkbox" name="radioCoordinator" checked disabled>
+          </ng-container>
+        </td>
+
+        <td *ngIf="!subject?.coordinator_dni">
+          <input type="checkbox" name="radioCoordinator" (change)="selectedCoordinator($event.target, subject)">
+        </td>
+
+
+        <td *ngIf="subject?.responsible_dni">
+          <ng-container *ngIf="subject?.responsible_dni === user?.teacher_dni">
+            <input type="checkbox" name="radioResponsible" (change)="selectedResponsible($event.target, subject)" checked>
+          </ng-container>
+          <ng-container *ngIf="subject?.responsible_dni != user?.teacher_dni">
+            <input type="checkbox" name="radioResponsible" checked disabled>
+          </ng-container>
+        </td>
+
+        <td *ngIf="!subject?.responsible_dni">
+          <input type="checkbox" name="radioResponsible" (change)="selectedResponsible($event.target, subject)">
+        </td>
+
+      </tr>
+      </tbody>
+    </table>
+  </div>
+  <button type="submit" class="btn btn-primary" (click)="sendDataData()">
+
+    <i *ngIf="!activeLoad" class="fa">&#xf021;</i>
+    <i *ngIf="activeLoad" class="fa fa-spin">&#xf021;</i>
+    Guardar cambios
+  </button>
+</div>
