@@ -1,6 +1,41 @@
 /* You can add global styles to this file, and also import other style files */
+
+$primary: #466b99;
+
+
 .badge-primary,
 .btn-primary {
-  background: #466b99;
+  background: $primary;
   color: white;
 }
+.btn-primary:hover
+{
+  background: white;
+  color: $primary;
+}
+
+.btn-outline-primary {
+  background: white;
+  color: $primary;
+  border: 1px solid $primary;
+}
+.btn-outline-primary:hover {
+  background: $primary;
+  color: white;
+  border: 1px solid $primary;
+}
+.btn-outline-primary:disabled {
+  background: white;
+  color: #7187A1;
+  border: 1px solid #7187A1;
+}
+
+.btn-outline-primary:not(:disabled):not(.disabled):active,
+.show>.btn-outline-primary.dropdown-toggle {
+  color: #fff;
+  background-color: $primary;
+  border-color: $primary;
+}
+
+
+

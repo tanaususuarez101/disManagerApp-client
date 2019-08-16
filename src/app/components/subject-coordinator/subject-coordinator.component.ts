@@ -18,7 +18,7 @@ export class SubjectCoordinatorComponent implements OnInit {
   constructor(public rest: RestService, private router: Router) { }
 
   ngOnInit() {
-    this.rest.getCoordinator().subscribe(
+    this.rest.getSubjectCoordinator().subscribe(
       data => {
         console.log(data);
         this.coordinator = data;
@@ -29,7 +29,7 @@ export class SubjectCoordinatorComponent implements OnInit {
         }
       }
     );
-    this.rest.getResponsible().subscribe(
+    this.rest.getSubjectResponsible().subscribe(
       data => {
         this.responsible = data;
       },

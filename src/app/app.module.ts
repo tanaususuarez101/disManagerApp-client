@@ -34,6 +34,10 @@ import { LoadPdaComponent } from './components/load-pda/load-pda.component';
 import { LoadDataComponent } from './components/load-data/load-data.component';
 import { LoadTeacherDataComponent } from './components/load-teacher-data/load-teacher-data.component';
 import { TutorialDetailsComponent } from './components/tutorial-details/tutorial-details.component';
+import { UserEditComponent } from './components/user-edit/user-edit.component';
+import { NewUserComponent } from './components/new-user/new-user.component';
+import { TeacherEditComponent } from './components/teacher-edit/teacher-edit.component';
+import { ModalAlertComponent } from './components/modal-alert/modal-alert.component';
 
 @NgModule({
   declarations: [
@@ -65,6 +69,10 @@ import { TutorialDetailsComponent } from './components/tutorial-details/tutorial
     LoadDataComponent,
     LoadTeacherDataComponent,
     TutorialDetailsComponent,
+    UserEditComponent,
+    NewUserComponent,
+    TeacherEditComponent,
+    ModalAlertComponent,
   ],
   imports: [
     BrowserModule,

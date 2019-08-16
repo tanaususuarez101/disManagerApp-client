@@ -31,7 +31,7 @@ export class AuthenticationService {
     this.removeTokenandUser();
   }
 
-  updateUser(user) {
+  updateCurrentUser(user) {
     const httpHeaderToken = {
       headers: new HttpHeaders({
         'Access-Control-Allow-Origin': '*',
@@ -39,7 +39,7 @@ export class AuthenticationService {
         'x-access-token': this.getToken()
       })
     };
-    return this.http.put(endpoint + '/teacher', user, httpHeaderToken);
+    return this.http.put(endpoint + '/currentUser', user, httpHeaderToken);
   }
 
   getCurrent(token): Observable<any> {
@@ -50,7 +50,7 @@ export class AuthenticationService {
         'x-access-token': token
       })
     };
-    return this.http.get(endpoint + '/user', httpHeaderToken);
+    return this.http.get(endpoint + '/currentUser', httpHeaderToken);
   }
 
   setToken(token): void {

@@ -1,0 +1,96 @@
+<div class="modal fade bd-example-modal-lg" id="modal-new-user" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Añadir nuevo usuario</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="signInForm" (ngSubmit)="addNewUser()">
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <label for="inputEmail4">Nombre de usuario</label>
+              <input type="text" class="form-control" id="inputEmail4" placeholder="Username" formControlName="username">
+            </div>
+            <div class="form-group col-md-6">
+              <label for="inputPassword4">Contraseña</label>
+              <input type="password" class="form-control" id="inputPassword4" placeholder="Password" formControlName="password">
+            </div>
+          </div>
+
+
+          <div class="form-group custom-control-inline">
+            <div class="custom-control custom-checkbox custom-control-inline">
+              <input class="custom-control-input" type="checkbox" id="gridCheck1" formControlName="admin">
+              <label class="custom-control-label" for="gridCheck1">Administrador</label>
+            </div>
+
+            <div class="custom-control custom-checkbox custom-control-inline">
+              <input class="custom-control-input" type="checkbox" id="gridCheck2"
+                     [checked]="isTeacher"
+                     (change)="selectedTeacher($event)"
+              >
+              <label class="custom-control-label" for="gridCheck2">Profesor</label>
+            </div>
+          </div>
+
+
+          <ng-container *ngIf="isTeacher" >
+            <div class="alert alert-light" role="alert">
+              Si el profesor ya está registrado, solo es necesario rellenar el campo <strong>DNI.</strong>
+            </div>
+            <div class="form-row">
+              <div class="form-group col-md-5">
+                <label for="inputName">Nombre</label>
+                <input type="text" class="form-control" id="inputName" formControlName="name">
+              </div>
+              <div class="form-group col-md-5">
+                <label for="inputSurnames">Apellidos</label>
+                <input type="text" class="form-control" id="inputSurnames" formControlName="surnames">
+              </div>
+              <div class="form-group col-md-2">
+                <label for="inputDni">DNI</label>
+                <input type="text" class="form-control" id="inputDni" formControlName="dni">
+              </div>
+            </div>
+
+
+            <div class="form-row">
+              <div class="form-group col-md-3">
+                <label for="inputPotential">Potencial</label>
+                <input type="text" class="form-control" id="inputPotential" formControlName="potential">
+              </div>
+
+              <div class="form-group col-md-3">
+                <label for="inputhourstutorial">Horas de tutorias</label>
+                <input type="text" class="form-control" id="inputhourstutorial" formControlName="tutorial_hours">
+              </div>
+
+              <div class="form-group col-md-6">
+                <label for="inputKnowledgeArea">Área de Conocimiento</label>
+                <select id="inputKnowledgeArea" class="form-control" formControlName="area_cod">
+                  <option value="35" selected>Arquitectura Y Tecnología de Computadores(35)</option>
+                  <option value="75">Ciencia De La Comp. E Intel. Artificial (75)</option>
+                  <option value="570">Lenguajes Y Sistemas Informáticos (570)</option>
+                </select>
+              </div>
+            </div>
+          </ng-container>
+
+
+          <div class="form-group row">
+            <div class="col-sm-10">
+              <button type="submit" class="btn btn-primary">
+                <fa name="fas fa-upload"></fa>
+                Añadir
+              </button>
+            </div>
+          </div>
+
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

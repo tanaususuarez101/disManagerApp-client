@@ -3,6 +3,7 @@ import {RestService} from '../../services/rest.service';
 import {Router} from '@angular/router';
 import {AuthenticationService} from '../../services/authentication.service';
 import {map} from 'rxjs/operators';
+import {element} from 'protractor';
 
 declare const $: any;
 
@@ -15,7 +16,8 @@ export class MySubjectComponent implements OnInit {
 
   user: any;
   fieldsAvailable = ['Titulación', 'Área', 'Asignatura', 'Curso', 'Semestre', 'Grupo', 'Tipo', 'Horas', 'Horas sin cubrir', 'H. Seleccionadas'];
-  fieldTeacherGroups = ['Titulación', 'Área', 'Asignatura', 'Grupo', 'Tipo', 'Horas', 'Horas sin cubrir', 'H. Seleccionadas', 'Estado', 'Eliminar'];
+  fieldTeacherGroups = ['Titulación', 'Área', 'Asignatura', 'Grupo', 'Tipo', 'Horas', 'Horas sin cubrir', 'H. Seleccionadas', 'Estado',
+    'Actualizar', 'Eliminar' ];
   groups: any = [];
   teacherGroupsConfirm = [];
   selectedHours = 0;
@@ -38,7 +40,7 @@ export class MySubjectComponent implements OnInit {
         map(data => {
           return data.map(element => {
             element.impart_hours = 0;
-            element.cover_hours_provitional = element.group_cover_hours;
+            element.cover_hours_provitional = +element.group_cover_hours;
             return element;
           });
         })
@@ -53,9 +55,9 @@ export class MySubjectComponent implements OnInit {
       .pipe(
         map(data => {
           return data.groups.map(element => {
-            element.confirmed = true;
-            element.impart_hours = element.assigned_hours;
+            element.impart_hours = +element.assigned_hours;
             element.deleteActiveLoad = false;
+            element.updateActiveLoad = false;
             return element;
           });
         })
@@ -86,7 +88,7 @@ export class MySubjectComponent implements OnInit {
           impart_hours: value.impart_hours
         };
       });
-    this.rest.postTeacherLoad(sendData)
+    this.rest.createTeacherLoad(sendData)
       .subscribe(
         result => {
           this.loadTeacher();
@@ -99,22 +101,9 @@ export class MySubjectComponent implements OnInit {
       );
   }
 
-  deleterGroup(element: any) {
-    element.deleteActiveLoad = true;
-    this.rest.deleteLoadTeacher(element.area_cod, element.subject_cod, element.group_cod)
-      .subscribe(
-        data => {
-          this.loadGroups();
-        },
-          err => {
-          element.deleteActiveLoad = false;
-          alert('ERROR: ' + err.message);
-        });
-  }
-
   clickChanger($event) {
     this.changeMade = true;
-    for (const group of this.groups) { group.cover_hours_provitional = group.group_cover_hours + group.impart_hours; }
+    for (const group of this.groups) { group.cover_hours_provitional = +group.group_cover_hours + +group.impart_hours; }
     this.calculatorHoursImpart();
   }
 
@@ -122,5 +111,34 @@ export class MySubjectComponent implements OnInit {
     this.selectedHours = 0;
     for (const group of this.groups) { this.selectedHours += +group.impart_hours; }
     for (const group of this.teacherGroupsConfirm) { this.selectedHours += +group.impart_hours; }
+  }
+
+  deleterGroup(element: any) {
+    element.deleteActiveLoad = true;
+    this.rest.deleteLoadTeacher(element.area_cod, element.subject_cod, element.group_cod)
+      .subscribe(
+        data => {
+          this.loadGroups();
+        },
+        err => {
+          element.deleteActiveLoad = false;
+          alert('ERROR: ' + err.message);
+        });
+  }
+
+  updateGroup(element: any) {
+    console.log(element);
+    if (element.impart_hours < 0.5) { return; }
+
+    element.updateActiveLoad = true;
+    this.rest.updateLoadTeacher(element.area_cod, element.subject_cod, element.group_cod, {hours: element.impart_hours})
+      .subscribe(
+        data => {
+          this.loadTeacher();
+        },
+        err => {
+          element.updateActiveLoad = false;
+          alert('ERROR: ' + err.message);
+        });
   }
 }

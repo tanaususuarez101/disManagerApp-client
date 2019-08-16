@@ -48,7 +48,7 @@ export class UserTutorialComponent implements OnInit {
 
   sendTutorialDay() {
     $('#tutorialModal').modal('hide');
-    this.rest.postTutorial(this.formTutorial)
+    this.rest.createTutorial(this.formTutorial)
       .subscribe(
         data => this.getServiceTutorial(),
           err => alert('Error al guardar los datos')

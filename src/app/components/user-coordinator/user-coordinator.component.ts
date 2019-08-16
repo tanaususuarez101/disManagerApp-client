@@ -24,7 +24,7 @@ export class UserCoordinatorComponent implements OnInit {
 
   ngOnInit() {
     this.user = this.auth.getUser();
-    this.rest.getSubject()
+    this.rest.getSubjects()
       .subscribe(data => {
         this.subjects = data[ "subject" ];
         for (let element of this.subjects) {
@@ -61,7 +61,7 @@ export class UserCoordinatorComponent implements OnInit {
 
   private sendDataData() {
     this.activeLoad = true;
-    this.rest.postCoordinatorAndResponsible(this.selected)
+    this.rest.createCoordinatorAndResponsible(this.selected)
       .subscribe(
         data => {
           this.activeLoad = false;

@@ -41,7 +41,7 @@ export class ProfileComponent implements OnInit {
       return;
     }
 
-    this.auth.updateUser({'password': this.passwordForm.value[ 'password' ]})
+    this.auth.updateCurrentUser({'password': this.passwordForm.value[ 'password' ]})
       .subscribe(
         data => {
           this.message = 'Contraseña guardada satisfactoriamente';

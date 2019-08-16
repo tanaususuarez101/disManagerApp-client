@@ -16,7 +16,7 @@ export class TutorialComponent implements OnInit {
   constructor(public rest: RestService, private router: Router) { }
 
   ngOnInit() {
-    this.rest.getAllTutorial().subscribe(
+    this.rest.getListTutorial().subscribe(
       data => this.teachertutorial = data,
       err => {
         if (err.status === 401) {

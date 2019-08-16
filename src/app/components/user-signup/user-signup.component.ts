@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {FormBuilder, Validators} from '@angular/forms';
 import {RestService} from '../../services/rest.service';
 import {HttpEventType} from '@angular/common/http';
+import {map} from 'rxjs/operators';
 
 declare const $: any;
 
@@ -12,91 +13,53 @@ declare const $: any;
 })
 export class UserSignupComponent implements OnInit {
   private title = 'Añadir usuario';
-  private isTeacher = false;
-  private signInForm: any;
-  private fileForm: any;
-  private onlyUser = true;
-  private fileToUpload: File = null;
-  private uploadByte = 0;
-  private activedLoad = false;
+  private tableUserHeader = ['Username', 'Admin', 'Profesor'];
+  private tableTeacherHeader = ['DNI', 'Nombe', 'Apellidos'];
+  private tableUser: any = [];
+  private teacherList: any = [];
 
-  constructor(private  formBuilder: FormBuilder, private rest: RestService) { }
+  private valueRadioButton: any;
+
+  constructor(private  formBuilder: FormBuilder, private rest: RestService) {}
 
   ngOnInit() {
-    this.createUserForm();
-  }
-  selectedTeacher(event) {
-    this.isTeacher = event.target.checked;
-    this.createUserForm();
+    this.loadList();
   }
 
-  createUserForm() {
+  loadList() {
+    this.valueRadioButton = null;
+    this.rest.getListTeacher().subscribe(data => this.teacherList = data);
+    this.rest.getListUser().subscribe(data => this.tableUser = data);
+  }
 
-    if (this.isTeacher) {
-      this.signInForm = this.formBuilder.group({
-        username: ['', Validators.required],
-        password: ['', Validators.required],
-        dni: ['', Validators.required],
-        name: [''],
-        surnames: [''],
-        area_cod: [''],
-        potential: [''],
-        tutorial_hours: [''],
-        admin: [false]
-      });
+  buttonEdit() {
+    if (this.valueRadioButton == null) return;
+    if (this.valueRadioButton.username != null) {
+      $('#modal-user-edit').modal('show');
     } else {
-      this.signInForm = this.formBuilder.group({
-        username: ['', Validators.required],
-        password: ['', Validators.required],
-        admin: [false]
-      });
+      $('#modal-teacher-edit').modal('show');
     }
   }
 
-  addNewUser() {
-    console.log(this.signInForm.value);
-    this.rest.postUser(this.signInForm.value)
-      .subscribe(
-        resp => {
-          alert('Usuario guardado');
-        },
-        err => {
-          alert('ERROR AL GUARDAR EL USUARIO');
-        }
-      );
+  newUser() {
+    $('#modal-new-user').modal('show');
   }
 
+  alertDelete() {
+    $('#modal-alert').modal('show');
+  }
 
-  handleFileInput(files: FileList) {
-    this.fileToUpload = files.item(0);
-    if (this.fileToUpload != null) {
-      document.getElementById('fileLabel').innerHTML = this.fileToUpload['name'];
-    } else {
-      document.getElementById('fileLabel').innerHTML = 'Elegir archivo';
-      this.activedLoad = false;
-      console.log(this.activedLoad);
+  confirmDelete($event: boolean) {
+    if ($event) {
+      if (this.valueRadioButton.username != null) {
+        this.rest.deleteUser(this.valueRadioButton.username).subscribe(value => this.loadList());
+      } else {
+        this.rest.deleteTeacher(this.valueRadioButton.teacher_dni).subscribe(value => this.loadList());
+      }
     }
-
-  }
-  ploadFileToActivity() {
-    this.activedLoad = true;
-    this.rest.postListTeacher(this.fileToUpload)
-      .subscribe(
-        event => {
-          if (event.type === HttpEventType.UploadProgress) {
-            console.log(event);
-            this.uploadByte = (event.loaded / event.total) * 100;
-            console.log(event.loaded); //uploaded bytes
-            console.log(event.total); //total bytes to upload
-            console.log('upload process ', this.uploadByte);
-          }
-        },
-      error => {
-          console.log(error);
-          alert('ERROR al guardar');
-          return;
-    });
   }
 
-
+  update() {
+    this.loadList();
+  }
 }

@@ -16,7 +16,7 @@ export class TeacherPDAComponent implements OnInit {
   constructor(public rest: RestService, private router: Router) { }
 
   ngOnInit() {
-    this.rest.getAllPDA()
+    this.rest.getPDAs()
       .subscribe(
       data => this.teacherHistory = data,
         err => {

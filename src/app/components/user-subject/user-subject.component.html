@@ -26,43 +26,46 @@
       <div class="row tableFixHead">
         <table class="table table-striped ">
           <thead>
-          <tr class="content-align">
-            <th *ngFor="let field of fieldTeacherGroups " scope="col" class="align-middle">{{field}}</th>
-          </tr>
+            <tr class="content-align">
+              <th *ngFor="let field of fieldTeacherGroups " scope="col" class="align-middle">{{field}}</th>
+            </tr>
           </thead>
           <tbody>
-            <ng-container *ngFor="let item of teacherGroupsConfirm | ordenBySubject">
-              <tr class=" content-align">
-
-                <td class="align-middle">{{item?.university_name}}</td>
+              <tr *ngFor="let item of teacherGroupsConfirm | ordenBySubject">
+                <td class="align-middle">{{item?.university_acronym}}</td>
                 <td class="align-middle">{{item?.area_name}}</td>
                 <td class="align-middle">{{item?.subject_name}}</td>
                 <td class="align-middle">{{item?.group_cod}}</td>
                 <td class="align-middle">{{item?.group_type}}</td>
                 <td class="align-middle">{{item?.group_hours}}</td>
-                <td
+                <td class="align-middle"
                   [ngClass]="{
-                  'align-middle p-3 mb-2 bg-danger text-white': item?.group_cover_hours < 0,
-                  'align-middle p-3 mb-2 bg-success text-white': item?.group_cover_hours == 0,
-                  'align-middle p-3 mb-2 bg-warning text-dark': item?.group_cover_hours > 0
+                  'p-3 mb-2 bg-danger text-white': item?.group_cover_hours < 0,
+                  'p-3 mb-2 bg-success text-white': item?.group_cover_hours === 0,
+                  'p-3 mb-2 bg-warning text-dark': item?.group_cover_hours > 0
                   }"
                 >{{item?.group_cover_hours}}</td>
                 <td class="align-middle">
-                  <input class="form-control" type="text" placeholder="{{item?.impart_hours}}" readonly>
+                  <!-- <input class="form-control" type="text" placeholder="{{item?.impart_hours}}"> -->
+                  <input type="number" class="form-control align-middle"
+                         step='1'
+                         value="{{item?.impart_hours}}" min="0.5" max="{{item?.group_hours}}"
+                         [(ngModel)]="item.impart_hours"
+                         (change)="clickChanger($event.target)">
                 </td>
-                <!--
-                <td class="align-middle">
-                  <p *ngIf="item?.confirmed">Sí</p>
-                  <p *ngIf="!item?.confirmed">No</p>
-                </td>
-                -->
+
                 <td class="align-middle">{{item?.state_solicitation}}</td>
+
                 <td class="align-middle">
-                  <fa *ngIf="!item.deleteActiveLoad" class="text-danger" name="fas fa-times" (click)="deleterGroup(item)"></fa>
-                  <i *ngIf="item.deleteActiveLoad" class="fa fa-spin">&#xf021;</i>
+                  <i *ngIf="!item.updateActiveLoad" class="fa fa-sync" (click)="updateGroup(item)">&#xf021;</i>
+                  <i *ngIf="item.updateActiveLoad" class="fa fa-sync fa-spinner fa-spin"></i>
+                </td>
+                <td class="align-middle">
+                  <i *ngIf="!item.deleteActiveLoad" class="fa fa-close" (click)="deleterGroup(item)"></i>
+                  <!--<i *ngIf="item.deleteActiveLoad" class="fa fa-sync fa-spin">&#xf021;</i>-->
+                  <i *ngIf="item.deleteActiveLoad" class="fa fa-sync fa-spinner fa-spin"></i>
                 </td>
               </tr>
-            </ng-container>
           </tbody>
         </table>
       </div>
@@ -91,14 +94,13 @@
         <table class="table table-striped ">
 
           <thead>
-          <tr class="content-align">
-            <th *ngFor="let field of fieldsAvailable" scope="col" class="align-middle">{{field}}</th>
-          </tr>
+            <tr class="content-align">
+              <th *ngFor="let field of fieldsAvailable" scope="col" class="align-middle">{{field}}</th>
+            </tr>
           </thead>
 
           <tbody>
-          <ng-container *ngFor="let item of groups | ordenBySubject">
-            <tr *ngIf="item?.area_cod == user?.area_cod" class="content-align">
+            <tr *ngFor="let item of groups | ordenBySubject">
               <td class="align-middle">{{item?.university_name}}</td>
               <td class="align-middle">{{item?.area_name}}</td>
               <td class="align-middle">{{item?.subject_name}}</td>
@@ -107,11 +109,11 @@
               <td class="align-middle">{{item?.group_cod}}</td>
               <td class="align-middle">{{item?.group_type}}</td>
               <td class="align-middle">{{item?.group_hours}}</td>
-              <td
+              <td class="align-middle"
                 [ngClass]="{
-                'align-middle p-3 mb-2 bg-danger text-white': item?.cover_hours_provitional < 0,
-                'align-middle p-3 mb-2 bg-success text-white': item?.cover_hours_provitional == 0,
-                'align-middle p-3 mb-2 bg-warning text-dark': item?.cover_hours_provitional > 0
+                'p-3 mb-2 bg-danger text-white': item?.cover_hours_provitional < 0,
+                'p-3 mb-2 bg-success text-white': item?.cover_hours_provitional == 0,
+                'p-3 mb-2 bg-warning text-dark': item?.cover_hours_provitional > 0
                 }"
               >{{item?.cover_hours_provitional}}</td>
               <td class="align-middle">
@@ -122,7 +124,6 @@
                          (change)="clickChanger($event.target)">
               </td>
             </tr>
-          </ng-container>
           </tbody>
 
         </table>
