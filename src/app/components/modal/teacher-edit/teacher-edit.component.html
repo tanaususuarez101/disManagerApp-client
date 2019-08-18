@@ -1,0 +1,78 @@
+
+<div class="modal fade" id="modal-teacher-edit" tabindex="-1" role="dialog"  aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Editar Profesor</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form>
+
+          <div class="form-group">
+            <label for="username" class="col-form-label">DNI</label>
+            <input type="text" class="form-control" id="dni" [value]="teacher?.teacher_dni"
+                   [(ngModel)]="teacher.teacher_dni"
+                   [ngModelOptions]="{standalone: true}"
+                   readonly
+            >
+          </div>
+
+          <div class="form-group">
+            <label for="username" class="col-form-label">Nombre</label>
+            <input type="text" class="form-control" id="username" [value]="teacher?.teacher_name"
+                   [(ngModel)]="teacher.teacher_name"
+                   [ngModelOptions]="{standalone: true}"
+            >
+          </div>
+
+          <div class="form-group">
+            <label for="username" class="col-form-label">Apellidoss</label>
+            <input type="text" class="form-control" id="surnames" [value]="teacher?.teacher_surnames"
+                   [(ngModel)]="teacher.teacher_surnames"
+                   [ngModelOptions]="{standalone: true}"
+            >
+          </div>
+
+          <div class="form-group">
+            <label class="my-1 mr-2" for="inlineFormCustomSelectPref">Código del área de conocimiento</label>
+            <select class="custom-select my-1 mr-sm-2" id="inlineFormCustomSelectPref"
+                    [(ngModel)]="teacher.area_cod"
+                    [ngModelOptions]="{standalone: true}"
+            >
+              <option [value]="teacher?.area_cod" selected>{{teacher?.area_cod}}</option>
+              <ng-container *ngFor="let area of optionArea">
+                <option [value]="area" *ngIf="area != teacher?.area_cod">
+                  {{area}}
+                </option>
+              </ng-container>
+            </select>
+          </div>
+
+
+          <div class="form-group">
+            <label for="username" class="col-form-label">Potencial</label>
+            <input type="number" class="form-control" id="teacher_potential" [value]="teacher?.teacher_potential"
+                   [(ngModel)]="teacher.teacher_potential"
+                   [ngModelOptions]="{standalone: true}"
+            >
+          </div>
+
+          <div class="form-group">
+            <label for="username" class="col-form-label">Horas de tutorías</label>
+            <input type="number" class="form-control" id="tutorial_hours" [value]="teacher?.tutorial_hours"
+                   [(ngModel)]="teacher.tutorial_hours"
+                   [ngModelOptions]="{standalone: true}"
+            >
+          </div>
+
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-success" (click)="updateTeacher()" >Guardar</button>
+      </div>
+    </div>
+  </div>
+</div>
