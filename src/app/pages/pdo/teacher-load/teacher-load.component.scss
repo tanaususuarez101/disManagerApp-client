@@ -15,7 +15,7 @@ h3{
   vertical-align: middle;
 }
 
-
+/*
 .tableFixHead {
   font-size: 0.7em;
   overflow-y: auto; max-height: 35rem;
@@ -25,3 +25,5 @@ h3{
   th     { background:#eee; }
 
 }
+*/
+.tableFixHead { font-size: .8em; max-height: 35rem !important;}

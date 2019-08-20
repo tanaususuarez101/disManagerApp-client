@@ -16,33 +16,33 @@ import {NotFoundComponent} from './components/common/not-found/not-found.compone
  * PROFILE
  **/
 
-import {ProfileComponent} from './components/user-pages/profile/profile.component';
-import {MySubjectComponent} from './components/user-pages/user-subject/user-subject.component';
-import {UserRequestComponent} from './components/user-pages/user-request/user-request.component';
-import {UserCoordinatorComponent} from './components/user-pages/user-coordinator/user-coordinator.component';
-import {UserTutorialComponent} from './components/user-pages/user-tutorial/user-tutorial.component';
+import {ProfileComponent} from './pages/user/profile/profile.component';
+import {MySubjectComponent} from './pages/user/user-subject/user-subject.component';
+import {UserRequestComponent} from './pages/user/user-request/user-request.component';
+import {UserCoordinatorComponent} from './pages/user/user-coordinator/user-coordinator.component';
+import {UserTutorialComponent} from './pages/user/user-tutorial/user-tutorial.component';
 
 /**
  * MANAGER
  * */
 
 import {LoadSchemeComponent} from './components/form/load-scheme/load-scheme.component';
-import {UserManagerComponent} from './components/manager-pages/user-manager/user-manager.component';
+import {UserManagerComponent} from './pages/manager/user-manager/user-manager.component';
 import {LoadPdaComponent} from './components/form/load-pda/load-pda.component';
-import {LoadDataComponent} from './components/manager-pages/load-data/load-data.component';
+import {LoadDataComponent} from './pages/manager/load-data/load-data.component';
 
 /**
  * PDO
  * */
 
-import {TeacherDemandComponent} from './components/pdo-pages/teacher-demand/teacher-demand.component';
-import {TeacherLoadComponent} from './components/pdo-pages/teacher-load/teacher-load.component';
-import {TutorialComponent} from './components/pdo-pages/tutorial/tutorial.component';
-import {SubjectCoordinatorComponent} from './components/pdo-pages/subject-coordinator/subject-coordinator.component';
-import {TeacherPDAComponent} from './components/pdo-pages/teacher-pda/teacher-pda.component';
-import {TeacherDemandDetailsComponent} from './components/pdo-pages/teacher-demand-details/teacher-demand-details.component';
-import {TeacherLoadDetailsComponent} from './components/pdo-pages/teacher-load-details/teacher-load-details.component';
-import {TutorialDetailsComponent} from './components/pdo-pages/tutorial-details/tutorial-details.component';
+import {TeacherDemandComponent} from './pages/pdo/teacher-demand/teacher-demand.component';
+import {TeacherLoadComponent} from './pages/pdo/teacher-load/teacher-load.component';
+import {TutorialComponent} from './pages/pdo/tutorial/tutorial.component';
+import {SubjectCoordinatorComponent} from './pages/pdo/subject-coordinator/subject-coordinator.component';
+import {TeacherPDAComponent} from './pages/pdo/teacher-pda/teacher-pda.component';
+import {TeacherDemandDetailsComponent} from './pages/pdo/teacher-demand-details/teacher-demand-details.component';
+import {TeacherLoadDetailsComponent} from './pages/pdo/teacher-load-details/teacher-load-details.component';
+import {TutorialDetailsComponent} from './pages/pdo/tutorial-details/tutorial-details.component';
 
 /**
  * */

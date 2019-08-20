@@ -1,11 +1,14 @@
 <h3 class="text-muted">Solicitudes</h3>
 
-<div class="row-title">
-  <h4 class="float-left"><em>Carga docente</em></h4>
-  <p class="text-muted">{{selectedHours}}/{{user?.teacher_potential}} Horas</p>
+<div class="row">
+  <div class="col-12">
+    <h4 class="float-left"><em>Carga docente</em></h4>
+  </div>
+  <div class="col-12">
+    <p class="text-muted">{{selectedHours}}/{{user?.teacher_potential}} Horas</p>
+  </div>
 </div>
 
-<hr class="separation">
 
 <div class="row" *ngIf="teacherGroupsConfirm.length == 0">
   <div class="alert alert-warning" role="alert">

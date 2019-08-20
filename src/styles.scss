@@ -2,18 +2,18 @@
 
 $primary: #466b99;
 
-
 .badge-primary,
 .btn-primary {
   background: $primary;
   color: white;
 }
+/*
 .btn-primary:hover
 {
   background: white;
   color: $primary;
 }
-
+*/
 .btn-outline-primary {
   background: white;
   color: $primary;
@@ -37,5 +37,19 @@ $primary: #466b99;
   border-color: $primary;
 }
 
+.tableFixHead {
+  font-size: .8em;
+  padding-right: 5px;
+  overflow-y: auto; max-height: 20rem;
+  padding-left: 0;
+  margin-bottom: 2.5rem;
+  thead th { position: sticky; top: -1px; background: white; color: black;}
+  table  {
 
+    border-collapse: collapse;
+    width: 100%;
+  }
+  th, td { padding: 8px 16px; text-align: center;}
+  th     { background:#eee; }
+}
 

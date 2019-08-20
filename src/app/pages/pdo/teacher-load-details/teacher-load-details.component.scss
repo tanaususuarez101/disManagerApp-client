@@ -1,26 +1,22 @@
-h3{
+h3 {
   text-align: right;
   margin-bottom: 30px;
 }
-.table {
-  font-size: 0.9em;
+
+.select-row{
+  cursor: pointer;
 }
 .content-align {
   text-align: center;
-
 }
 .content-vertical {
   vertical-align: middle;
 }
-
-h4{
-  color: #002e67;
-  text-align: left;
-}
+/*
 .tableFixHead {
-  font-size: 0.8em;
+  font-size: 0.7em;
   padding-right: 5px;
-  overflow-y: auto; max-height: 25rem;
+  overflow-y: auto; max-height: 35rem;
   thead th { position: sticky; top: 0; }
   table  {
     border-collapse: collapse;
@@ -30,4 +26,6 @@ h4{
   th     { background:#eee; }
 
 }
-
+*/
+thead th { position: sticky; top: -1px; background: white; color: black;}
+.tableFixHead { font-size: .8em; max-height: 35rem !important;}

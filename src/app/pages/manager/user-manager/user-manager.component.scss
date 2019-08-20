@@ -3,26 +3,21 @@ h3 {
   margin-bottom: 1.7rem;
   margin-top: 0.2rem;
 }
+
 .tableFixHead {
   font-size: 0.7em;
   padding-right: 5px;
-  overflow-y: auto; max-height: 35rem;
+  overflow-y: auto; max-height: 20rem;
   padding-left: 0;
   margin-bottom: 2.5rem;
-  thead th { position: sticky; top: -1px; text-align: center;}
+  thead th { position: sticky; top: -1px; background: white; color: black;}
   table  {
+
     border-collapse: collapse;
     width: 100%;
   }
   th, td { padding: 8px 16px; text-align: center;}
   th     { background:#eee; }
-}
-.row-title {
-  display: inline-flex;
-  p {
-    margin: 0 .2rem 0 .4rem  !important;
-    padding: .2rem 0 .2rem 0;
-  }
 }
 .separation {
   border-top: 1px solid rgba(0,0,0,.1);
@@ -31,4 +26,10 @@ h3 {
 
   margin-right: -0.95rem !important;
   margin-left: -0.95rem !important;
+}
+
+.fa { margin-right: 0.4rem;}
+
+.dropdown-toggle::after {
+  display:none;
 }

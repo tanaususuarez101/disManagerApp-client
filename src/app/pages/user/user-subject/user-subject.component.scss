@@ -1,0 +1,34 @@
+h3 {
+  text-align: right;
+  margin-bottom: 1.7rem;
+  margin-top: 0.2rem;
+}
+
+
+.select-row:hover{ cursor: pointer; background: #eeeeee; }
+.content-align { text-align: center; }
+.content-vertical { vertical-align: middle; }
+
+
+.separation {
+  border-top: 1px solid rgba(0,0,0,.1);
+  margin-top: 1.5rem;
+  margin-bottom: 1.5rem;
+
+  margin-right: -0.95rem !important;
+  margin-left: -0.95rem !important;
+}
+
+.fa { cursor: pointer; font-size: 1.2rem; }
+
+.tableFixHead {
+  font-size: .7em;
+  max-height: 31rem !important;
+  .fa-close { color: grey !important; }
+  .fa-close:hover { color: red !important; }
+  .fa-refresh { color: grey !important; }
+  .fa-refresh:hover { color: #466b99 !important; }
+}
+
+
+

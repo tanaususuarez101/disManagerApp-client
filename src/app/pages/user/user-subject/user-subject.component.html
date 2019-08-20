@@ -1,0 +1,156 @@
+<h3 class="text-muted">Mi Carga docente</h3>
+
+
+<div class="row">
+  <div class="btn-group btn-group-sm" role="group">
+    <button type="button" class="btn btn-outline-primary" (click)="updateChange()">
+      <i class="fa fa-save"></i>
+      Guardar
+    </button>
+    <button type="button" class="btn btn-outline-primary" (click)="deleteGroup()" [disabled]="!deleteBtnAvailable">
+      <i class="fa fa-trash" ></i>
+      Eliminar
+    </button>
+    <button type="button" class="btn btn-outline-primary" (click)="deleteGroup()">
+      <i class="fa fa-inbox" ></i>
+      Solicitar Venias
+    </button>
+  </div>
+</div>
+
+<hr class="separation">
+
+<div class="row">
+  <div class="col-lg-6">
+    <div class="row">
+      <div class="col-12">
+        <h4 class="align-middle"><em>Carga docente seleccionada</em></h4>
+      </div>
+      <div class="col-12">
+        <p class="text-muted float-left align-middle">{{selectedHours}}/{{user?.teacher_potential}} Horas</p>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div class="row" *ngIf="teacherGroupsConfirm.length == 0">
+  <div class="alert alert-warning" role="alert">
+    <p>
+      <strong>CUIDADO!</strong>
+      Aún no tienes seleccionadas ningun número de horas de impartición. Por favor, seleccione el grupo y el número de horas que desea impartir en
+      la tabla que se encuentra de más bajo.
+    </p>
+  </div>
+  <hr class="separation">
+</div>
+
+<div class="row" *ngIf="teacherGroupsConfirm.length > 0">
+
+  <div class="col">
+
+    <div class="row tableFixHead">
+      <table class="table table-striped ">
+        <thead>
+          <tr class="content-align">
+            <th class="align-middle">
+              <input id="allSelected" type="checkbox" name="radioDelete"
+                     (change)="selectedAll($event)"
+                     [value]="allSelected"
+                     [(ngModel)]="allSelected"
+              >
+            </th>
+            <th *ngFor="let field of fieldTeacherGroups " scope="col" class="align-middle">{{field}}</th>
+          </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let item of teacherGroupsConfirm | ordenBySubject">
+              <td class="align-middle">
+                <input type="checkbox" class="form-control" name="radioDelete"
+                       [(ngModel)]="item.activedChanger"
+                       (change)="changeCheckboxItem($event)"
+                >
+              </td>
+              <td class="align-middle">{{item?.university_acronym}}</td>
+              <td class="align-middle">{{item?.area_name}}</td>
+              <td class="align-middle">{{item?.subject_name}}</td>
+              <td class="align-middle">{{item?.group_cod}}</td>
+              <td class="align-middle">{{item?.group_type}}</td>
+              <td class="align-middle">{{item?.group_hours}}</td>
+              <td class="align-middle"
+                [ngClass]="{
+                'p-3 mb-2 bg-danger text-white': item?.group_cover_hours < 0,
+                'p-3 mb-2 bg-success text-white': item?.group_cover_hours === 0,
+                'p-3 mb-2 bg-warning text-dark': item?.group_cover_hours > 0
+                }"
+              >{{item?.group_cover_hours}}</td>
+              <td class="align-middle">
+
+                <input type="number" class="form-control align-middle"
+                       min="0.00" max="{{item?.group_hours}}"
+                       [value]="item?.impart_hours"
+                       [(ngModel)]="item.impart_hours"
+                       (change)="clickChanger($event.target)"
+                >
+              </td>
+              <td class="align-middle">{{item?.state_solicitation}}</td>
+            </tr>
+        </tbody>
+      </table>
+    </div>
+
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-12">
+    <h4 class="float-left"><em>Carga docente disponible</em></h4>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col ">
+
+    <div class="row tableFixHead">
+      <table class="table table-striped ">
+
+        <thead>
+          <tr class="content-align">
+            <th *ngFor="let field of fieldsAvailable" scope="col" class="align-middle">{{field}}</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr *ngFor="let item of groups | ordenBySubject">
+            <td class="align-middle">{{item?.university_name}}</td>
+            <td class="align-middle">{{item?.area_name}}</td>
+            <td class="align-middle">{{item?.subject_name}}</td>
+            <td class="align-middle">{{item?.subject_course}}</td>
+            <td class="align-middle">{{item?.subject_semester}}</td>
+            <td class="align-middle">{{item?.group_cod}}</td>
+            <td class="align-middle">{{item?.group_type}}</td>
+            <td class="align-middle">{{item?.group_hours}}</td>
+            <td class="align-middle"
+              [ngClass]="{
+              'p-3 mb-2 bg-danger text-white': item?.cover_hours_provitional < 0,
+              'p-3 mb-2 bg-success text-white': item?.cover_hours_provitional == 0,
+              'p-3 mb-2 bg-warning text-dark': item?.cover_hours_provitional > 0
+              }"
+            >{{item?.cover_hours_provitional}}</td>
+            <td class="align-middle">
+              <input type="number" class="form-control"
+                       step='1'
+                       value="{{item?.impart_hours}}" min="0" max="{{item?.group_hours}}"
+                       [(ngModel)]="item.impart_hours"
+                       (change)="clickChanger($event.target)">
+            </td>
+          </tr>
+        </tbody>
+
+      </table>
+    </div>
+
+  </div>
+</div>
+
+

@@ -1,23 +1,27 @@
-
-h3 {
+h3{
   text-align: right;
-  margin-bottom: 1.7rem;
-  margin-top: 0.2rem;
+  margin-bottom: 30px;
 }
-.select-row:hover{
-  cursor: pointer;
-  background: #eeeeee;
+.table {
+  font-size: 0.9em;
 }
 .content-align {
   text-align: center;
+
 }
 .content-vertical {
   vertical-align: middle;
 }
+
+h4{
+  color: #002e67;
+  text-align: left;
+}
+/*
 .tableFixHead {
-  font-size: 0.7em;
+  font-size: 0.8em;
   padding-right: 5px;
-  overflow-y: auto; max-height: 35rem;
+  overflow-y: auto; max-height: 25rem;
   thead th { position: sticky; top: 0; }
   table  {
     border-collapse: collapse;
@@ -26,9 +30,5 @@ h3 {
   th, td { padding: 8px 16px; }
   th     { background:#eee; }
 
-}
-
-
-/* Just common table stuff. Really. */
-
-
+}*/
+.tableFixHead { font-size: 0.8em; max-height: 35rem !important; }
