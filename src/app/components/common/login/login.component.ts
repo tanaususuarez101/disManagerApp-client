@@ -12,8 +12,9 @@ declare var $: any;
 })
 export class LoginComponent implements OnInit {
   private submitted: boolean;
-  loginForm: any;
+  private loginForm: any;
   private activateLoad: boolean;
+  private loginIncorrect = false;
 
   constructor(public auth: AuthenticationService, private formBuilder: FormBuilder, private router: Router) { }
 
@@ -24,14 +25,13 @@ export class LoginComponent implements OnInit {
       this.auth.getCurrent(token)
         .subscribe(
           data => this.router.navigate(['dashboard/teacher-demand']),
-          err => {}
+          err => { }
         );
     }
   }
 
-  get f() { return this.loginForm.controls; }
-
   confirmLogin() {
+    console.log(this.loginForm.value);
     this.submitted = true;
 
     // stop here if form is invalid
@@ -49,15 +49,7 @@ export class LoginComponent implements OnInit {
       },
       error => {
         this.activateLoad = false;
-        const element = document.getElementById('alert-login');
-        if (element != null) {
-          element.innerHTML = '<div class="alert alert-danger alert-dismissible fade show" role="alert">\n' +
-            'Usuario o contraseña incorrecto' +
-            '  <button type="button" class="close" data-dismiss="alert" aria-label="Close">\n' +
-            '    <span aria-hidden="true">&times;</span>\n' +
-            '  </button>\n' +
-            '</div>';
-        }
+        this.loginIncorrect = true;
       }
     );
   }

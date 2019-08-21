@@ -1,54 +1,59 @@
-<body>
-<div class="container">
-  <div class="row">
-    <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
-      <div class="card card-signin my-5">
-        <div class="card-body">
-          <h5 class="card-title text-center">Inicio de sessión</h5>
-          <div id="alert-login"></div>
-          <form class="form-signin" [formGroup]="loginForm" (ngSubmit)="confirmLogin()">
+  <div class="row content-login ">
+    <div class="col-md-12 col-lg-8 background-ulpgc">
+      <img src="../../../../assets/img/ulpgc-white.gif">
+    </div>
 
-            <label class="sr-only" >Username</label>
-            <div class="input-group mb-2 mr-sm-2">
-              <div class="input-group-prepend">
-                <div class="input-group-text">
-                  <fa name="fas fa-user"></fa>
+    <div class="col-md-12 col-lg-4">
+
+      <div class="container">
+        <div class="row margin-top">
+          <div class="col-12">
+            <h4>Gestión docente </h4>
+            <h6 class="card-subtitle mb-2 text-muted">Departamento de Informática y Sistemas</h6>
+          </div>
+          <div class="col-12">
+            <form [formGroup]="loginForm" (submit)="confirmLogin()" >
+
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <span class="input-group-text" id="usuarioInputIcon"><i class="fa fa-user"></i></span>
                 </div>
+                <input type="text" class="form-control" id="usuarioInput" placeholder="Usuario"
+                       formControlName="username" required autofocus
+                >
               </div>
-              <input type="text" class="form-control" placeholder="Usuario" formControlName="username"
-                     [ngClass]="{ 'is-invalid': submitted && f.username?.errors }"
-                     required autofocus>
-              <div *ngIf="submitted && f.username?.errors" class="invalid-feedback">
-                <div *ngIf="f.username?.errors.required">Se requiere nombre de usuario</div>
-              </div>
-            </div>
 
-            <div class="input-group mb-2 mr-sm-2">
-              <div class="input-group-prepend">
-                <div class="input-group-text">
-                  <fa name="fas fa-unlock-alt"></fa>
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <span class="input-group-text" id="passwordInputIcon"><i class="fa fa-unlock-alt"></i></span>
                 </div>
+                <input type="password" class="form-control" id="passwordInput" placeholder="Contraseña"
+                       formControlName="password" required autofocus
+                >
               </div>
-              <input type="password" class="form-control"  placeholder="Contraseña"
-                     formControlName="password" required autofocus
-                     [ngClass]="{ 'is-invalid': submitted && f.password?.errors }">
-              <div *ngIf="submitted && f.password?.errors" class="invalid-feedback">
-                <div *ngIf="f.password?.errors.required">Se requiere contraseña</div>
-              </div>
-            </div>
 
-            <hr class="my-4">
-            <button class="btn btn-link btn-lg btn-block text-uppercase" type="submit">
-              Entrar
-              <i *ngIf="activateLoad" class="fa fa-spinner fa-spin" style="font-size:24px"></i>
-            </button>
-          </form>
+              <button *ngIf="!activateLoad" type="submit" class="btn btn-primary btn-lg btn-block btn-sm">
+                Acceder
+              </button>
+
+              <button *ngIf="activateLoad" type="submit" class="btn btn-primary btn-lg btn-block btn-sm">
+                <i class="fa fa-spinner fa-spin"></i>
+                Por favor, espere ...
+              </button>
+
+              <div *ngIf="loginIncorrect" class="alert alert-danger alert-dismissible fade show text-center" role="alert">
+                Usuario o contraseña incorrecto
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+            </form>
+          </div>
         </div>
       </div>
-    </div>
-  </div>
-</div>
-</body>
 
+    </div>
+
+  </div>
 
 

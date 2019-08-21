@@ -1,48 +1,39 @@
 
-
-body {
+.content-login {
+  height: 100vh;
   width: 100%;
-  //background: linear-gradient(to bottom, #002e67 0%,#42648e 100%);
+}
+.alert { margin-top: .7rem; }
+.margin-top { margin-top:10rem; }
+.btn { margin-top: 2.5rem; }
+.input-group-text,
+.form-control {
+  background: white;
+  border: none;
+  border-radius: 0 !important;
+}
+.input-group {
+  margin-top: .5rem;
+  border-bottom: 1px solid lightgrey;
+}
+
+.input-group:focus-within { border-bottom: 1px solid #466b99; }
+
+.background-ulpgc {
+
   background: linear-gradient(to bottom, #002e61 0%,#42648e 100%);
-  .container{
-    padding-top: 5rem;
-    padding-bottom: 10rem;
-  }
-
+  padding-top: 10rem;
+  padding-left: 5rem;
+  img { width: 50%; }
+}
+input[type="text"]:focus,
+input[type="password"]:focus
+{
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+  box-shadow: none;
 }
 
-.card-signin {
-  border: 0;
-  border-radius: 1rem;
-  box-shadow: 0 0.5rem 1rem 0 rgba(0, 0, 0, 0.1);
+@media screen and (max-width: 768px) {
+  .background-ulpgc { display:none; }
 }
-
-.card-signin .card-title {
-  margin-bottom: 2rem;
-  font-weight: 300;
-  font-size: 1.5rem;
-}
-
-.card-signin .card-body {
-  padding: 2rem;
-}
-
-.form-signin {
-  width: 100%;
-}
-
-.form-signin .btn {
-  font-size: 80%;
-  border-radius: .5rem;
-  letter-spacing: .1rem;
-  font-weight: bold;
-  padding: 0.3rem;
-  color: #42648e;
-}
-.card-title {
-  letter-spacing: .05rem;
-  color: black;
-  font-weight: bold;
-}
-
-
