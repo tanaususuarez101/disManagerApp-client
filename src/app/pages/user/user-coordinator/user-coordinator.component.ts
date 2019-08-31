@@ -59,7 +59,7 @@ export class UserCoordinatorComponent implements OnInit {
     }
   }
 
-  private sendDataData() {
+  private saveData() {
     this.activeLoad = true;
     this.rest.createCoordinatorAndResponsible(this.selected)
       .subscribe(

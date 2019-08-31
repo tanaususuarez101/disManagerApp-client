@@ -27,8 +27,9 @@ export class NavegationComponent implements OnInit {
     {name: 'Mi Carga docente', path: '/dashboard/user-subject'}
   ];
   adminlink = [
-    {name: 'Importar excel', path: '/dashboard/load-data'},
-    {name: 'Administrar usuario', path: '/dashboard/user-manager'}
+    {name: 'Base de Datos', path: '/dashboard/load-data'},
+    {name: 'Usuario', path: '/dashboard/user-manager'},
+    {name: 'Solicitudes', path: '/dashboard/request-manager'},
   ];
 
   constructor(private auth: AuthenticationService, private router: Router) { }

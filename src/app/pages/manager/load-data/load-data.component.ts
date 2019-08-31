@@ -6,7 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./load-data.component.scss']
 })
 export class LoadDataComponent implements OnInit {
-  title = 'Importar excel';
+  title = 'Panel de base de datos';
   order = 'scheme';
   ordenSelected = [
     {name: 'Importar esquema de base de datos', id: 'scheme'},

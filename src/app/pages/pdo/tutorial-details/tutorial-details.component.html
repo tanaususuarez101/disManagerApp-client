@@ -2,9 +2,9 @@
 
 <div class="row">
   <div class="col-sm-12 col-md-12 col-lg-6">
-    <h4 class="col-12">Primer semestre</h4>
-    <hr class="h-auto">
-    <table class="table table-bordered align-content-center" >
+    <h4 class="row">Primer semestre</h4>
+    <div class="row">
+      <table class="table table-bordered align-content-center" >
       <thead>
       <tr>
         <th *ngFor="let col of fieldDay" scope="col" style="text-align: center">{{col}}</th>
@@ -38,11 +38,12 @@
       </tr>
       </tbody>
     </table>
+    </div>
   </div>
   <div class="col-sm-12 col-md-12 col-lg-6">
-    <h4 class="col-12">Segundo semestre</h4>
-    <hr class="h-auto">
-    <table class="table table-bordered align-content-center" >
+    <h4 class="row">Segundo semestre</h4>
+    <div class="row">
+      <table class="table table-bordered align-content-center" >
       <thead>
       <tr>
         <th *ngFor="let col of fieldDay" scope="col" style="text-align: center">{{col}}</th>
@@ -76,5 +77,6 @@
       </tr>
       </tbody>
     </table>
+    </div>
   </div>
 </div>

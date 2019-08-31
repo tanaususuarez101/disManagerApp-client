@@ -1,24 +1,23 @@
-h3 {
-  text-align: right;
-  margin-bottom: 1.7rem;
-  margin-top: 0.2rem;
-}
+h3 { text-align: right; margin-bottom: 1.7rem; margin-top: 0.2rem; }
+.row { margin-right: 0; }
+
+
 .container-hours {
   margin-left: .8rem;
   margin-top: .2rem;
   margin-bottom: .4rem;
-  .badge {
-    margin-right: .1rem;
-    background: #466b99;
-    color: white;
-  }
-  .circle {
-    font-size: 1rem;
-    padding: .1rem .2rem .1rem .2rem;
-    border-radius: 50%;
-  }
-  .circle:hover {
-    cursor: pointer;
-    color: black;
-  }
+  .badge { margin-right: .1rem; background: #466b99; color: white; }
+  .circle { font-size: 1rem; padding: .1rem .2rem .1rem .2rem; border-radius: 50%; }
+  .circle:hover { cursor: pointer; color: black; }
 }
+.separation {
+  border-top: 1px solid rgba(0,0,0,.1);
+  margin-top: 1.5rem;
+  margin-bottom: 1.5rem;
+
+  margin-right: -0.95rem !important;
+  margin-left: -0.95rem !important;
+}
+
+
+

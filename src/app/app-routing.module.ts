@@ -43,6 +43,7 @@ import {TeacherPDAComponent} from './pages/pdo/teacher-pda/teacher-pda.component
 import {TeacherDemandDetailsComponent} from './pages/pdo/teacher-demand-details/teacher-demand-details.component';
 import {TeacherLoadDetailsComponent} from './pages/pdo/teacher-load-details/teacher-load-details.component';
 import {TutorialDetailsComponent} from './pages/pdo/tutorial-details/tutorial-details.component';
+import {RequestManagerComponent} from './pages/manager/request-manager/request-manager.component';
 
 /**
  * */
@@ -68,6 +69,8 @@ const routes: Routes = [
       { path: 'load-pda', component: LoadPdaComponent, canActivate: [AuthGuard]},
       { path: 'load-data', component: LoadDataComponent, canActivate: [AuthGuard]},
       { path: 'user-manager', component: UserManagerComponent, canActivate: [AuthGuard]},
+      { path: 'request-manager', component: RequestManagerComponent, canActivate: [AuthGuard]},
+
       { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard]},
       { path: 'user-subject', component: MySubjectComponent, canActivate: [AuthGuard]},
       { path: 'user-request', component: UserRequestComponent, canActivate: [AuthGuard]},

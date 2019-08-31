@@ -1,34 +1,15 @@
 /* You can add global styles to this file, and also import other style files */
 
-$primary: #466b99;
+/* títulos generales */
+h3 { text-align: right; margin-bottom: 1.7rem; margin-top: 0.2rem; }
 
-.badge-primary,
-.btn-primary {
-  background: $primary;
-  color: white;
-}
-/*
-.btn-primary:hover
-{
-  background: white;
-  color: $primary;
-}
-*/
-.btn-outline-primary {
-  background: white;
-  color: $primary;
-  border: 1px solid $primary;
-}
-.btn-outline-primary:hover {
-  background: $primary;
-  color: white;
-  border: 1px solid $primary;
-}
-.btn-outline-primary:disabled {
-  background: white;
-  color: #7187A1;
-  border: 1px solid #7187A1;
-}
+$primary: #466b99;
+.fa { cursor: pointer; font-size: 1rem; margin-right: .2rem; }
+.badge-primary, .btn-primary { background: $primary; color: white; }
+
+.btn-outline-primary { background: white; color: $primary; border: 1px solid $primary; }
+.btn-outline-primary:hover { background: $primary; color: white; border: 1px solid $primary; }
+.btn-outline-primary:disabled { background: white; color: #7187A1; border: 1px solid #7187A1; }
 
 .btn-outline-primary:not(:disabled):not(.disabled):active,
 .show>.btn-outline-primary.dropdown-toggle {
@@ -44,12 +25,8 @@ $primary: #466b99;
   padding-left: 0;
   margin-bottom: 2.5rem;
   thead th { position: sticky; top: -1px; background: white; color: black;}
-  table  {
-
-    border-collapse: collapse;
-    width: 100%;
-  }
-  th, td { padding: 8px 16px; text-align: center;}
+  table  { border-collapse: collapse; width: 100%; }
+  th, td { padding: 8px 16px; text-align: center; vertical-align: middle !important;}
   th     { background:#eee; }
 }
 

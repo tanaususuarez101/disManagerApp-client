@@ -1,11 +1,5 @@
-h3 {
-  text-align: right;
-  margin-bottom: 1.7rem;
-  margin-top: 0.2rem;
-}
-.custom-file-label::after {
-  content: 'Buscar';
-}
+.custom-file-label::after { content: 'Elegir'; }
+.input-group > .custom-file { margin-right: .4rem; }
 .app-bar {
   margin-top: 1.2rem;
   padding-right: 1.5rem;
@@ -14,4 +8,3 @@ h3 {
     background: #466b99 !important;
   }
 }
-

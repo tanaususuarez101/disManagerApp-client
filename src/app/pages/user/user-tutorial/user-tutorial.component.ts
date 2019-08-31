@@ -13,6 +13,7 @@ declare const $: any;
 export class UserTutorialComponent implements OnInit {
   title = 'Mis tutorias';
   user: any;
+  //fieldDay = ['Días', 'Horas'];
   fieldDay = ['Días', 'Horas'];
   selected: any;
   hoursOption = ['-', '08:30 - 10:30', '10:30 - 12:30', '12:30 - 14:30'];

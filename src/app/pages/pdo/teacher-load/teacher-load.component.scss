@@ -1,29 +1,11 @@
-
-h3{
-  text-align: right;
-  margin-bottom: 30px;
-}
-.select-row:hover{
-  cursor: pointer;
-  background: #eeeeee;
-}
-.content-align {
-  text-align: center;
-
-}
-.content-vertical {
-  vertical-align: middle;
-}
-
-/*
-.tableFixHead {
-  font-size: 0.7em;
-  overflow-y: auto; max-height: 35rem;
-  thead th { position: sticky; top: 0; }
-  table  { border-collapse: collapse; width: 100%; }
-  th, td { padding: 8px 16px; }
-  th     { background:#eee; }
-
-}
-*/
+.input-group-text,
+.form-control { background: white; border: none; border-radius: 0 !important; }
+.input-group { margin-top: .5rem; border: 1px solid lightgrey; border-radius: .1rem}
 .tableFixHead { font-size: .8em; max-height: 35rem !important;}
+
+input[type="text"]:focus
+{
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+  box-shadow: none;
+}

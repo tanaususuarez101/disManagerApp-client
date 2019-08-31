@@ -1,7 +1,4 @@
-h3 {
-  text-align: right;
-  margin-bottom: 30px;
-}
+h3 { text-align: right; margin-bottom: 30px; }
 .select-row:hover{
   cursor: pointer;
   background: #eeeeee;
@@ -12,24 +9,6 @@ h3 {
 .content-vertical {
   vertical-align: middle;
 }
-/*
-.tableFixHead {
-  font-size: 0.7em;
-  padding-right: 5px;
-  overflow-y: auto; max-height: 35rem;
-
-  thead th { position: sticky; top: 0; }
-  table  {
-    border-collapse: collapse;
-    width: 100%;
-  }
-  th, td { padding: 8px 16px; }
-  th     { background:#eee; }
-
-}
-*/
-
 .tableFixHead { font-size: .8em; max-height: 35rem !important;}
-/* Just common table stuff. Really. */
 
 

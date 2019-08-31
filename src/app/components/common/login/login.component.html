@@ -1,9 +1,9 @@
   <div class="row content-login ">
-    <div class="col-md-12 col-lg-8 background-ulpgc">
-      <img src="../../../../assets/img/ulpgc-white.gif">
+    <div class="col-md-6 col-lg-8 background-ulpgc">
+      <img src="assets/img/logo_ulpgc_inline_white.png">
     </div>
 
-    <div class="col-md-12 col-lg-4">
+    <div class="col-md-6 col-lg-4">
 
       <div class="container">
         <div class="row margin-top">
@@ -12,6 +12,8 @@
             <h6 class="card-subtitle mb-2 text-muted">Departamento de Informática y Sistemas</h6>
           </div>
           <div class="col-12">
+
+            <!-- TODO - Añadir validación de formulario -->
             <form [formGroup]="loginForm" (submit)="confirmLogin()" >
 
               <div class="input-group">

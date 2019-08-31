@@ -20,8 +20,10 @@
 .navbar {
   padding: .5rem 1.9rem;
 }
-
-@media screen and (max-device-width: 480px) {
+.bg-color-ulpgc {
+  background: linear-gradient(to bottom, #002e61 0%,#42648e 100%);
+}
+@media screen and (max-width: 520px) {
   .phone-logo {
     display: inline-flex;
   }
@@ -29,7 +31,7 @@
     display: none;
   }
 }
-@media screen and (min-device-width: 480px) {
+@media screen and (min-width: 520px) {
   .phone-logo {
     display: none;
   }

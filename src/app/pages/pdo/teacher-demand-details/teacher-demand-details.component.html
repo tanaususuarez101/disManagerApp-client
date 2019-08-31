@@ -1,7 +1,5 @@
 
-<div class="title">
-  <h3 class="text-muted">{{groupDetails?.subject_name}}</h3>
-</div>
+<h3 class="text-muted">{{groupDetails?.subject_name}}</h3>
 
 <hr class="my-4 row-my">
 
@@ -58,21 +56,13 @@
       <tr *ngFor="let teacher of groupDetails?.teacher">
         <td>{{teacher?.teacher_surnames}}, {{teacher?.teacher_name}}</td>
         <td>{{teacher?.assigned_hours}}</td>
-        <td>{{teacher?.state_solicitation}}</td>
+        <td>{{teacher?.status}}</td>
       </tr>
       </tbody>
     </table>
   </div>
 
 </div>
-    <!--
-    <app-group-solicitation-form
-      [data]="groupDetails"
-      (statusRequest)="showRequest($event)"
-    ></app-group-solicitation-form>
-    -->
-
-
 
 <div id="alert-success" class="alert alert-success alert-dismissible fade" role="alert">
   <strong>¡Solicitud enviada!</strong> Deberá esperar que su solicitud sea aceptada

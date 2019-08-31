@@ -2,9 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import {RestService} from '../../../services/rest.service';
 import {Router} from '@angular/router';
 import {AuthenticationService} from '../../../services/authentication.service';
-import {map} from 'rxjs/operators';
-import {element} from 'protractor';
-import {Observable} from 'rxjs';
+import {concatAll, concatMap, map} from 'rxjs/operators';
+import { forkJoin, of } from 'rxjs';
+import {subscribeToObservable, subscribeToPromise} from 'rxjs/internal-compatibility';
 
 declare const $: any;
 
@@ -15,25 +15,50 @@ declare const $: any;
 })
 export class MySubjectComponent implements OnInit {
 
-  user: any;
-  fieldsAvailable = ['Titulación', 'Área', 'Asignatura', 'Curso', 'Semestre', 'Grupo', 'Tipo', 'Horas', 'Horas sin cubrir',
+  private user: any;
+  private fieldsAvailable = ['Titulación', 'Área', 'Asignatura', 'Curso', 'Semestre', 'Grupo', 'Tipo', 'Horas', 'Horas sin cubrir',
     'H. Seleccionadas'];
-  fieldTeacherGroups = ['Titulación', 'Área', 'Asignatura', 'Grupo', 'Tipo', 'Horas', 'Horas sin cubrir', 'H. Seleccionadas', 'Estado' ];
-  groups: any = [];
-  teacherGroupsConfirm = [];
-  selectedHours = 0;
-  allSelected = false;
-  deleteBtnAvailable = false;
+  private fieldTeacherGroups = ['Titulación', 'Área', 'Asignatura', 'Grupo', 'Tipo', 'Horas', 'Horas sin cubrir', 'H. Seleccionadas',
+    'Estado' ];
+  private groups: any = [];
+  private teacherGroupsConfirm = [];
+  private selectedHours = 0;
+  private allSelected = false;
+  private deleteBtnAvailable = false;
+  private loadDeleterIcon = false;
+  private loadSaveIcon = false;
 
   constructor(private rest: RestService, private router: Router, private auth: AuthenticationService) { }
 
   ngOnInit() {
     this.user = this.auth.getUser();
-    this.loadGroups();
+    this.loadData();
+  }
+
+  private loadData() {
+    forkJoin(
+      this.loadGroups(),
+      this.loadTeacher()
+    )
+    .subscribe(
+      value => {
+      this.groups = value[0];
+      this.teacherGroupsConfirm = value[1];
+
+      this.groups = this.groups.filter(teacherGroups => {
+        for (const group of this.teacherGroupsConfirm) {
+          if (group.area_cod === teacherGroups.area_cod && group.subject_cod === teacherGroups.subject_cod
+            && group.group_cod === teacherGroups.group_cod) { return false; }
+        }
+        return true;
+      });
+      this.loadDeleterIcon = false;
+      this.calculatorHoursImpart();
+    });
   }
 
   private loadGroups() {
-    this.rest.getGroups()
+    return this.rest.getAvailableGroups()
       .pipe(
         map(data => {
           // tslint:disable-next-line:no-shadowed-variable
@@ -43,36 +68,20 @@ export class MySubjectComponent implements OnInit {
             return element;
           });
         })
-      )
-      .subscribe(groups =>  {
-        this.groups = groups;
-        this.loadTeacher();
-      });
+      );
   }
 
   private loadTeacher() {
-    this.rest.getTeacherLoad(this.user.teacher_dni)
+    return this.rest.getTeacherLoad(this.user.teacher_dni)
       .pipe(
         map(data => {
           // tslint:disable-next-line:no-shadowed-variable
           return data.groups.map(element => {
             element.impart_hours = +element.assigned_hours;
-            element.activedChanger = false;
             return element;
           });
         })
-      )
-      .subscribe(data => {
-        this.teacherGroupsConfirm = data;
-        this.groups = this.groups.filter(teacherGroups => {
-          for (const group of data) {
-            if (group.area_cod === teacherGroups.area_cod && group.subject_cod === teacherGroups.subject_cod
-              && group.group_cod === teacherGroups.group_cod) { return false; }
-          }
-          return true;
-        });
-        this.calculatorHoursImpart();
-      });
+      );
   }
 
   private clickChanger($event) {
@@ -80,32 +89,40 @@ export class MySubjectComponent implements OnInit {
     this.calculatorHoursImpart();
   }
 
-  calculatorHoursImpart() {
+  private calculatorHoursImpart() {
     this.selectedHours = 0;
     for (const group of this.groups) { this.selectedHours += +group.impart_hours; }
     for (const group of this.teacherGroupsConfirm) { this.selectedHours += +group.impart_hours; }
   }
 
-  deleteGroup() {
+  /*
+   * Button function
+   * */
 
+  private deleteGroup() {
+    this.loadDeleterIcon = true;
+    this.deleteBtnAvailable = false;
+    this.allSelected = false;
     for ( const group of this.teacherGroupsConfirm) {
       if (group.activedChanger) {
-        this.rest.deleteLoadTeacher(group.area_cod, group.subject_cod, group.group_cod)
-          .subscribe(
-            data => {
-              this.loadGroups();
-            },
-          );
+        this.rest.deleteLoadTeacher(group.area_cod, group.subject_cod, group.group_cod).subscribe(data => this.loadData());
       }
     }
   }
 
-  updateChange() {
+  private updateChange() {
+    this.loadSaveIcon = true;
     this.confirmSelection();
     this.updateGroup();
   }
 
-  confirmSelection() {
+  private requestVenia() { $('#modal-request-venia').modal('show'); }
+
+  /*
+   * auxiliary function
+   * */
+
+  private confirmSelection() {
     const sendData = this.groups
       .filter(value => value.impart_hours > 0 )
       .map(value => {
@@ -116,47 +133,41 @@ export class MySubjectComponent implements OnInit {
           impart_hours: value.impart_hours
         };
       });
-
-    this.rest.createTeacherLoad(sendData)
-      .subscribe(
-        result =>  {
-          this.loadTeacher();
-        }
-      );
+    this.rest.createTeacherLoad(sendData).subscribe( result => {this.loadSaveIcon = false; this.loadData(); },
+        err => this.loadSaveIcon = false);
   }
 
-  updateGroup() {
+  private updateGroup() {
     // tslint:disable-next-line:no-shadowed-variable
     for ( const element of this.teacherGroupsConfirm) {
       if (element.impart_hours < 0.5) { continue; }
-
       element.updateActiveLoad = true;
       this.rest.updateLoadTeacher(element.area_cod, element.subject_cod, element.group_cod, {hours: element.impart_hours})
-        .subscribe(
-          data => {
-            this.loadTeacher();
-          },
-          err => {
-            element.updateActiveLoad = false;
-          });
+        .subscribe( data => this.loadData(), err =>  alert('Error al guardar') );
     }
   }
 
-  selectedAll($event) {
+  /*
+  * changer checkbox
+  * */
+
+  private selectedAll($event) {
     this.deleteBtnAvailable = $event.target.checked;
     this.allSelected = $event.target.checked;
     for (const group of this.teacherGroupsConfirm) { group.activedChanger = $event.target.checked; }
-
   }
 
-  changeCheckboxItem($event) {
+  private changeCheckboxItem($event) {
     if (!$event.target.checked && this.allSelected) { this.allSelected = !this.allSelected; }
     if (this.checkedAllInput()) { this.allSelected = true; }
-    for (const group of this.teacherGroupsConfirm) { if (group.activedChanger) { this.deleteBtnAvailable = true; break; } else { this.deleteBtnAvailable = false; } }
+    for (const group of this.teacherGroupsConfirm) {
+      if (group.activedChanger) { this.deleteBtnAvailable = true; break; } else { this.deleteBtnAvailable = false; } }
   }
 
   private checkedAllInput(): boolean {
     for (const group of this.teacherGroupsConfirm) { if (!group.activedChanger) { return false; } }
     return true;
   }
+
+
 }

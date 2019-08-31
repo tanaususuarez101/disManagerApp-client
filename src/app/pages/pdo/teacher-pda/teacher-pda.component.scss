@@ -1,32 +1,5 @@
-h3 {
-  text-align: right;
-  margin-bottom: 30px;
-}
-.select-row:hover{
-  cursor: pointer;
-  background: #eeeeee;
-}
-.content-align {
-  text-align: center;
-}
-.content-vertical {
-  vertical-align: middle;
-}
-/*
-.tableFixHead {
-  font-size: 0.9em;
-  padding-right: 10px;
-  overflow-y: auto; max-height: 35rem;
-  thead th { position: sticky; top: 0; }
-  table  { border-collapse: collapse; width: 100%; }
-  th, td { padding: 8px 16px; }
-  th     { background:#eee; }
-
-}
-*/
-
+h3 { text-align: right; margin-bottom: 30px; }
 .tableFixHead { font-size: .8em; max-height: 35rem !important;}
 
-/* Just common table stuff. Really. */
 
 

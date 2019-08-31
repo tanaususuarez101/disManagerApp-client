@@ -1,0 +1,37 @@
+
+<!-- Modal -->
+<div class="modal fade" id="modal-request-venia" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalCenterTitle">
+          Solicitud de Venias
+          <i class="fa fa-info-circle" data-container="body" data-toggle="popover" data-placement="top"
+                  data-content="Tipo 1: Permiten impartir docencia a otras áreas de conocimientos. Tipo 2: Permiten
+                  impartir a otras asignaturas, distintas del propio área de conocimiento"
+          ></i>
+        </h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+
+      <div class="modal-body">
+
+
+        <div class="form-group">
+          <label for="exampleFormControlSelect1"> Tipo de Venia</label>
+          <select class="form-control" id="exampleFormControlSelect1" [(ngModel)]="typeVenia" [ngModelOptions]="{standalone: true}">
+            <option value="default" disabled selected>Seleccione un tipo</option>
+            <option value="type1">Tipo 1</option>
+            <option value="type2">Tipo 2</option>
+          </select>
+        </div>
+        <app-form-venia1 *ngIf="typeVenia=='type1'"></app-form-venia1>
+        <app-form-venia2 *ngIf="typeVenia=='type2'"></app-form-venia2>
+
+      </div>
+
+    </div>
+  </div>
+</div>

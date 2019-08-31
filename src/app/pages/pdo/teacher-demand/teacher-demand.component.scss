@@ -1,36 +1,6 @@
 
-h3 {
-  text-align: right;
-  margin-bottom: 1.7rem;
-  margin-top: 0.2rem;
-}
-.select-row:hover{
-  cursor: pointer;
-  background: #eeeeee;
-}
-.content-align {
-  text-align: center;
-}
-.content-vertical {
-  vertical-align: middle;
-}
+h3 { text-align: right; margin-bottom: 1.7rem; margin-top: 0.2rem; }
+.input-group-text,
+.form-control { background: white; border: none; border-radius: 0 !important; }
+.input-group { margin-top: .5rem; border: 1px solid lightgrey; border-radius: .1rem}
 .tableFixHead { font-size: .8em; max-height: 35rem !important; }
-/*
-.tableFixHead {
-  font-size: 0.7em;
-  padding-right: 5px;
-  overflow-y: auto; max-height: 35rem;
-  thead th { position: sticky; top: 0; }
-  table  {
-    border-collapse: collapse;
-    width: 100%;
-  }
-  th, td { padding: 8px 16px; }
-  th     { background:#eee; }
-
-}
-*/
-
-/* Just common table stuff. Really. */
-
-

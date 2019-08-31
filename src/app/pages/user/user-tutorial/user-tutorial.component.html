@@ -3,13 +3,25 @@
 </h3>
 
 <div class="row">
+  <div class="btn-group btn-group-sm" role="group">
+    <button type="button" class="btn btn-outline-primary" (click)="showTutorialModal()">
+      <i class="fa fa-pencil"></i>
+      Editar
+      <span class="badge badge-outline-primary">{{selected?.hours}} / {{user.tutorial_hours}} horas</span>
+    </button>
+  </div>
+</div>
+
+<hr class="separation">
+
+<div class="row ">
   <div class="col-sm-12 col-md-12 col-lg-6">
-    <h4 class="col-12">Primer semestre</h4>
-    <hr class="h-auto">
-    <table class="table table-bordered align-content-center" >
+    <h4 class="row">Primer semestre</h4>
+    <div class="row">
+      <table class="table table-bordered align-content-center" >
       <thead>
       <tr>
-        <th *ngFor="let col of fieldDay" scope="col" style="text-align: center">{{col}}</th>
+        <th *ngFor="let col of fieldDay" scope="col">{{col}}</th>
       </tr>
       </thead>
       <tbody>
@@ -40,11 +52,12 @@
       </tr>
       </tbody>
     </table>
+    </div>
   </div>
-  <div class="col-sm-12 col-md-12 col-lg-6">
-    <h4 class="col-12">Segundo semestre</h4>
-    <hr class="h-auto">
-    <table class="table table-bordered align-content-center" >
+  <div class="col-table col-sm-12 col-md-12 col-lg-6">
+    <h4 class="row">Segundo semestre</h4>
+    <div class="row">
+      <table class="table table-bordered align-content-center" >
       <thead>
       <tr>
         <th *ngFor="let col of fieldDay" scope="col" style="text-align: center">{{col}}</th>
@@ -78,18 +91,10 @@
       </tr>
       </tbody>
     </table>
+    </div>
   </div>
 </div>
 
-<div class="row">
-  <div class="col-12">
-    <button type="submit" class="btn btn-primary" (click)="showTutorialModal()">
-      Añadir tutorías
-      <span class="badge badge-primary">{{selected?.hours}} / {{user.tutorial_hours}} horas</span>
-    </button>
-
-  </div>
-</div>
 
 <!--
   Modal for add new tutorial hours

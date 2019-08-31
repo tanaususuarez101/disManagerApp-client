@@ -1,17 +1,20 @@
 <h3 class="text-muted">Mi Carga docente</h3>
 
+<app-request-venia></app-request-venia>
 
 <div class="row">
   <div class="btn-group btn-group-sm" role="group">
     <button type="button" class="btn btn-outline-primary" (click)="updateChange()">
-      <i class="fa fa-save"></i>
+      <i *ngIf="!loadSaveIcon" class="fa fa-save"></i>
+      <i *ngIf="loadSaveIcon" class="fa fa-spinner fa-spin" ></i>
       Guardar
     </button>
     <button type="button" class="btn btn-outline-primary" (click)="deleteGroup()" [disabled]="!deleteBtnAvailable">
-      <i class="fa fa-trash" ></i>
+      <i *ngIf="!loadDeleterIcon" class="fa fa-trash" ></i>
+      <i *ngIf="loadDeleterIcon" class="fa fa-spinner fa-spin" ></i>
       Eliminar
     </button>
-    <button type="button" class="btn btn-outline-primary" (click)="deleteGroup()">
+    <button type="button" class="btn btn-outline-primary" (click)="requestVenia()">
       <i class="fa fa-inbox" ></i>
       Solicitar Venias
     </button>
@@ -46,10 +49,7 @@
 </div>
 
 <div class="row" *ngIf="teacherGroupsConfirm.length > 0">
-
-  <div class="col">
-
-    <div class="row tableFixHead">
+    <div class="tableFixHead">
       <table class="table table-striped ">
         <thead>
           <tr class="content-align">
@@ -66,18 +66,20 @@
         <tbody>
             <tr *ngFor="let item of teacherGroupsConfirm | ordenBySubject">
               <td class="align-middle">
-                <input type="checkbox" class="form-control" name="radioDelete"
+                <input type="checkbox"
+                       class="form-control"
+                       name="radioDelete"
                        [(ngModel)]="item.activedChanger"
                        (change)="changeCheckboxItem($event)"
                 >
               </td>
-              <td class="align-middle">{{item?.university_acronym}}</td>
-              <td class="align-middle">{{item?.area_name}}</td>
-              <td class="align-middle">{{item?.subject_name}}</td>
-              <td class="align-middle">{{item?.group_cod}}</td>
-              <td class="align-middle">{{item?.group_type}}</td>
-              <td class="align-middle">{{item?.group_hours}}</td>
-              <td class="align-middle"
+              <td>{{item?.university_acronym}}</td>
+              <td>{{item?.area_name}}</td>
+              <td>{{item?.subject_name}}</td>
+              <td>{{item?.group_cod}}</td>
+              <td>{{item?.group_type}}</td>
+              <td>{{item?.group_hours}}</td>
+              <td
                 [ngClass]="{
                 'p-3 mb-2 bg-danger text-white': item?.group_cover_hours < 0,
                 'p-3 mb-2 bg-success text-white': item?.group_cover_hours === 0,
@@ -93,30 +95,26 @@
                        (change)="clickChanger($event.target)"
                 >
               </td>
-              <td class="align-middle">{{item?.state_solicitation}}</td>
+              <td *ngIf="item.approved">Aprobado</td>
+              <td *ngIf="item.rejected">Rechazado</td>
+              <td *ngIf="!item.approved && !item.rejected">Pendiente</td>
             </tr>
         </tbody>
       </table>
     </div>
-
-  </div>
 </div>
 
 <div class="row">
-  <div class="col-12">
     <h4 class="float-left"><em>Carga docente disponible</em></h4>
-  </div>
 </div>
 
 <div class="row">
-  <div class="col ">
-
-    <div class="row tableFixHead">
+    <div class="tableFixHead">
       <table class="table table-striped ">
 
         <thead>
           <tr class="content-align">
-            <th *ngFor="let field of fieldsAvailable" scope="col" class="align-middle">{{field}}</th>
+            <th *ngFor="let field of fieldsAvailable" scope="col" >{{field}}</th>
           </tr>
         </thead>
 
@@ -149,8 +147,6 @@
 
       </table>
     </div>
-
-  </div>
 </div>
 
 

@@ -21,16 +21,16 @@ export class UserManagerComponent implements OnInit {
 
   constructor(private  formBuilder: FormBuilder, private rest: RestService) {}
 
-  ngOnInit() {
-    this.loadList();
-  }
+  ngOnInit() { this.loadList(); }
+  newUser() { $('#modal-new-user').modal('show'); }
+  loadTeacherList() { $('#modal-load-teacher-list').modal('show'); }
+  alertDelete() { $('#modal-alert').modal('show'); }
 
   loadList() {
     this.valueRadioButton = null;
 
     this.rest.getListUser().subscribe(users => {
       this.tableUser = users;
-      console.log('USER => ', users);
       this.rest.getListTeacher().subscribe(teachers => {
         this.teacherList = teachers;
         this.availableTeacherList = this.teacherList.filter(value => {
@@ -43,24 +43,11 @@ export class UserManagerComponent implements OnInit {
 
   buttonEdit() {
     if (this.valueRadioButton == null) return;
-    console.log(this.valueRadioButton);
-    if (this.valueRadioButton.teacherSelected != null) {
-      $('#modal-teacher-edit').modal('show');
-    } else if (this.valueRadioButton.userSelected != null) {
-      $('#modal-user-edit').modal('show');
-    }
+    if (this.valueRadioButton.teacherSelected != null) { $('#modal-teacher-edit').modal('show'); } else
+    if (this.valueRadioButton.userSelected != null) { $('#modal-user-edit').modal('show'); }
   }
 
-  newUser() {
-    $('#modal-new-user').modal('show');
-  }
-  loadTeacherList() {
-    $('#modal-load-teacher-list').modal('show');
-  }
 
-  alertDelete() {
-    $('#modal-alert').modal('show');
-  }
 
   confirmDelete($event: boolean) {
     if ($event) {
@@ -72,7 +59,5 @@ export class UserManagerComponent implements OnInit {
     }
   }
 
-  update() {
-    this.loadList();
-  }
+  update() { this.loadList(); }
 }

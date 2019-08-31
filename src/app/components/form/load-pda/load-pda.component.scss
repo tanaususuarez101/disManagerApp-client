@@ -1,6 +1,5 @@
-.custom-file-label::after {
-  content: 'Buscar';
-}
+.custom-file-label::after { content: 'Elegir'; }
+.input-group > .custom-file { margin-right: .4rem; }
 .app-bar {
   margin-top: 1.2rem;
   padding-right: 1.5rem;

@@ -9,29 +9,26 @@ import {AuthenticationService} from '../../../services/authentication.service';
   styleUrls: ['./user-request.component.scss']
 })
 export class UserRequestComponent implements OnInit {
+  private fieldTeacherGroups = ['Titulación', 'Área', 'Asignatura', 'Grupo', 'Horas', 'H. Seleccionadas', 'Estado'];
+  private fieldVeniaI = ['Área de conocimiento', 'Código', 'Estado'];
+  private fieldVeniaII = ['Código Área', 'Código Asignatura', 'Asignatura', 'Estado'];
   private user: any;
   private selectedHours = 0;
   private teacherGroupsConfirm = [];
-  fieldTeacherGroups = ['Titulación', 'Área', 'Asignatura', 'Grupo', 'Horas', 'H. Seleccionadas', 'Estado'];
+  private listVeniasI = [];
+  private listVeniasII = [];
 
   constructor(private rest: RestService, private auth: AuthenticationService) { }
 
   ngOnInit() {
     this.user = this.auth.getUser();
     this.loadTeacher();
+    this.loadVenias();
   }
 
   private loadTeacher() {
     this.rest.getTeacherLoad(this.user.teacher_dni)
-      .pipe(
-        map(data => {
-          return data.groups.map(element => {
-            element.impart_hours = element.assigned_hours;
-            element.deleteActiveLoad = false;
-            return element;
-          });
-        })
-      )
+      .pipe(map(data => data.groups))
       .subscribe(data => {
         this.teacherGroupsConfirm = data;
         this.calculatorHoursImpart();
@@ -39,6 +36,11 @@ export class UserRequestComponent implements OnInit {
   }
   calculatorHoursImpart() {
     this.selectedHours = 0;
-    for (const group of this.teacherGroupsConfirm) { this.selectedHours += +group.impart_hours; }
+    for (const group of this.teacherGroupsConfirm) { this.selectedHours += +group.assigned_hours; }
+  }
+
+  private loadVenias() {
+    this.rest.getVeniaType1(this.user.teacher_dni).subscribe(venia => this.listVeniasI = venia);
+    this.rest.getVeniaType2(this.user.teacher_dni).subscribe(venia => this.listVeniasII = venia);
   }
 }

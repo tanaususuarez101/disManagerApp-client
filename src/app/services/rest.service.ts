@@ -67,10 +67,18 @@ export class RestService {
         'x-access-token': this.auth.getToken()
       })
     };
-    return this.http.get(this.endpoint + '/groups', httpOptions)
-      .pipe(
-        map(data => data)
-      );
+    return this.http.get(this.endpoint + '/groups', httpOptions);
+  }
+
+  getAvailableGroups(): Observable<any> {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Access-Control-Allow-Origin': '*',
+        'Content-Type': 'application/json',
+        'x-access-token': this.auth.getToken()
+      })
+    };
+    return this.http.get(this.endpoint + '/groups/available', httpOptions);
   }
 
   getGroup(groupCod, subjectCod, areaCod): Observable<any> {
@@ -149,8 +157,6 @@ export class RestService {
     return this.http.post(this.endpoint + '/subject/coordinator', JSON.stringify(data), httpOptions);
   }
 
-
-
   /**
    * TEACHER LOAD
    * */
@@ -215,6 +221,28 @@ export class RestService {
       httpOptions);
   }
 
+  getTeacherLoadRequest(): Observable<any> {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Access-Control-Allow-Origin': '*',
+        'Content-Type': 'application/json',
+        'x-access-token': this.auth.getToken()
+      })
+    };
+    return this.http.get(this.endpoint + '/teacher_load/request', httpOptions);
+  }
+
+  updateTeacherLoadRequest(areaCod: any, subjectCod: any, groupCod: any, teacherDni: any, data): Observable<any> {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Access-Control-Allow-Origin': '*',
+        'Content-Type': 'application/json',
+        'x-access-token': this.auth.getToken()
+      })
+    };
+    return this.http.put(this.endpoint + '/teacher_load/' + areaCod + '/' + subjectCod + '/' + groupCod + '/' + teacherDni ,
+      JSON.stringify(data), httpOptions);
+  }
 
   /**
    * TEACHER
@@ -357,5 +385,122 @@ export class RestService {
   }
 
 
+  /**
+   * Knowledge Area
+   * */
 
+  getAreas(): Observable<any> {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Access-Control-Allow-Origin': '*',
+        'Content-Type': 'application/json',
+        'x-access-token': this.auth.getToken()
+      })
+    };
+    return this.http.get(this.endpoint + '/knowledgeAreas', httpOptions);
+  }
+
+  createVeniaType1(data): Observable<any>  {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Access-Control-Allow-Origin': '*',
+        'Content-Type': 'application/json',
+        'x-access-token': this.auth.getToken()
+      })
+    };
+    return this.http.post(this.endpoint + '/veniaI', JSON.stringify(data), httpOptions);
+  }
+
+  createVeniaType2(data): Observable<any>  {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Access-Control-Allow-Origin': '*',
+        'Content-Type': 'application/json',
+        'x-access-token': this.auth.getToken()
+      })
+    };
+    return this.http.post(this.endpoint + '/veniaII', JSON.stringify(data), httpOptions);
+  }
+
+  getSubjectsArea(areaCod): Observable<any> {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Access-Control-Allow-Origin': '*',
+        'Content-Type': 'application/json',
+        'x-access-token': this.auth.getToken()
+      })
+    };
+    return this.http.get(this.endpoint + '/subjects/area/' + areaCod, httpOptions);
+  }
+
+
+  /**
+   * VENIAS
+   * */
+  getVeniaType1(dni: number): Observable<any> {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Access-Control-Allow-Origin': '*',
+        'Content-Type': 'application/json',
+        'x-access-token': this.auth.getToken()
+      })
+    };
+    return this.http.get(this.endpoint + '/veniaI/' + dni, httpOptions);
+  }
+
+  getAllVeniaType1(): Observable<any> {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Access-Control-Allow-Origin': '*',
+        'Content-Type': 'application/json',
+        'x-access-token': this.auth.getToken()
+      })
+    };
+    return this.http.get(this.endpoint + '/veniaI', httpOptions);
+  }
+
+  getVeniaType2(dni: number): Observable<any> {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Access-Control-Allow-Origin': '*',
+        'Content-Type': 'application/json',
+        'x-access-token': this.auth.getToken()
+      })
+    };
+    return this.http.get(this.endpoint + '/veniaII/' + dni, httpOptions);
+  }
+
+  getAllVeniaType2(): Observable<any> {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Access-Control-Allow-Origin': '*',
+        'Content-Type': 'application/json',
+        'x-access-token': this.auth.getToken()
+      })
+    };
+    return this.http.get(this.endpoint + '/veniaII', httpOptions);
+  }
+
+
+  updateVeniaType1(areaCod: any, teacherDni: any, status: any) {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Access-Control-Allow-Origin': '*',
+        'Content-Type': 'application/json',
+        'x-access-token': this.auth.getToken()
+      })
+    };
+    return this.http.put(this.endpoint + '/veniaI/' + areaCod + '/' + teacherDni, JSON.stringify(status), httpOptions);
+  }
+
+  updateVeniaType2(areaCod: any, subjectCod: any, teacherDni: any, status: any) {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Access-Control-Allow-Origin': '*',
+        'Content-Type': 'application/json',
+        'x-access-token': this.auth.getToken()
+      })
+    };
+    return this.http.put(this.endpoint + '/veniaII/' + areaCod + '/' + subjectCod + '/' + teacherDni, JSON.stringify(status), httpOptions);
+  }
 }
