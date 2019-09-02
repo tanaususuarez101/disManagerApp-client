@@ -11,12 +11,23 @@ export class LoadPdaComponent implements OnInit {
   title = 'Carga de PDA';
   private fileToUpload: any;
   private uploadByte = 0;
-  private activedLoad = false;
   private fileLabelName = 'Elegir lista de PDA';
+
+  private activedLoad: any;
+  private showDetails: any;
+  private loading: any;
+
+  private message: any;
 
   constructor(private rest: RestService) { }
 
-  ngOnInit() {
+  ngOnInit() { this.initState(); }
+
+  initState() {
+    this.uploadByte = 0;
+    this.activedLoad = false;
+    this.loading = true;
+    this.showDetails = false;
   }
 
   ploadFileToActivity() {
@@ -24,28 +35,21 @@ export class LoadPdaComponent implements OnInit {
     this.rest.postLoadPda(this.fileToUpload)
       .subscribe(
         event => {
-          if (event.type === HttpEventType.UploadProgress) {
-            console.log(event);
-            this.uploadByte = (event.loaded / event.total) * 100;
-            console.log(event.loaded); //uploaded bytes
-            console.log(event.total); //total bytes to upload
-            console.log('upload process ', this.uploadByte);
-          }
+          if (event.type === HttpEventType.UploadProgress) { Math.round(this.uploadByte = 100 * event.loaded / event.total); }
+          if (event.type === HttpEventType.Response) {this.message = event.body['message']; this.showDetails = true; }
         },
-        error => {
-          console.log(error);
-          alert('ERROR al guardar');
-          return;
-        });
+        error => { alert('ERROR al guardar'); },
+        () => { this.loading = false;  }
+        );
   }
 
   handleFileInput(files: FileList) {
     this.fileToUpload = files.item(0);
     if (this.fileToUpload != null) {
-      document.getElementById('fileLabel').innerHTML = this.fileToUpload['name'];
+      document.getElementById('fileLabelPDA').innerHTML = this.fileToUpload.name;
     } else {
-      document.getElementById('fileLabel').innerHTML = this.fileLabelName;
-      this.activedLoad = false;
+      document.getElementById('fileLabelPDA').innerHTML = this.fileLabelName;
+      this.initState();
     }
   }
 }

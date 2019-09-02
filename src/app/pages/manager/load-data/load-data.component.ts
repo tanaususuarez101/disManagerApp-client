@@ -1,4 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
+import {RestService} from '../../../services/rest.service';
+import {Observable} from 'rxjs';
+
+declare const $: any;
 
 @Component({
   selector: 'app-load-data',
@@ -6,16 +10,23 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./load-data.component.scss']
 })
 export class LoadDataComponent implements OnInit {
-  title = 'Panel de base de datos';
-  order = 'scheme';
-  ordenSelected = [
-    {name: 'Importar esquema de base de datos', id: 'scheme'},
-    {name: 'Importar PDA', id: 'pda'},
-  ];
+  private title = 'Panel de Administración';
+  private hrefExportDatabase = '';
+  private hrefBackupDatabase = '';
 
-  constructor() { }
+  constructor(private rest: RestService) { }
 
   ngOnInit() {
+    this.hrefExportDatabase = this.rest.getExportDataBase();
+    this.hrefBackupDatabase = this.rest.getBackupDataBase();
+  }
+
+  availableDelete() { $('#modal-alert').modal('show'); }
+
+  deleteDataBases(b: boolean) {
+    if (b) {
+      this.rest.deleteScheme().subscribe(res => alert('Base de datos borrada'), err => alert('ERROR: no se pudo borrar'));
+    }
   }
 
 }

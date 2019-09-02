@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
-import {HttpClient, HttpEvent, HttpHeaders} from '@angular/common/http';
-import {Observable, pipe} from 'rxjs';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {Observable} from 'rxjs';
 import {AuthenticationService} from './authentication.service';
-import {filter, map, repeat, tap, find, catchError} from 'rxjs/operators';
+import {map} from 'rxjs/operators';
 
 
 @Injectable({
@@ -15,10 +15,14 @@ export class RestService {
   constructor(private http: HttpClient, private auth: AuthenticationService) { }
 
 
+  /**
+   * MANAGER DATA BASES
+   * */
+
   postListTeacher(fileToUpload: File): Observable <any> {
     const formData = new FormData();
     formData.append('file', fileToUpload, fileToUpload.name);
-    return this.http.post(this.endpoint + '/upload_teacher', formData,
+    return this.http.post(this.endpoint + '/database/teacher', formData,
       {
         headers: new HttpHeaders({
           'Access-Control-Allow-Origin': '*',
@@ -32,7 +36,7 @@ export class RestService {
   postLoadScheme(fileToUpload: File): Observable<any> {
     const formData = new FormData();
     formData.append('file', fileToUpload, fileToUpload.name);
-    return this.http.post(this.endpoint + '/upload_database', formData,
+    return this.http.post(this.endpoint + '/database', formData,
       {
         headers: new HttpHeaders({
           'Access-Control-Allow-Origin': '*',
@@ -42,10 +46,17 @@ export class RestService {
         reportProgress: true});
   }
 
+  getExportDataBase() {
+    return this.endpoint + '/database';
+  }
+  getBackupDataBase() {
+    return this.endpoint + '/database/backup';
+  }
+
   postLoadPda(fileToUpload: File) {
     const formData = new FormData();
     formData.append('file', fileToUpload, fileToUpload.name);
-    return this.http.post(this.endpoint + '/upload_pda', formData,
+    return this.http.post(this.endpoint + '/database/pda', formData,
       {
         headers: new HttpHeaders({
           'Access-Control-Allow-Origin': '*',
@@ -53,6 +64,17 @@ export class RestService {
         }),
         observe: 'events',
         reportProgress: true});
+  }
+
+  deleteScheme() {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Access-Control-Allow-Origin': '*',
+        'Content-Type': 'application/json',
+        'x-access-token': this.auth.getToken()
+      })
+    };
+    return this.http.delete(this.endpoint + '/database', httpOptions);
   }
 
   /**
@@ -503,4 +525,7 @@ export class RestService {
     };
     return this.http.put(this.endpoint + '/veniaII/' + areaCod + '/' + subjectCod + '/' + teacherDni, JSON.stringify(status), httpOptions);
   }
+
+
+
 }

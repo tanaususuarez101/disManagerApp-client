@@ -1,22 +1,16 @@
 
-<!-- TODO - Añadir opción para borrar base de datos -->
-
 <form (ngSubmit)="ploadFileToActivity()">
 
   <div class="row">
     <div class="input-group">
       <div class="custom-file">
-        <input type="file" class="custom-file-input"
-               lang="es"
-               id="file"
-               (change)="handleFileInput($event.target['files'])"
-        >
+        <input type="file" class="custom-file-input" lang="es" id="file"
+               (change)="handleFileInput($event.target['files'])">
         <label class="custom-file-label" for="file" id="fileLabel">{{fileLabelName}}</label>
       </div>
       <div class="input-group-append">
         <button type="submit" class="btn btn-primary">
-          <fa name="fas fa-upload"></fa>
-          Cargar
+          Subir
         </button>
       </div>
     </div>
@@ -25,10 +19,19 @@
 
   <div class="row" *ngIf="activedLoad">
     <div class="app-bar col-12">
-      <label>Subiendo fichero...</label>
+      <label *ngIf="loading">Subiendo fichero... <i class="fa fa-spinner fa-spin"></i></label>
+      <label *ngIf="!loading">Datos cargados satisfactoriamente <i class="fa fa-check"></i></label>
       <div class="progress">
         <div id="loadFile" class="progress-bar bg-info" role="progressbar" [ngStyle]="{'width.%':uploadByte}" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">{{uploadByte}}%</div>
       </div>
     </div>
+
+    <div class="col-12" *ngIf="showDetails">
+      <button type="button" class="btn btn-link btn-padding" data-toggle="modal" data-target="#details-scheme-modal">
+        Detalles
+      </button>
+    </div>
+    <app-details-scheme [message]="message"></app-details-scheme>
   </div>
 </form>
+

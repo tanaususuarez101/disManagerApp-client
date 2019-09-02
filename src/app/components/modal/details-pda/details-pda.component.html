@@ -1,0 +1,41 @@
+<div class="modal fade" id="details-pda-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xl" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Detalles</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-12">
+            <span class="badge badge-light"> PDA: {{message?.count}} </span>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-12 tableFixHead" >
+            <table class="table table-striped ">
+              <thead>
+              <tr>
+                <th *ngFor="let field of fields " scope="col" >{{field}}</th></tr>
+              </thead>
+              <tbody>
+              <tr *ngFor="let item of message?.pda">
+                <td>{{item?.id}}</td>
+                <td>{{item?.subject_cod}}</td>
+                <td>{{item?.subject_name}}</td>
+                <td>{{item?.area_cod}}</td>
+                <td>{{item?.pda_status}}</td>
+                <td>{{item?.pda_observations}}</td>
+              </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>

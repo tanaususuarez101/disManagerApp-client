@@ -1,19 +1,44 @@
-  <h3 class="text-muted">{{title}}</h3>
-
+<h3 class="text-muted">{{title}}</h3>
 <div class="row">
-  <div class="col-2">
-    <select id="selectImport" class="custom-select" [(ngModel)]="order">
-      <option *ngFor="let order of ordenSelected"
-              [value]="order?.id"
-      >
-        {{order?.name}}
-      </option>
-    </select>
-  </div>
+  <div class="col-12">
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">Importar <i class="fa fa-upload"></i></h5>
 
-  <div class="col-10">
-    <app-load-pda *ngIf="order==='pda'" ></app-load-pda>
-    <app-load-scheme *ngIf="order==='scheme'"></app-load-scheme>
+        <h6 class="card-subtitle mb-2 text-muted">Importar Esquema</h6>
+        <p class="input-custom">
+          <app-load-scheme></app-load-scheme>
+        </p>
+        <h6 class="card-subtitle mb-2 text-muted">Importar PDA</h6>
+        <p class="input-custom">
+          <app-load-pda></app-load-pda>
+        </p>
+
+      </div>
+    </div>
+  </div>
+  <div class="col-12">
+    <div class="card">
+    <div class="card-body">
+      <h5 class="card-title">Exportar <i class="fa fa-download"></i></h5>
+      <a [href]="hrefExportDatabase" class="card-link">
+        Exportar base de datos
+      </a>
+      <a [href]="hrefBackupDatabase" class="card-link">Descargar backup</a>
+    </div>
+  </div>
+  </div>
+  <div class="col-12">
+    <div class="card border-danger">
+      <div class="card-body text-danger">
+        <h5 class="card-title">Eliminar</h5>
+        <p>
+          ¡Tenga cuidado esta acción elimina todo el contenido de la base de datos!. Antes de realizar esta acción se le
+          recomienda que haga una copia.
+        </p>
+        <button type="button" class="btn btn-link" (click)="availableDelete()">Eliminar base de datos</button>
+      </div>
+    </div>
   </div>
 </div>
-
+<app-modal-alert (request)="deleteDataBases($event)"></app-modal-alert>

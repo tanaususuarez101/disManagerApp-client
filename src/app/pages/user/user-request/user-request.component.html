@@ -72,9 +72,10 @@
         <tr *ngFor="let item of listVeniasI">
           <td>{{item?.area_name}}</td>
           <td>{{item?.area_cod}}</td>
-          <td *ngIf="item?.approved">Aprobado</td>
-          <td *ngIf="item?.rejected">Rechazado</td>
-          <td *ngIf="!item?.approved && !item?.rejected">Pendiente</td>
+
+          <td *ngIf="item.approved">Aprobado</td>
+          <td *ngIf="item.rejected">Rechazado</td>
+          <td *ngIf="!item.approved && !item.rejected">Pendiente</td>
         </tr>
         </tbody>
       </table>

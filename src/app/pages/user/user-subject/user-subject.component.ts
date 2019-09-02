@@ -3,7 +3,7 @@ import {RestService} from '../../../services/rest.service';
 import {Router} from '@angular/router';
 import {AuthenticationService} from '../../../services/authentication.service';
 import {concatAll, concatMap, map} from 'rxjs/operators';
-import { forkJoin, of } from 'rxjs';
+import {forkJoin, from, Observable, of} from 'rxjs';
 import {subscribeToObservable, subscribeToPromise} from 'rxjs/internal-compatibility';
 
 declare const $: any;
@@ -100,14 +100,18 @@ export class MySubjectComponent implements OnInit {
    * */
 
   private deleteGroup() {
-    this.loadDeleterIcon = true;
-    this.deleteBtnAvailable = false;
-    this.allSelected = false;
+    this.loadDeleterIcon = true; this.deleteBtnAvailable = false; this.allSelected = false; const listDelete = [];
     for ( const group of this.teacherGroupsConfirm) {
-      if (group.activedChanger) {
-        this.rest.deleteLoadTeacher(group.area_cod, group.subject_cod, group.group_cod).subscribe(data => this.loadData());
-      }
+      if (group.activedChanger) { listDelete.push({area_cod: group.area_cod, subject_cod: group.subject_cod, group_cod: group.group_cod}); }
     }
+    this.deleteGroupOfTeacherLoad(listDelete).subscribe(res => { this.loadData(); this.loadDeleterIcon = false });
+
+  }
+
+  deleteGroupOfTeacherLoad(dataForSend): Observable<any> {
+    return from(dataForSend).pipe(
+      concatMap(data => this.rest.deleteLoadTeacher(data['area_cod'], data['subject_cod'], data['group_cod']))
+    );
   }
 
   private updateChange() {
@@ -121,6 +125,8 @@ export class MySubjectComponent implements OnInit {
   /*
    * auxiliary function
    * */
+
+  // TODO - Susutituir lista por elementos uno a uno
 
   private confirmSelection() {
     const sendData = this.groups

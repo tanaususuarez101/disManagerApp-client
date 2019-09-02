@@ -43,6 +43,8 @@ import { RequestVeniaComponent } from './components/modal/request-venia/request-
 import { FormVenia1Component } from './components/form/form-venia1/form-venia1.component';
 import { FormVenia2Component } from './components/form/form-venia2/form-venia2.component';
 import { RequestManagerComponent } from './pages/manager/request-manager/request-manager.component';
+import { DetailsSchemeComponent } from './components/modal/details-scheme/details-scheme.component';
+import { DetailsPdaComponent } from './components/modal/details-pda/details-pda.component';
 
 @NgModule({
   declarations: [
@@ -83,6 +85,8 @@ import { RequestManagerComponent } from './pages/manager/request-manager/request
     FormVenia1Component,
     FormVenia2Component,
     RequestManagerComponent,
+    DetailsSchemeComponent,
+    DetailsPdaComponent,
   ],
   imports: [
     BrowserModule,
@@ -92,7 +96,6 @@ import { RequestManagerComponent } from './pages/manager/request-manager/request
     FormsModule,
     ReactiveFormsModule,
     AngularFontAwesomeModule
-
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {map} from 'rxjs/operators';
 import {RestService} from '../../../services/rest.service';
 import {AuthenticationService} from '../../../services/authentication.service';
+import {forkJoin} from 'rxjs';
 
 @Component({
   selector: 'app-user-request',
@@ -22,25 +23,21 @@ export class UserRequestComponent implements OnInit {
 
   ngOnInit() {
     this.user = this.auth.getUser();
-    this.loadTeacher();
-    this.loadVenias();
+
+    forkJoin(
+      this.rest.getTeacherLoad(this.user.teacher_dni).pipe(map(data => data.groups)),
+      this.rest.getVeniaType1(this.user.teacher_dni),
+      this.rest.getVeniaType2(this.user.teacher_dni)
+    ).subscribe( data => {
+      this.teacherGroupsConfirm = data[0];
+      this.listVeniasI = data[1];
+      this.listVeniasII = data[2];
+      this.calculatorHoursImpart();
+    });
   }
 
-  private loadTeacher() {
-    this.rest.getTeacherLoad(this.user.teacher_dni)
-      .pipe(map(data => data.groups))
-      .subscribe(data => {
-        this.teacherGroupsConfirm = data;
-        this.calculatorHoursImpart();
-      });
-  }
   calculatorHoursImpart() {
     this.selectedHours = 0;
     for (const group of this.teacherGroupsConfirm) { this.selectedHours += +group.assigned_hours; }
-  }
-
-  private loadVenias() {
-    this.rest.getVeniaType1(this.user.teacher_dni).subscribe(venia => this.listVeniasI = venia);
-    this.rest.getVeniaType2(this.user.teacher_dni).subscribe(venia => this.listVeniasII = venia);
   }
 }

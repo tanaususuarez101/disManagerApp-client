@@ -12,7 +12,9 @@
             <h6 class="card-subtitle mb-2 text-muted">Departamento de Informática y Sistemas</h6>
           </div>
           <div class="col-12">
-
+            <div *ngIf="loginIncorrect" class="alert alert-danger alert-dismissible fade show text-center" role="alert">
+              Usuario o contraseña incorrecto
+            </div>
             <!-- TODO - Añadir validación de formulario -->
             <form [formGroup]="loginForm" (submit)="confirmLogin()" >
 
@@ -34,7 +36,7 @@
                 >
               </div>
 
-              <button *ngIf="!activateLoad" type="submit" class="btn btn-primary btn-lg btn-block btn-sm">
+              <button *ngIf="!activateLoad" type="submit" class="btn btn-outline-primary btn-lg btn-block btn-sm">
                 Acceder
               </button>
 
@@ -43,12 +45,7 @@
                 Por favor, espere ...
               </button>
 
-              <div *ngIf="loginIncorrect" class="alert alert-danger alert-dismissible fade show text-center" role="alert">
-                Usuario o contraseña incorrecto
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                  <span aria-hidden="true">&times;</span>
-                </button>
-              </div>
+
             </form>
           </div>
         </div>
