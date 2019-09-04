@@ -31,8 +31,7 @@ import { UserTutorialComponent } from './pages/user/user-tutorial/user-tutorial.
 import { LoadSchemeComponent } from './components/form/load-scheme/load-scheme.component';
 import { UserManagerComponent } from './pages/manager/user-manager/user-manager.component';
 import { LoadPdaComponent } from './components/form/load-pda/load-pda.component';
-import { LoadDataComponent } from './pages/manager/load-data/load-data.component';
-import { LoadTeacherDataComponent } from './components/modal/load-teacher-data/load-teacher-data.component';
+import { DatabaseManagerComponent } from './pages/manager/database-manager/database-manager.component';
 import { TutorialDetailsComponent } from './pages/pdo/tutorial-details/tutorial-details.component';
 import { UserEditComponent } from './components/modal/user-edit/user-edit.component';
 import { NewUserComponent } from './components/modal/new-user/new-user.component';
@@ -45,6 +44,7 @@ import { FormVenia2Component } from './components/form/form-venia2/form-venia2.c
 import { RequestManagerComponent } from './pages/manager/request-manager/request-manager.component';
 import { DetailsSchemeComponent } from './components/modal/details-scheme/details-scheme.component';
 import { DetailsPdaComponent } from './components/modal/details-pda/details-pda.component';
+import { LoadTeacherComponent } from './components/form/load-teacher/load-teacher.component';
 
 @NgModule({
   declarations: [
@@ -73,8 +73,7 @@ import { DetailsPdaComponent } from './components/modal/details-pda/details-pda.
     LoadSchemeComponent,
     UserManagerComponent,
     LoadPdaComponent,
-    LoadDataComponent,
-    LoadTeacherDataComponent,
+    DatabaseManagerComponent,
     TutorialDetailsComponent,
     UserEditComponent,
     NewUserComponent,
@@ -87,6 +86,7 @@ import { DetailsPdaComponent } from './components/modal/details-pda/details-pda.
     RequestManagerComponent,
     DetailsSchemeComponent,
     DetailsPdaComponent,
+    LoadTeacherComponent,
   ],
   imports: [
     BrowserModule,

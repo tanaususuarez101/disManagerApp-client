@@ -1,17 +1,23 @@
 <h3 class="text-muted">{{title}}</h3>
 <div class="row">
-  <div class="col-12">
-    <div class="card">
+  <div class="col-12 ">
+    <div class="card ">
       <div class="card-body">
         <h5 class="card-title">Importar <i class="fa fa-upload"></i></h5>
 
-        <h6 class="card-subtitle mb-2 text-muted">Importar Esquema</h6>
+        <h6 class="card-subtitle mb-2 text-muted">Lista de carga docente</h6>
         <p class="input-custom">
           <app-load-scheme></app-load-scheme>
         </p>
-        <h6 class="card-subtitle mb-2 text-muted">Importar PDA</h6>
+
+        <h6 class="card-subtitle mb-2 text-muted">Lista de proyecto docente</h6>
         <p class="input-custom">
           <app-load-pda></app-load-pda>
+        </p>
+
+        <h6 class="card-subtitle mb-2 text-muted">Lista de profesores</h6>
+        <p class="input-custom">
+          <app-load-teacher></app-load-teacher>
         </p>
 
       </div>
@@ -21,10 +27,7 @@
     <div class="card">
     <div class="card-body">
       <h5 class="card-title">Exportar <i class="fa fa-download"></i></h5>
-      <a [href]="hrefExportDatabase" class="card-link">
-        Exportar base de datos
-      </a>
-      <a [href]="hrefBackupDatabase" class="card-link">Descargar backup</a>
+      <a [href]="hrefExportDatabase" class="card-link"> Exportar base de datos </a>
     </div>
   </div>
   </div>
@@ -37,6 +40,7 @@
           recomienda que haga una copia.
         </p>
         <button type="button" class="btn btn-link" (click)="availableDelete()">Eliminar base de datos</button>
+        <div id="delete-database"></div>
       </div>
     </div>
   </div>

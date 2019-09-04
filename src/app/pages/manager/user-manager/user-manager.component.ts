@@ -23,7 +23,6 @@ export class UserManagerComponent implements OnInit {
 
   ngOnInit() { this.loadList(); }
   newUser() { $('#modal-new-user').modal('show'); }
-  loadTeacherList() { $('#modal-load-teacher-list').modal('show'); }
   alertDelete() { $('#modal-alert').modal('show'); }
 
   loadList() {

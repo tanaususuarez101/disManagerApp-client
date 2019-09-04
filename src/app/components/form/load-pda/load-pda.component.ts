@@ -10,37 +10,63 @@ import {RestService} from '../../../services/rest.service';
 export class LoadPdaComponent implements OnInit {
   title = 'Carga de PDA';
   private fileToUpload: any;
-  private uploadByte = 0;
   private fileLabelName = 'Elegir lista de PDA';
 
   private activedLoad: any;
   private showDetails: any;
-  private loading: any;
 
   private message: any;
+  private progress: number;
 
   constructor(private rest: RestService) { }
 
   ngOnInit() { this.initState(); }
 
   initState() {
-    this.uploadByte = 0;
     this.activedLoad = false;
-    this.loading = true;
     this.showDetails = false;
   }
 
   ploadFileToActivity() {
+    const elemFile = document.getElementById('upload-pda');
+    const elemSaved = document.getElementById('saved-pda');
+    elemFile.innerHTML = '<p style="margin-bottom: 0">Subiendo fichero... <i class="fa fa-spinner fa-spin"></i></p>';
     this.activedLoad = true;
+
     this.rest.postLoadPda(this.fileToUpload)
       .subscribe(
         event => {
-          if (event.type === HttpEventType.UploadProgress) { Math.round(this.uploadByte = 100 * event.loaded / event.total); }
-          if (event.type === HttpEventType.Response) {this.message = event.body['message']; this.showDetails = true; }
+
+          switch (event.type) {
+
+            case HttpEventType.UploadProgress:
+              this.progress = Math.round(100 * event.loaded / event.total);
+              console.log({ status: 'progress', message: this.progress });
+
+              if (this.progress !== 100) {
+                elemFile.innerHTML = '<p style="margin: 0">Subiendo fichero... <i class="fa fa-spinner fa-spin"></i></p>';
+              } else {
+                elemFile.innerHTML = '<p style="margin: 0">Fichero subido <i style="color:green"  class="fa fa-check"></i></p>';
+                elemSaved.innerHTML = '<p style="margin: 0">Guardando datos... <i class="fa fa-spinner fa-spin"></i></p>';
+              }
+
+              break;
+
+            case HttpEventType.Response:
+              this.showDetails = true;
+              this.activedLoad = false;
+              this.message = event.body['message'];
+              elemSaved.innerHTML = '<p style="margin: 0">Datos guardados satisfactoriamente <i style="color:green"  class="fa fa-check">' +
+                '</i></p>';
+              break;
+          }
         },
-        error => { alert('ERROR al guardar'); },
-        () => { this.loading = false;  }
-        );
+        error => {
+          this.activedLoad = false;
+          elemFile.innerHTML = '<p style="margin: 0">Error al subir el fichero <i style="color:red"  class="fa fa-close"></i></p>';
+          elemSaved.innerHTML = '';
+        },
+      );
   }
 
   handleFileInput(files: FileList) {

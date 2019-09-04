@@ -17,14 +17,19 @@
 
 
 
-  <div class="row" *ngIf="activedLoad">
+  <div class="row">
     <div class="app-bar col-12">
-      <label *ngIf="loading">Subiendo fichero... <i class="fa fa-spinner fa-spin"></i></label>
-      <label *ngIf="!loading">Datos cargados satisfactoriamente <i class="fa fa-check"></i></label>
-      <div class="progress">
-        <div id="loadFile" class="progress-bar bg-info" role="progressbar" [ngStyle]="{'width.%':uploadByte}"
-             aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">{{uploadByte}}%</div>
+
+      <div class="content-message">
+        <div id="upload-pda"></div>
+        <div id="saved-pda"></div>
       </div>
+
+      <div class="progress" [hidden]="!activedLoad">
+        <div id="loadFile" class="progress-bar bg-info" role="progressbar" [ngStyle]="{'width.%': progress}"
+             aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">{{progress}}%</div>
+      </div>
+
     </div>
 
     <div class="col-12" *ngIf="showDetails">
@@ -32,7 +37,7 @@
         Detalles
       </button>
     </div>
-
   </div>
+
 </form>
 <app-details-pda [message]="message"></app-details-pda>

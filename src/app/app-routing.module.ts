@@ -29,7 +29,8 @@ import {UserTutorialComponent} from './pages/user/user-tutorial/user-tutorial.co
 import {LoadSchemeComponent} from './components/form/load-scheme/load-scheme.component';
 import {UserManagerComponent} from './pages/manager/user-manager/user-manager.component';
 import {LoadPdaComponent} from './components/form/load-pda/load-pda.component';
-import {LoadDataComponent} from './pages/manager/load-data/load-data.component';
+import {RequestManagerComponent} from './pages/manager/request-manager/request-manager.component';
+import {DatabaseManagerComponent} from './pages/manager/database-manager/database-manager.component';
 
 /**
  * PDO
@@ -43,10 +44,7 @@ import {TeacherPDAComponent} from './pages/pdo/teacher-pda/teacher-pda.component
 import {TeacherDemandDetailsComponent} from './pages/pdo/teacher-demand-details/teacher-demand-details.component';
 import {TeacherLoadDetailsComponent} from './pages/pdo/teacher-load-details/teacher-load-details.component';
 import {TutorialDetailsComponent} from './pages/pdo/tutorial-details/tutorial-details.component';
-import {RequestManagerComponent} from './pages/manager/request-manager/request-manager.component';
 
-/**
- * */
 
 
 const routes: Routes = [
@@ -67,7 +65,7 @@ const routes: Routes = [
       { path: 'teacher-load-details/:id', component: TeacherLoadDetailsComponent, canActivate: [AuthGuard]},
       { path: 'load-scheme', component: LoadSchemeComponent, canActivate: [AuthGuard]},
       { path: 'load-pda', component: LoadPdaComponent, canActivate: [AuthGuard]},
-      { path: 'load-data', component: LoadDataComponent, canActivate: [AuthGuard]},
+      { path: 'database-manager', component: DatabaseManagerComponent, canActivate: [AuthGuard]},
       { path: 'user-manager', component: UserManagerComponent, canActivate: [AuthGuard]},
       { path: 'request-manager', component: RequestManagerComponent, canActivate: [AuthGuard]},
 

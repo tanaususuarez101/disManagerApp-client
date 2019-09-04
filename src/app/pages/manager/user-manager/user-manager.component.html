@@ -10,15 +10,9 @@
 <div class="row">
   <div class="btn-group btn-group-sm" role="group">
 
-    <div class="btn-group" role="group">
-      <button id="btnGroupDrop1" type="button" class="btn btn-outline-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-        <i class='fa fa-plus'></i>Añadir
-      </button>
-      <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
-        <button class="dropdown-item btn-link" (click)="loadTeacherList()" >Lista de profesores</button>
-        <button class="dropdown-item btn-link" (click)="newUser()">Usuario</button>
-      </div>
-    </div>
+    <button type="button" class="btn btn-outline-primary" (click)="newUser()">
+      <i class="fa fa-plus"></i>Añadir
+    </button>
 
     <button type="button" class="btn btn-outline-primary" (click)="buttonEdit()" [disabled]="!valueRadioButton">
       <i class="fa fa-pencil"></i>Editar
@@ -110,4 +104,3 @@
 <app-teacher-edit [teacher]="valueRadioButton?.teacherSelected"></app-teacher-edit>
 <app-new-user></app-new-user>
 <app-modal-alert (request)="confirmDelete($event)" ></app-modal-alert>
-<app-load-teacher-data (request)="loadList()"></app-load-teacher-data>

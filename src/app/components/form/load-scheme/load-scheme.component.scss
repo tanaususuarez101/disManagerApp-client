@@ -1,11 +1,10 @@
 .custom-file-label::after { content: 'Elegir'; }
 .input-group > .custom-file { margin-right: .4rem; }
 .app-bar {
-  margin-top: 1.2rem;
-  padding-right: 1.5rem;
+  margin-top: .5rem;
   padding-left: 0;
   .bg-info { background: #466b99 !important; }
 }
-.fa-check { color: green; }
 
 .btn-padding { padding-left: 0; margin-left: -15px; }
+

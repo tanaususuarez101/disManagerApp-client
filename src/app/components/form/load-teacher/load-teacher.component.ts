@@ -1,42 +1,52 @@
-import {Component, EventEmitter, OnInit, Output} from '@angular/core';
-import {RestService} from '../../../services/rest.service';
+import { Component, OnInit } from '@angular/core';
 import {HttpEventType} from '@angular/common/http';
+import {RestService} from '../../../services/rest.service';
 
 @Component({
-  selector: 'app-load-scheme',
-  templateUrl: './load-scheme.component.html',
-  styleUrls: ['./load-scheme.component.scss']
+  selector: 'app-load-teacher',
+  templateUrl: './load-teacher.component.html',
+  styleUrls: ['./load-teacher.component.scss']
 })
-export class LoadSchemeComponent implements OnInit {
-  private fileLabelName = 'Elegir esquema';
-  private fileToUpload: any;
+export class LoadTeacherComponent implements OnInit {
+
+  private fileLabelName = 'Elegir lista de profesores';
+
+  private fileToUpload: File;
 
   private activedLoad: any;
   private showDetails: any;
 
-  private message: any;
-  private progress: number;
-
+  private message = '';
+  private progress: any;
 
   constructor(private rest: RestService) { }
 
-  ngOnInit() {
-    this.initState();
-  }
+  ngOnInit() { this.initState(); }
 
   initState() {
     this.activedLoad = false;
     this.showDetails = false;
   }
 
+  handleFileInput(files: FileList) {
+    this.fileToUpload = files.item(0);
+    if (this.fileToUpload != null) {
+      document.getElementById('fileTeacher').innerHTML = this.fileToUpload['name'];
+    } else {
+      document.getElementById('fileTeacher').innerHTML = this.fileLabelName;
+      this.activedLoad = false;
+      console.log(this.activedLoad);
+    }
+  }
+
   ploadFileToActivity() {
-    const elemFile = document.getElementById('upload-file');
-    const elemSaved = document.getElementById('saved-file');
+    const elemFile = document.getElementById('upload-teacher');
+    const elemSaved = document.getElementById('saved-teacher');
+
     elemFile.innerHTML = '<p style="margin-bottom: 0">Subiendo fichero... <i class="fa fa-spinner fa-spin"></i></p>';
     this.activedLoad = true;
 
-    this.rest
-      .postLoadScheme(this.fileToUpload)
+    this.rest.postListTeacher(this.fileToUpload)
       .subscribe(
         event => {
 
@@ -63,24 +73,12 @@ export class LoadSchemeComponent implements OnInit {
                 '</i></p>';
               break;
           }
-          },
+        },
         error => {
           this.activedLoad = false;
           elemFile.innerHTML = '<p style="margin: 0">Error al subir el fichero <i style="color:red"  class="fa fa-close"></i></p>';
           elemSaved.innerHTML = '';
-          },
-        );
+        },
+      );
   }
-
-  handleFileInput(files: FileList) {
-
-    this.fileToUpload = files.item(0);
-    if (this.fileToUpload != null ) {
-      document.getElementById('fileLabel').innerHTML = this.fileToUpload.name;
-    } else {
-      document.getElementById('fileLabel').innerHTML = this.fileLabelName;
-      this.initState();
-    }
-  }
-
 }
