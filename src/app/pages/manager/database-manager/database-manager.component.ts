@@ -29,8 +29,12 @@ export class DatabaseManagerComponent implements OnInit {
     messageDataBase.innerHTML = '<p style="color: #212529">Eliminando todo el contenido... <i class="fa fa-spinner fa-spin"></i></p>';
     this.rest.deleteScheme()
       .subscribe(
-        res => messageDataBase.innerHTML = '<p style="color: #212529">Datos eliminados satisfactoriamente <i style="color:green"  class="fa fa-check"></i></p>',
-        err => '<p style="color: #212529">Hubo algún error<i style="color:red"  class="fa fa-close"></i></p>');
+        res => {
+          messageDataBase.innerHTML = '<p style="color: #212529">Datos eliminados satisfactoriamente <i style="color:green"  class="fa fa-check"></i></p>';
+        },
+        err => {
+          messageDataBase.innerHTML = '<p style="color: #212529">Hubo algún error<i style="color:red"  class="fa fa-close"></i></p>';
+        });
   }
 
 }

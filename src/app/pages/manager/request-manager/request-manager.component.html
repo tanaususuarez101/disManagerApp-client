@@ -91,7 +91,6 @@
           <tr *ngFor="let item of listVeniasI">
             <td>
               <input type="checkbox"
-                     class="form-control"
                      name="radioVenia11"
                      [(ngModel)]="item.activedChanger"
                      (change)="changeCheckboxVenia1($event)"
@@ -137,7 +136,7 @@
         <tbody>
           <tr *ngFor="let item of listVeniasII">
             <td>
-              <input type="checkbox" class="form-control" name="radioVenia2"
+              <input type="checkbox" name="radioVenia2"
                      [(ngModel)]="item.activedChanger"
                      (change)="changeCheckboxVenia2($event)"
               >

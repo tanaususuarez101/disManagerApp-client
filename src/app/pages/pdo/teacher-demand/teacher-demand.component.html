@@ -12,28 +12,32 @@
   </div>
 </div>
 
-
 <div class="row">
   <div class="col">
     <div class="form-group" >
-    <div class="custom-control custom-radio custom-control-inline">
-      <input type="radio" id="customRadioInline1" class="custom-control-input"
-             [(ngModel)]="filterOption" value="full" [checked]="true">
-      <label class="custom-control-label" for="customRadioInline1">Todas</label>
+      <div class="custom-control custom-radio custom-control-inline">
+        <input type="radio" id="customRadioInline1" class="custom-control-input"
+               [(ngModel)]="filterOption" value="full" [checked]="true">
+        <label class="custom-control-label" for="customRadioInline1">Todas</label>
+      </div>
+      <div class="custom-control custom-radio custom-control-inline">
+        <input type="radio" id="customRadioInline2" class="custom-control-input"
+               [(ngModel)]="filterOption" value="notfull">
+        <label class="custom-control-label" for="customRadioInline2">Solo horas sin cubir</label>
+      </div>
     </div>
-    <div class="custom-control custom-radio custom-control-inline">
-      <input type="radio" id="customRadioInline2" class="custom-control-input"
-             [(ngModel)]="filterOption" value="notfull">
-      <label class="custom-control-label" for="customRadioInline2">Solo horas sin cubir</label>
-    </div>
-  </div>
   </div>
 </div>
+
+
+
+
+
 
 <div class="row">
   <div class="col">
     <div class="tableFixHead">
-    <table class="table table-striped ">
+    <table class="table table-hover">
     <thead>
     <tr class="content-align">
       <th *ngFor="let field of fields" scope="col" class="content-vertical">{{field}}</th>
@@ -42,8 +46,7 @@
     <tbody>
 
     <tr *ngFor="let item of teacherDemands | searchFilter: filterSubject | hoursFilter: filterOption"
-        routerLink="/dashboard/teacher-demand-details/{{item?.area_cod}}/{{item?.subject_cod}}/{{item?.group_cod}}"
-        class="select-row content-align">
+        routerLink="/dashboard/teacher-demand-details/{{item?.area_cod}}/{{item?.subject_cod}}/{{item?.group_cod}}" >
       <td>{{item?.university_name}}</td>
       <td>{{item?.area_name}}</td>
       <td>{{item?.subject_name}}</td>
