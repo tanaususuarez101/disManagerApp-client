@@ -1,90 +1,91 @@
-<div class="title">
-  <h3 class="text-muted">{{title}}</h3>
-</div>
+<h3 class="text-muted">{{title}}</h3>
 
 <!-- TODO - AÑADIR VALIDACIÓN DE FORMULARIOS -->
 
+<div class="btn-group btn-group-sm" role="group">
 
-<div class="row">
-  <div class="btn-group btn-group-sm" role="group">
+  <button type="button" class="btn btn-outline-primary" (click)="newUser()">
+    <i class="fa fa-plus"></i>Añadir
+  </button>
 
-    <button type="button" class="btn btn-outline-primary" (click)="newUser()">
-      <i class="fa fa-plus"></i>Añadir
-    </button>
+  <button type="button" class="btn btn-outline-primary" (click)="buttonEdit()" [disabled]="!valueRadioButton">
+    <i class="fa fa-pencil"></i>Editar
+  </button>
 
-    <button type="button" class="btn btn-outline-primary" (click)="buttonEdit()" [disabled]="!valueRadioButton">
-      <i class="fa fa-pencil"></i>Editar
-    </button>
+  <button type="button" class="btn btn-outline-primary" (click)="alertDelete()" [disabled]="!valueRadioButton">
+    <i class="fa fa-trash"></i>Eliminar
+  </button>
 
-    <button type="button" class="btn btn-outline-primary" (click)="alertDelete()" [disabled]="!valueRadioButton">
-      <i class="fa fa-trash"></i>Eliminar
-    </button>
-
-    <button type="button" class="btn btn-outline-primary" (click)="update()">
-      <i class="fa fa-refresh"></i>
-      Actualizar
-    </button>
-
-  </div>
-
+  <button type="button" class="btn btn-outline-primary" (click)="update()">
+    <i class="fa fa-refresh"></i>
+    Actualizar
+  </button>
 
 </div>
+<div class="card">
+  <div class="card-body">
+    <div class="row">
+      <div class="col-12">
+        <h4 class="float-left"><em>Usuarios</em></h4>
+      </div>
 
-<hr class="separation">
+      <div class="col-12">
+        <div class="tableFixHead">
+          <table class="table table-striped table-hover">
+            <thead>
+            <tr class="content-align">
+              <th></th>
+              <th *ngFor="let field of tableUserHeader" scope="col" class="align-middle">{{field}}</th>
+            </tr>
+            </thead>
 
-<div class="row">
-    <div class="col-12">
-      <h4 class="float-left"><em>Usuarios</em></h4>
-    </div>
+            <tbody>
+            <tr *ngFor="let user of tableUser">
+              <td><input type="radio" name="buttonEdit" [value]="{userSelected: user}" [(ngModel)]="valueRadioButton" ></td>
+              <td class="align-middle">{{user?.username}}</td>
+              <td class="align-middle" *ngIf="user.isAdmin">Sí</td>
+              <td class="align-middle" *ngIf="!user.isAdmin">No</td>
+              <td class="align-middle">{{user?.teacher_name}} {{user?.teacher_surnames}}</td>
+            </tr>
+            </tbody>
 
-    <div class="col-12 tableFixHead">
-      <table class="table table-hover">
-        <thead>
-          <tr class="content-align">
-            <th></th>
-            <th *ngFor="let field of tableUserHeader" scope="col" class="align-middle">{{field}}</th>
-          </tr>
-        </thead>
-
-        <tbody>
-        <tr *ngFor="let user of tableUser">
-          <td><input type="radio" name="buttonEdit" [value]="{userSelected: user}" [(ngModel)]="valueRadioButton" ></td>
-          <td class="align-middle">{{user?.username}}</td>
-          <td class="align-middle" *ngIf="user.isAdmin">Sí</td>
-          <td class="align-middle" *ngIf="!user.isAdmin">No</td>
-          <td class="align-middle">{{user?.teacher_name}} {{user?.teacher_surnames}}</td>
-        </tr>
-        </tbody>
-
-      </table>
+          </table>
+        </div>
+      </div>
     </div>
   </div>
+</div>
 
 
-  <div class="col-12">
-
+<div class="card">
+  <div class="card-body">
     <div class="row">
-      <h4 class="float-left"><em>Profesores</em></h4>
+      <div class="col-12">
+        <h4 class="float-left"><em>Profesores</em></h4>
+      </div>
+      <div class="col-12">
+        <div class="tableFixHead">
+          <table class="table table-striped table-hover">
+            <thead>
+            <tr class="content-align">
+              <th></th>
+              <th *ngFor="let field of tableTeacherHeader" scope="col" class="align-middle">{{field}}</th>
+            </tr>
+            </thead>
+
+            <tbody>
+            <tr *ngFor="let teacher of teacherList">
+              <td><input type="radio" name="buttonEdit" [value]="{teacherSelected: teacher}" [(ngModel)]="valueRadioButton" ></td>
+              <td class="align-middle">{{teacher?.teacher_dni}}</td>
+              <td class="align-middle">{{teacher?.teacher_name}}</td>
+              <td class="align-middle">{{teacher?.teacher_surnames}}</td>
+            </tr>
+            </tbody>
+
+          </table>
+        </div>
+      </div>
     </div>
-    <div class="row tableFixHead">
-      <table class="table table-hover">
-        <thead>
-        <tr class="content-align">
-          <th></th>
-          <th *ngFor="let field of tableTeacherHeader" scope="col" class="align-middle">{{field}}</th>
-        </tr>
-        </thead>
-
-        <tbody>
-        <tr *ngFor="let teacher of teacherList">
-          <td><input type="radio" name="buttonEdit" [value]="{teacherSelected: teacher}" [(ngModel)]="valueRadioButton" ></td>
-          <td class="align-middle">{{teacher?.teacher_dni}}</td>
-          <td class="align-middle">{{teacher?.teacher_name}}</td>
-          <td class="align-middle">{{teacher?.teacher_surnames}}</td>
-        </tr>
-        </tbody>
-
-      </table>
   </div>
 </div>
 
@@ -96,6 +97,6 @@
 -->
 
 <app-user-edit [user]="valueRadioButton?.userSelected" [teacherList]="availableTeacherList" (request)="loadList()"></app-user-edit>
-<app-teacher-edit [teacher]="valueRadioButton?.teacherSelected"></app-teacher-edit>
+<app-teacher-edit [teacher]="valueRadioButton?.teacherSelected" (request)="loadList()"></app-teacher-edit>
 <app-new-user></app-new-user>
 <app-modal-alert (request)="confirmDelete($event)" ></app-modal-alert>

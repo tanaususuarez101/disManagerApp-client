@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {FormBuilder} from '@angular/forms';
 import {RestService} from '../../../services/rest.service';
+import {forkJoin} from 'rxjs';
 
 declare const $: any;
 
@@ -28,20 +29,23 @@ export class UserManagerComponent implements OnInit {
   loadList() {
     this.valueRadioButton = null;
 
-    this.rest.getListUser().subscribe(users => {
-      this.tableUser = users;
-      this.rest.getListTeacher().subscribe(teachers => {
-        this.teacherList = teachers;
-        this.availableTeacherList = this.teacherList.filter(value => {
-          for (let user of users) { if (user.teacher_dni === value.teacher_dni) return false; }
-          return true;
-        });
+    forkJoin(
+      this.rest.getListUser(),
+      this.rest.getListTeacher()
+    )
+    .subscribe( res => {
+      this.tableUser = res[0];
+      this.teacherList = res[1];
+      // Available teacher list to be used in element text select "user edit"
+      this.availableTeacherList = this.teacherList.filter(value => {
+        for (const user of res[0]) { if (user.teacher_dni === value.teacher_dni) { return false; } }
+        return true;
       });
     });
   }
 
   buttonEdit() {
-    if (this.valueRadioButton == null) return;
+    if (this.valueRadioButton == null) { return; }
     if (this.valueRadioButton.teacherSelected != null) { $('#modal-teacher-edit').modal('show'); } else
     if (this.valueRadioButton.userSelected != null) { $('#modal-user-edit').modal('show'); }
   }

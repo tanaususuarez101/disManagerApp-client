@@ -45,6 +45,7 @@ import { RequestManagerComponent } from './pages/manager/request-manager/request
 import { DetailsSchemeComponent } from './components/modal/details-scheme/details-scheme.component';
 import { DetailsPdaComponent } from './components/modal/details-pda/details-pda.component';
 import { LoadTeacherComponent } from './components/form/load-teacher/load-teacher.component';
+import { SidebarComponent } from './components/common/sidebar/sidebar.component';
 
 @NgModule({
   declarations: [
@@ -87,6 +88,7 @@ import { LoadTeacherComponent } from './components/form/load-teacher/load-teache
     DetailsSchemeComponent,
     DetailsPdaComponent,
     LoadTeacherComponent,
+    SidebarComponent,
   ],
   imports: [
     BrowserModule,

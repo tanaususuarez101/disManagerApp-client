@@ -1,14 +1,18 @@
+
 .fa-power-off {
   font-size: 1.4rem;
-  margin: .2rem 0.5rem 1.7rem 0.5rem;
-  padding: .3rem .5rem .3rem .5rem !important;
-  box-shadow: 1px 3px 10px 1px rgba(0,0,0,0.75);
-  border-radius: 0.3rem;
+  //margin: .2rem 0.5rem 1.7rem 0.5rem;
+  //padding: .3rem .5rem .3rem .5rem !important;
+  //box-shadow: 1px 3px 10px 1px rgba(0,0,0,0.75);
   color: lightgrey;
   border-color: lightgrey;
 }
 .fa-power-off:hover {
   cursor: pointer;
   color: #002e67;
-  box-shadow: 1px 3px 10px 1px rgba(0,46,103,1);
+  //box-shadow: 1px 3px 10px 1px rgba(0,46,103,1);
+}
+
+.modal .modal-backdrop {
+  z-index: 8 !important;
 }

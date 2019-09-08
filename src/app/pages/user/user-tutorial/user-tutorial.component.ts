@@ -15,8 +15,8 @@ export class UserTutorialComponent implements OnInit {
   user: any;
   //fieldDay = ['Días', 'Horas'];
   fieldDay = ['Días', 'Horas'];
-  selected: any;
   hoursOption = ['-', '08:30 - 10:30', '10:30 - 12:30', '12:30 - 14:30'];
+  selected: any;
   formTutorial = {
     first_semester : {
       monday: [],
@@ -42,6 +42,7 @@ export class UserTutorialComponent implements OnInit {
     this.getServiceTutorial();
     this.incrementHours();
     this.user = this.auth.getUser();
+
   }
 
 

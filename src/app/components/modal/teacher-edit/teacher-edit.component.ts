@@ -25,8 +25,8 @@ export class TeacherEditComponent implements OnInit, OnChanges {
   }
 
   private initTeacher() {
-    if (!this.teacher) this.teacher = {teacher_dni: '', teacher_name: '', teacher_surnames: '', teacher_potential: '', tutorial_hours: '',
-    area_cod: ''};
+    if (!this.teacher) { this.teacher = {teacher_dni: '', teacher_name: '', teacher_surnames: '', teacher_potential: '', tutorial_hours: '',
+    area_cod: ''}; }
   }
 
   updateTeacher() {
@@ -36,7 +36,11 @@ export class TeacherEditComponent implements OnInit, OnChanges {
           data => {
             $('#modal-teacher-edit').modal('hide');
             this.request.emit(true);
-          },err => alert('Error al guardar usuario'));
+          },
+          err => {
+            alert('Error al guardar usuario' + err.message);
+          }
+        );
     }
   }
 }

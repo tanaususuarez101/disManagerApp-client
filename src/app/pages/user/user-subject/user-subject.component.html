@@ -2,26 +2,23 @@
 
 <app-request-venia></app-request-venia>
 
-<div class="row">
-  <div class="btn-group btn-group-sm" role="group">
-    <button type="button" class="btn btn-outline-primary" (click)="updateChange()">
-      <i *ngIf="!loadSaveIcon" class="fa fa-save"></i>
-      <i *ngIf="loadSaveIcon" class="fa fa-spinner fa-spin" ></i>
-      Guardar
-    </button>
-    <button type="button" class="btn btn-outline-primary" (click)="deleteGroup()" [disabled]="!deleteBtnAvailable">
-      <i *ngIf="!loadDeleterIcon" class="fa fa-trash" ></i>
-      <i *ngIf="loadDeleterIcon" class="fa fa-spinner fa-spin" ></i>
-      Eliminar
-    </button>
-    <button type="button" class="btn btn-outline-primary" (click)="requestVenia()">
-      <i class="fa fa-inbox" ></i>
-      Solicitar Venias
-    </button>
-  </div>
+<div class="btn-group btn-group-sm" role="group">
+  <button type="button" class="btn btn-outline-primary" (click)="updateChange()">
+    <i *ngIf="!loadSaveIcon" class="fa fa-save"></i>
+    <i *ngIf="loadSaveIcon" class="fa fa-spinner fa-spin" ></i>
+    Guardar
+  </button>
+  <button type="button" class="btn btn-outline-primary" (click)="deleteGroup()" [disabled]="!deleteBtnAvailable">
+    <i *ngIf="!loadDeleterIcon" class="fa fa-trash" ></i>
+    <i *ngIf="loadDeleterIcon" class="fa fa-spinner fa-spin" ></i>
+    Eliminar
+  </button>
+  <button type="button" class="btn btn-outline-primary" (click)="requestVenia()">
+    <i class="fa fa-inbox" ></i>
+    Solicitar Venias
+  </button>
 </div>
 
-<hr class="separation">
 
 <div class="row">
   <div class="col-lg-6">
@@ -34,21 +31,18 @@
       </div>
     </div>
   </div>
-
 </div>
 
-<div class="row" *ngIf="teacherGroupsConfirm.length == 0">
-  <div class="alert alert-warning" role="alert">
-    <p>
-      <strong>CUIDADO!</strong>
-      Aún no tienes seleccionadas ningun número de horas de impartición. Por favor, seleccione el grupo y el número de horas que desea impartir en
-      la tabla que se encuentra de más bajo.
-    </p>
-  </div>
-  <hr class="separation">
+<div class="alert alert-warning" role="alert" *ngIf="teacherGroupsConfirm.length == 0">
+  <p>
+    <strong>CUIDADO!</strong>
+    Aún no tienes seleccionadas ningun número de horas de impartición. Por favor, seleccione el grupo y el número de horas que desea impartir en
+    la tabla que se encuentra de más bajo.
+  </p>
 </div>
 
 <div class="row" *ngIf="teacherGroupsConfirm.length > 0">
+  <div class="col-12">
     <div class="tableFixHead">
       <table class="table table-striped ">
         <thead>
@@ -102,51 +96,56 @@
         </tbody>
       </table>
     </div>
+  </div>
 </div>
 
 <div class="row">
+  <div class="col-12">
     <h4 class="float-left"><em>Carga docente disponible</em></h4>
+  </div>
 </div>
 
 <div class="row">
+  <div class="col-12">
     <div class="tableFixHead">
       <table class="table table-striped ">
 
         <thead>
-          <tr class="content-align">
-            <th *ngFor="let field of fieldsAvailable" scope="col" >{{field}}</th>
-          </tr>
+        <tr class="content-align">
+          <th *ngFor="let field of fieldsAvailable" scope="col" >{{field}}</th>
+        </tr>
         </thead>
 
         <tbody>
-          <tr *ngFor="let item of groups | ordenBySubject">
-            <td class="align-middle">{{item?.university_name}}</td>
-            <td class="align-middle">{{item?.area_name}}</td>
-            <td class="align-middle">{{item?.subject_name}}</td>
-            <td class="align-middle">{{item?.subject_course}}</td>
-            <td class="align-middle">{{item?.subject_semester}}</td>
-            <td class="align-middle">{{item?.group_cod}}</td>
-            <td class="align-middle">{{item?.group_type}}</td>
-            <td class="align-middle">{{item?.group_hours}}</td>
-            <td class="align-middle"
+        <tr *ngFor="let item of groups | ordenBySubject">
+          <td class="align-middle">{{item?.university_name}}</td>
+          <td class="align-middle">{{item?.area_name}}</td>
+          <td class="align-middle">{{item?.subject_name}}</td>
+          <td class="align-middle">{{item?.subject_course}}</td>
+          <td class="align-middle">{{item?.subject_semester}}</td>
+          <td class="align-middle">{{item?.group_cod}}</td>
+          <td class="align-middle">{{item?.group_type}}</td>
+          <td class="align-middle">{{item?.group_hours}}</td>
+          <td class="align-middle"
               [ngClass]="{
               'p-3 mb-2 bg-danger text-white': item?.cover_hours_provitional < 0,
               'p-3 mb-2 bg-success text-white': item?.cover_hours_provitional == 0,
               'p-3 mb-2 bg-warning text-dark': item?.cover_hours_provitional > 0
               }"
-            >{{item?.cover_hours_provitional}}</td>
-            <td class="align-middle">
-              <input type="number" class="form-control"
-                       step='1'
-                       value="{{item?.impart_hours}}" min="0" max="{{item?.group_hours}}"
-                       [(ngModel)]="item.impart_hours"
-                       (change)="clickChanger($event.target)">
-            </td>
-          </tr>
+          >{{item?.cover_hours_provitional}}</td>
+          <td class="align-middle">
+            <input type="number" class="form-control"
+                   step='1'
+                   value="{{item?.impart_hours}}" min="0" max="{{item?.group_hours}}"
+                   [(ngModel)]="item.impart_hours"
+                   (change)="clickChanger($event.target)">
+          </td>
+        </tr>
         </tbody>
 
       </table>
     </div>
+  </div>
 </div>
 
 

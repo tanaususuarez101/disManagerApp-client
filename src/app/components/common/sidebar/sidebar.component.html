@@ -1,0 +1,76 @@
+<nav class="sidebar">
+  <div class="sidebar-header">
+    <div class="row ">
+      <div class="col-6"><h3>Curso 2019/2020</h3></div>
+      <div class="col-6 logout">
+        <i class="fa fa-power-off" (click)="logout()"></i>
+
+      </div>
+    </div>
+  </div>
+
+  <div class="sidebar-body">
+    <ul id="accordion" class="list-group list-group-flush">
+      <li class="list-group-item">
+        <a href="#userSubMenu" data-toggle="collapse"  data-parent="#accordion" data-target="#userSubMenu" aria-expanded="true">
+          <i class="fa fa-user"></i>
+          Mi cuenta
+        </a>
+        <div id="userSubMenu" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
+          <ul class="list-group list-group-flush" >
+            <li routerLink="/dashboard/profile"
+                class="list-group-item app-list"
+                routerLinkActive="router-link-active"
+                (click)="closeSidebar()"
+            >
+              <a class="">Perfil</a>
+            </li>
+
+            <ng-container *ngIf="user?.teacher_dni">
+              <li *ngFor="let link of userlink" routerLink="{{link.path}}"
+                  class="list-group-item app-list"
+                  routerLinkActive="router-link-active"
+                  (click)="closeSidebar()"
+              >
+                <a class="">{{link.name}}</a>
+              </li>
+            </ng-container>
+          </ul>
+        </div>
+      </li>
+
+      <li class="list-group-item" *ngIf="user?.isAdmin">
+        <a href="#managerSubMenu" data-toggle="collapse"  data-parent="#accordion" data-target="#managerSubMenu" aria-expanded="true">
+          <i class="fa fa-database"></i> Administración</a>
+        <div id="managerSubMenu" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
+          <ul class="list-group list-group-flush" >
+            <li *ngFor="let link of adminlink" routerLink="{{link.path}}"
+                (click)="closeSidebar()"
+                class="list-group-item app-list"
+                routerLinkActive="router-link-active">
+              <a class="">{{link.name}}</a>
+            </li>
+          </ul>
+        </div>
+      </li>
+
+      <li class="list-group-item">
+        <a href="#pdaSubMenu" data-toggle="collapse"  data-parent="#accordion" data-target="#pdaSubMenu" aria-expanded="true">
+          <i class="fa fa-bars"></i>
+          PDO
+        </a>
+        <div id="pdaSubMenu"  class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
+          <ul class="list-group list-group-flush">
+            <li *ngFor="let link of PDOlink" routerLink="{{link.path}}"
+                (click)="closeSidebar()"
+                routerLinkActive="router-link-active"
+                class="list-group-item app-list" >
+              <a class="">{{link.name}}</a>
+            </li>
+          </ul>
+        </div>
+      </li>
+    </ul>
+  </div>
+</nav>
+

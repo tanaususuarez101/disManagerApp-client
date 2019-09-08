@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
+declare const $: any;
+
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
@@ -12,4 +14,9 @@ export class HeaderComponent implements OnInit {
   ngOnInit() {
   }
 
+
+  activeSideBar() {
+    $('#dashboard-sidebar').toggleClass('active');
+    $('#overlay').toggleClass('active');
+  }
 }

@@ -9,23 +9,18 @@
   </div>
 </div>
 
-
-<div class="row" *ngIf="teacherGroupsConfirm.length == 0">
-  <div class="alert alert-warning" role="alert">
-    <p>
-      <strong>CUIDADO!</strong>
-      Aún no tienes seleccionadas ningun número de horas de impartición. Por favor, seleccione el grupo y el número de horas que desea impartir en
-      la tabla que se encuentra de más bajo.
-    </p>
-  </div>
-  <hr class="separation">
+<div class="alert alert-warning" role="alert" *ngIf="teacherGroupsConfirm.length == 0">
+  <p>
+    <strong>CUIDADO!</strong>
+    Aún no tienes seleccionadas ningun número de horas de impartición. Por favor, seleccione el grupo y el número de horas que desea impartir en
+    la tabla que se encuentra de más bajo.
+  </p>
 </div>
 
 <div class="row" *ngIf="teacherGroupsConfirm.length > 0">
 
   <div class="col">
-
-    <div class="row tableFixHead">
+    <div class="tableFixHead">
       <table class="table table-striped ">
         <thead>
         <tr class="content-align">
@@ -49,8 +44,8 @@
         </tbody>
       </table>
     </div>
-
   </div>
+
 </div>
 
 <div class="row" *ngIf="listVeniasI.length > 0">
@@ -60,8 +55,8 @@
 </div>
 
 <div class="row" *ngIf="listVeniasI.length > 0">
-  <div class="col">
-    <div class="row tableFixHead" >
+  <div class="col-12">
+    <div class="tableFixHead" >
       <table class="table table-striped ">
         <thead>
         <tr class="content-align">
@@ -91,8 +86,8 @@
 
 <div class="row" *ngIf="listVeniasII.length > 0">
 
-  <div class="col">
-    <div class="row tableFixHead">
+  <div class="col-12">
+    <div class="tableFixHead">
       <table class="table table-striped ">
         <thead>
         <tr class="content-align">

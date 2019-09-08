@@ -1,8 +1,13 @@
-
-h3 { text-align: right; margin-bottom: 1.7rem; margin-top: 0.2rem; }
 .input-group-text,
 .form-control { background: white; border: none; border-radius: 0 !important; }
-.input-group { margin-top: .5rem; border: 1px solid lightgrey; border-radius: .1rem}
+.input-group { border-bottom: 1px solid lightgrey; border-radius: .1rem}
 .tableFixHead { font-size: .8em; max-height: 35rem !important; }
-.card { margin-bottom: 1rem; }
 .cursor-pointer { cursor: pointer; }
+
+.content-filter-radio {
+
+  display: inline-flex;
+  .fieldset-title { font-size: 1rem; font-weight: 400; }
+  .content-radio { margin-right: 15px; }
+}
+.card { margin-bottom: 1rem; }

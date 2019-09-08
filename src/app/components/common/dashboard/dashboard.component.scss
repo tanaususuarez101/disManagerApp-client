@@ -1,5 +1,70 @@
-.app-container {
-  margin: 114px 15px 0 15px;
+$text-muted: #6C757D;
+$siderbar-primary: #eeeeee;
+$siderbar-secondary: white;
+
+.wrapper {
+  display: flex;
+}
+
+#dashboard-header {
+  position: fixed;
+  z-index: 10;
+
+  top: 0;
+  left: 0;
+  right: 0;
+}
+
+#dashboard-sidebar {
+  position: fixed;
+  z-index: 10;
+
+  width: 220px;
+  height: 100vh;
+
+  margin-top: 4.5rem;
+  border-right: 1px solid $siderbar-primary;
 
 }
 
+#dashboard-content {
+  position: relative;
+  padding-left: 220px;
+
+  width: 100%;
+
+  margin-top: 5rem;
+  margin-right: 1.2rem;
+  margin-left: 1.2rem;
+}
+
+#overlay {
+  display: none;
+  opacity: 1;
+  position: fixed;
+
+  width: 100vw;
+  height: 100vh;
+
+  background: rgba(0, 0, 0, 0.7);
+
+  z-index: 0;
+}
+
+#overlay,
+#dashboard-sidebar
+{
+  transition: all 0.5s ease-in-out;
+  -moz-transition: all .5s ease-in-out;
+}
+
+@media screen and (max-width: 768px) {
+
+  #dashboard-sidebar { margin-left: -220px; }
+
+  #dashboard-sidebar.active { margin-left: 0; }
+
+  #overlay.active { display: block; opacity: 1; }
+
+  #dashboard-content { position: relative; padding-left: 0; }
+}

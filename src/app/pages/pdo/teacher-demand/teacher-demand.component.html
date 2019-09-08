@@ -1,7 +1,10 @@
 <h3 class="text-muted">{{title}}</h3>
 
-<div class="row">
-  <div class="col">
+
+<div class="card">
+  <div class="card-body">
+
+
     <div class="input-group mb-3">
       <div class="input-group-prepend">
         <span class="input-group-text" id="basic-addon1"><i class="fa fa-search"></i></span>
@@ -9,31 +12,46 @@
       <input type="text" class="form-control" placeholder="Buscar asignatura o titulación..."
              [(ngModel)]="filterSubject">
     </div>
-  </div>
-</div>
 
-<div class="row">
-  <div class="col">
-    <div class="form-group" >
-      <div class="custom-control custom-radio custom-control-inline">
-        <input type="radio" id="customRadioInline1" class="custom-control-input"
-               [(ngModel)]="filterOption" value="full" [checked]="true">
-        <label class="custom-control-label" for="customRadioInline1">Todas</label>
+    <div class="content-filter-radio">
+
+      <div class="content-radio">
+          <h4 class="fieldset-title">Horas</h4>
+
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="checkbox" id="radioHours1" value="full" name="radioHours">
+            <label class="form-check-label" for="radioHours1">Sin cubir</label>
+          </div>
+
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="checkbox" id="radioHours2" value="notfull" name="radioHours">
+            <label class="form-check-label" for="radioHours2">Excedidas</label>
+          </div>
       </div>
-      <div class="custom-control custom-radio custom-control-inline">
-        <input type="radio" id="customRadioInline2" class="custom-control-input"
-               [(ngModel)]="filterOption" value="notfull">
-        <label class="custom-control-label" for="customRadioInline2">Solo horas sin cubir</label>
+
+      <div class="content-radio">
+          <h4 class="fieldset-title" >Área de conocimiento</h4>
+
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="checkbox" id="radioArea1" value="full" name="radioHours" [checked]="true">
+            <label class="form-check-label" for="radioArea1">Arq. y tec. de Computadores</label>
+          </div>
+
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="checkbox" id="radioArea2" value="notfull" name="radioHours">
+            <label class="form-check-label" for="radioArea2">Ciencia de la Comp. e Intel. Artificial</label>
+          </div>
+
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="checkbox" id="radioArea3" value="notfull" name="radioHours">
+            <label class="form-check-label" for="radioArea3">Len. y sis. Informáticos</label>
+          </div>
       </div>
+
     </div>
+
   </div>
 </div>
-
-
-
-
-
-
 <div class="row">
   <div class="col">
     <div class="tableFixHead">

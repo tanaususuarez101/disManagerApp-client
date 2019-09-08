@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnChanges, OnInit} from '@angular/core';
 import {AuthenticationService} from '../../../services/authentication.service';
 import {Router} from '@angular/router';
 
@@ -11,12 +11,17 @@ declare const $: any;
 })
 export class LogOutComponent implements OnInit {
 
-  constructor(private auth: AuthenticationService, private router: Router) { }
+  constructor(private auth: AuthenticationService, private router: Router) {
+  }
 
-  ngOnInit() {}
+  ngOnInit() {
+
+  }
+
   acceptModal() {
     $('#session-logout').modal('hide');
     this.auth.logout();
     this.router.navigate(['/login']);
   }
+
 }
