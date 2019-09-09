@@ -1,58 +1,63 @@
-  <div class="row content-login ">
-    <div class="col-md-6 col-lg-8 background-ulpgc">
-      <img src="assets/img/logo_ulpgc_inline_white.png">
-    </div>
+<div class="row content-login ">
+  <div class="col-md-6 col-lg-8 background-ulpgc">
+    <img src="assets/img/logo_ulpgc_inline_white.png">
+  </div>
 
-    <div class="col-md-6 col-lg-4">
+  <div class="col-md-6 col-lg-4">
+    <div class="container">
+      <div class="row margin-top">
 
-      <div class="container">
-        <div class="row margin-top">
-          <div class="col-12">
-            <h4>Gestión docente </h4>
-            <h6 class="card-subtitle mb-2 text-muted">Departamento de Informática y Sistemas</h6>
+        <div class="col-12">
+          <h4>Gestión docente </h4>
+          <h6 class="card-subtitle mb-2 text-muted">Departamento de Informática y Sistemas</h6>
+        </div>
+
+        <div class="col-12">
+          <div *ngIf="alert.loginIncorrect" class="alert alert-danger alert-dismissible fade show text-center" role="alert">
+            Usuario o contraseña incorrecto
           </div>
-          <div class="col-12">
-            <div *ngIf="loginIncorrect" class="alert alert-danger alert-dismissible fade show text-center" role="alert">
-              Usuario o contraseña incorrecto
+          <!-- TODO - Añadir validación de formulario -->
+          <form [formGroup]="loginForm" (submit)="confirmLogin()" >
+
+            <div class="input-group">
+              <div class="input-group-prepend">
+                <span class="input-group-text" id="usuarioInputIcon"><i class="fa fa-user"></i></span>
+              </div>
+              <input type="text" class="form-control" id="usuarioInput" placeholder="Usuario" formControlName="username"
+                     required autofocus >
             </div>
-            <!-- TODO - Añadir validación de formulario -->
-            <form [formGroup]="loginForm" (submit)="confirmLogin()" >
+            <div *ngIf="submitted && f.username?.errors" class="invalid-feedback">
+              Introduzca un nombre de usuario
+            </div>
 
-              <div class="input-group">
-                <div class="input-group-prepend">
-                  <span class="input-group-text" id="usuarioInputIcon"><i class="fa fa-user"></i></span>
-                </div>
-                <input type="text" class="form-control" id="usuarioInput" placeholder="Usuario"
-                       formControlName="username" required autofocus
-                >
+            <div class="input-group">
+
+              <div class="input-group-prepend">
+                <span class="input-group-text" id="passwordInputIcon"><i class="fa fa-unlock-alt"></i></span>
               </div>
+              <input type="password" class="form-control" id="passwordInput" placeholder="Contraseña"
+                     formControlName="password" required autofocus >
+            </div>
+            <div *ngIf="submitted && f.password?.errors" class="invalid-feedback">
+              Introduzca una contraseña
+            </div>
 
-              <div class="input-group">
-                <div class="input-group-prepend">
-                  <span class="input-group-text" id="passwordInputIcon"><i class="fa fa-unlock-alt"></i></span>
-                </div>
-                <input type="password" class="form-control" id="passwordInput" placeholder="Contraseña"
-                       formControlName="password" required autofocus
-                >
-              </div>
+            <button *ngIf="!activateLoad" type="submit" class="btn btn-primary btn-lg btn-block btn-sm">
+              Acceder
+            </button>
 
-              <button *ngIf="!activateLoad" type="submit" class="btn btn-primary btn-lg btn-block btn-sm">
-                Acceder
-              </button>
-
-              <button *ngIf="activateLoad" type="submit" class="btn btn-primary btn-lg btn-block btn-sm">
-                <i class="fa fa-spinner fa-spin"></i>
-                Por favor, espere ...
-              </button>
+            <button *ngIf="activateLoad" type="submit" class="btn btn-primary btn-lg btn-block btn-sm">
+              <i class="fa fa-spinner fa-spin"></i>
+              Por favor, espere ...
+            </button>
 
 
-            </form>
-          </div>
+          </form>
         </div>
       </div>
-
     </div>
-
   </div>
+
+</div>
 
 

@@ -14,7 +14,9 @@ export class LoginComponent implements OnInit {
   private submitted: boolean;
   private loginForm: any;
   private activateLoad: boolean;
-  private loginIncorrect = false;
+  private alert = {
+      loginIncorrect: false
+    };
 
   constructor(public auth: AuthenticationService, private formBuilder: FormBuilder, private router: Router) { }
 
@@ -24,14 +26,14 @@ export class LoginComponent implements OnInit {
     if (token) {
       this.auth.getCurrent(token)
         .subscribe(
-          data => this.router.navigate(['dashboard/teacher-demand']),
-          err => { }
+          data => this.router.navigate(['dashboard/teacher-demand'])
         );
     }
   }
 
+  get f() { return this.loginForm.controls; }
+
   confirmLogin() {
-    console.log(this.loginForm.value);
     this.submitted = true;
 
     // stop here if form is invalid
@@ -49,7 +51,7 @@ export class LoginComponent implements OnInit {
       },
       error => {
         this.activateLoad = false;
-        this.loginIncorrect = true;
+        this.alert.loginIncorrect = true;
       }
     );
   }

@@ -22,5 +22,5 @@ input[type="password"]:focus
   -moz-box-shadow: none;
   box-shadow: none;
 }
-
+.invalid-feedback { display: block !important; }
 @media screen and (max-width: 768px) { .background-ulpgc { display:none; } }
