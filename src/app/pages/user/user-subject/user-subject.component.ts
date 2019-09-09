@@ -16,10 +16,12 @@ declare const $: any;
 export class MySubjectComponent implements OnInit {
 
   private user: any;
+
   private fieldsAvailable = ['Titulación', 'Área', 'Asignatura', 'Curso', 'Semestre', 'Grupo', 'Tipo', 'Horas', 'Horas sin cubrir',
     'H. Seleccionadas'];
   private fieldTeacherGroups = ['Titulación', 'Área', 'Asignatura', 'Grupo', 'Tipo', 'Horas', 'Horas sin cubrir', 'H. Seleccionadas',
     'Estado' ];
+
   private groups: any = [];
   private teacherGroupsConfirm = [];
   private selectedHours = 0;
@@ -27,6 +29,20 @@ export class MySubjectComponent implements OnInit {
   private deleteBtnAvailable = false;
   private loadDeleterIcon = false;
   private loadSaveIcon = false;
+
+  filterSubject: any;
+
+  orderHours = [
+    {id: 'radioHours1', name: 'Sin cubrir', value: 'uncovered', checked: false },
+    {id: 'radioHours2', name: 'Excedidas', value: 'exceeded', checked: false },
+    {id: 'radioHours3', name: 'Cubiertas', value: 'cover', checked: false },
+  ];
+
+  orderArea = [
+    {id: 'radioArea1', name: 'Arq. y tec. de Computadores', value: 'ATC', checked: false },
+    {id: 'radioArea2', name: 'Ciencia de la Comp. e Intel. Artificial', value: 'CCIA', checked: false },
+    {id: 'radioArea3', name: 'Len. y sis. Informáticos', value: 'LSI', checked: false },
+  ];
 
   constructor(private rest: RestService, private router: Router, private auth: AuthenticationService) { }
 
@@ -44,6 +60,8 @@ export class MySubjectComponent implements OnInit {
       value => {
       this.groups = value[0];
       this.teacherGroupsConfirm = value[1];
+
+      console.log(this.groups);
 
       this.groups = this.groups.filter(teacherGroups => {
         for (const group of this.teacherGroupsConfirm) {

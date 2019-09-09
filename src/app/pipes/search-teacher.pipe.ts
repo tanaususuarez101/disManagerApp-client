@@ -6,7 +6,7 @@ import { Pipe, PipeTransform } from '@angular/core';
 export class SearchTeacherPipe implements PipeTransform {
 
   transform(value: any, args?: any): any {
-    console.log(value, args);
+
     if (args == null || args === '') {
       return value;
     }

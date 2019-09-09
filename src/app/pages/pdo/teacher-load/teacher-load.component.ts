@@ -12,10 +12,16 @@ export class TeacherLoadComponent implements OnInit {
 
   constructor(public rest: RestService, private auth: AuthenticationService, private router: Router) { }
 
-  teacherloads = [];
-  fields = ['Profesor', 'Área', 'Potencial', 'H. a cubir', 'Otras docencias', 'Horas sin cubrir'];
   title = 'Carga docente';
+  fields = ['Profesor', 'Área', 'Potencial', 'H. a cubir', 'Otras docencias', 'Horas sin cubrir'];
+  teacherloads = [];
   filterTeacher: any;
+
+  orderArea = [
+    {id: 'radioArea1', name: 'Arq. y tec. de Computadores', value: 'ATC', checked: false },
+    {id: 'radioArea2', name: 'Ciencia de la Comp. e Intel. Artificial', value: 'CCIA', checked: false },
+    {id: 'radioArea3', name: 'Len. y sis. Informáticos', value: 'LSI', checked: false },
+  ];
 
   ngOnInit() {
     this.rest.getTeacherLoads()

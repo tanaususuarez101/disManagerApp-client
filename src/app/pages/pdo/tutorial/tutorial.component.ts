@@ -9,9 +9,17 @@ import {Router} from '@angular/router';
 })
 export class TutorialComponent implements OnInit {
 
-  teachertutorial = [];
-  fields = ['Profesor', 'Área de conocimiento', 'Horas totales', 'Horas cubiertas', 'Horas sin cubrir'];
   title = 'Tutorías';
+  fields = ['Profesor', 'Área de conocimiento', 'Horas totales', 'Horas cubiertas', 'Horas sin cubrir'];
+  teachertutorial = [];
+
+  filterTeacher: any;
+
+  orderArea = [
+    {id: 'radioArea1', name: 'Arq. y tec. de Computadores', value: 'ATC', checked: false },
+    {id: 'radioArea2', name: 'Ciencia de la Comp. e Intel. Artificial', value: 'CCIA', checked: false },
+    {id: 'radioArea3', name: 'Len. y sis. Informáticos', value: 'LSI', checked: false },
+  ];
 
   constructor(public rest: RestService, private router: Router) { }
 

@@ -107,6 +107,36 @@
 
 <div class="row">
   <div class="col-12">
+
+    <div class="input-group mb-3">
+      <div class="input-group-prepend">
+        <span class="input-group-text" id="basic-addon1"><i class="fa fa-search"></i></span>
+      </div>
+      <input type="text" class="form-control" placeholder="Buscar asignatura o titulación..." [(ngModel)]="filterSubject">
+    </div>
+
+    <div class="content-filter-radio">
+
+      <div class="content-radio">
+        <h4 class="fieldset-title">Horas</h4>
+        <div class="form-check form-check-inline" *ngFor="let item of orderHours">
+          <input class="form-check-input" type="checkbox" id="{{item?.id}}" [value]="item?.value" name="radioHours"
+                 [(ngModel)]="item.checked" >
+          <label class="form-check-label" for="{{item?.id}}">{{item?.name}}</label>
+        </div>
+      </div>
+
+      <div class="content-radio">
+        <h4 class="fieldset-title" >Área de conocimiento</h4>
+        <div class="form-check form-check-inline" *ngFor="let item of orderArea">
+          <input class="form-check-input" type="checkbox" [id]="item?.id" [value]="item?.value" name="radioHours"
+                 [(ngModel)]="item.checked" >
+          <label class="form-check-label" for="{{item?.id}}">{{item?.name}}</label>
+        </div>
+      </div>
+
+    </div>
+
     <div class="tableFixHead">
       <table class="table table-striped ">
 
@@ -117,7 +147,8 @@
         </thead>
 
         <tbody>
-        <tr *ngFor="let item of groups | ordenBySubject">
+        <tr *ngFor="let item of groups | ordenBySubject | searchFilter: filterSubject | hoursFilter: orderHours |
+          areaFilter: orderArea">
           <td class="align-middle">{{item?.university_name}}</td>
           <td class="align-middle">{{item?.area_name}}</td>
           <td class="align-middle">{{item?.subject_name}}</td>

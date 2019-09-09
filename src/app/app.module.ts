@@ -46,6 +46,7 @@ import { DetailsSchemeComponent } from './components/modal/details-scheme/detail
 import { DetailsPdaComponent } from './components/modal/details-pda/details-pda.component';
 import { LoadTeacherComponent } from './components/form/load-teacher/load-teacher.component';
 import { SidebarComponent } from './components/common/sidebar/sidebar.component';
+import { AreaFilterPipe } from './pipes/area-filter.pipe';
 
 @NgModule({
   declarations: [
@@ -89,6 +90,7 @@ import { SidebarComponent } from './components/common/sidebar/sidebar.component'
     DetailsPdaComponent,
     LoadTeacherComponent,
     SidebarComponent,
+    AreaFilterPipe,
   ],
   imports: [
     BrowserModule,

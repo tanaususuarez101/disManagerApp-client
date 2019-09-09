@@ -9,3 +9,11 @@ input[type="text"]:focus
   -moz-box-shadow: none;
   box-shadow: none;
 }
+
+.content-filter-radio {
+  display: inline-flex;
+  margin-bottom: 1.5rem;
+  margin-left: .5rem;
+  .fieldset-title { font-size: 1rem; font-weight: 400; }
+  .content-radio { margin-right: 15px; }
+}

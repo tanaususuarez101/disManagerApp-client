@@ -1,13 +1,20 @@
 .input-group-text,
 .form-control { background: white; border: none; border-radius: 0 !important; }
-.input-group { border-bottom: 1px solid lightgrey; border-radius: .1rem}
+.input-group { margin-top: .5rem; border: 1px solid lightgrey; border-radius: .1rem}
 .tableFixHead { font-size: .8em; max-height: 35rem !important; }
 .cursor-pointer { cursor: pointer; }
 
-.content-filter-radio {
+input[type="text"]:focus
+{
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+  box-shadow: none;
+}
 
+.content-filter-radio {
   display: inline-flex;
+  margin-bottom: 1.5rem;
+  margin-left: .5rem;
   .fieldset-title { font-size: 1rem; font-weight: 400; }
   .content-radio { margin-right: 15px; }
 }
-.card { margin-bottom: 1rem; }
