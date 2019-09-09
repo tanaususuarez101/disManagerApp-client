@@ -9,33 +9,42 @@
       </div>
       <div class="modal-body">
         <form [formGroup]="signInForm" (ngSubmit)="addNewUser()">
+
+          <div class="content-check">
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="checkbox" id="checkTeacher" (change)="selectedTeacher($event)" >
+              <label class="form-check-label" for="checkTeacher">Profesor</label>
+            </div>
+
+
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="checkbox" id="checkAdmin" formControlName="admin">
+              <label class="form-check-label" for="checkAdmin">Administrador</label>
+            </div>
+          </div>
+
           <div class="form-row">
             <div class="form-group col-md-6">
-              <label for="inputEmail4">Nombre de usuario</label>
-              <input type="text" class="form-control" id="inputEmail4" placeholder="Username" formControlName="username">
+              <input type="text" class="form-control" id="inputEmail4" placeholder="Nombre de usuario"
+                     [ngClass]="{
+                     'is-invalid': submitted && f.username?.errors,
+                     'is-valid': submitted && !f.username?.errors
+                     }"
+                     formControlName="username">
+              <div *ngIf="submitted && f.username?.errors" class="invalid-feedback">
+                Introduzca un nombre de usuario
+              </div>
             </div>
             <div class="form-group col-md-6">
-              <label for="inputPassword4">Contraseña</label>
-              <input type="password" class="form-control" id="inputPassword4" placeholder="Password" formControlName="password">
+              <input type="password" class="form-control" id="inputPassword4" placeholder="Contraseña"
+                     formControlName="password"
+                     [ngClass]="{ 'is-invalid': submitted && f.password?.errors,
+                     'is-valid': submitted && !f.password?.errors }">
+              <div *ngIf="submitted && f.password?.errors" class="invalid-feedback">
+                Introduzca una contraseña
+              </div>
             </div>
           </div>
-
-
-          <div class="form-group custom-control-inline">
-            <div class="custom-control custom-checkbox custom-control-inline">
-              <input class="custom-control-input" type="checkbox" id="gridCheck1" formControlName="admin">
-              <label class="custom-control-label" for="gridCheck1">Administrador</label>
-            </div>
-
-            <div class="custom-control custom-checkbox custom-control-inline">
-              <input class="custom-control-input" type="checkbox" id="gridCheck2"
-                     [checked]="isTeacher"
-                     (change)="selectedTeacher($event)"
-              >
-              <label class="custom-control-label" for="gridCheck2">Profesor</label>
-            </div>
-          </div>
-
 
           <ng-container *ngIf="isTeacher" >
             <div class="alert alert-light" role="alert">
@@ -52,7 +61,13 @@
               </div>
               <div class="form-group col-md-2">
                 <label for="inputDni">DNI</label>
-                <input type="text" class="form-control" id="inputDni" formControlName="dni">
+                <input type="text" class="form-control" id="inputDni" formControlName="dni"
+                       [ngClass]="{
+                       'is-invalid': submitted && f.dni?.errors,
+                       'is-valid': submitted && !f.dni?.errors}">
+                <div *ngIf="submitted && f.dni?.errors" class="invalid-feedback">
+                  Introduzca el DNI
+                </div>
               </div>
             </div>
 

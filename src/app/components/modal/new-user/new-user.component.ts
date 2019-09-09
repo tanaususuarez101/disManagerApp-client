@@ -12,6 +12,7 @@ export class NewUserComponent implements OnInit {
 
   private signInForm: any;
   private isTeacher = false;
+  private submitted: boolean;
 
   constructor(private formBuilder: FormBuilder, private rest: RestService) { }
 
@@ -35,27 +36,35 @@ export class NewUserComponent implements OnInit {
         area_cod: [''],
         potential: [''],
         tutorial_hours: [''],
-        admin: [false]
+        admin: false
       });
     } else {
       this.signInForm = this.formBuilder.group({
         username: ['', Validators.required],
         password: ['', Validators.required],
-        admin: [false]
+        admin: false
       });
     }
   }
 
   addNewUser() {
+    this.submitted = true;
+
+    // stop here if form is invalid
+    if (this.signInForm.invalid) {
+      return;
+    }
+
     this.rest.createUser(this.signInForm.value)
       .subscribe(
         resp => {
           alert('Usuario guardado');
         },
         err => {
-          alert('ERROR AL GUARDAR EL USUARIO');
+          console.log(err);
+          alert('Error: ' + err.error.message);
         }
       );
   }
-
+  get f() { return this.signInForm.controls; }
 }

@@ -35,8 +35,9 @@
               <div class="input-group-prepend">
                 <span class="input-group-text" id="passwordInputIcon"><i class="fa fa-unlock-alt"></i></span>
               </div>
-              <input type="password" class="form-control" id="passwordInput" placeholder="Contraseña"
-                     formControlName="password" required autofocus >
+              <input type="password" id="passwordInput" placeholder="Contraseña"
+                     formControlName="password" required autofocus class="form-control"
+                     [ngClass]="">
             </div>
             <div *ngIf="submitted && f.password?.errors" class="invalid-feedback">
               Introduzca una contraseña

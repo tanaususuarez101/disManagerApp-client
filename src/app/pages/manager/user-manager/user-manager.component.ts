@@ -22,7 +22,7 @@ export class UserManagerComponent implements OnInit {
 
   constructor(private  formBuilder: FormBuilder, private rest: RestService) {}
 
-  ngOnInit() { this.loadList(); }
+  ngOnInit() { this.loadList(); $('#modal-new-user').modal('show'); }
   newUser() { $('#modal-new-user').modal('show'); }
   alertDelete() { $('#modal-alert').modal('show'); }
 
