@@ -22,7 +22,7 @@ export class UserManagerComponent implements OnInit {
 
   constructor(private  formBuilder: FormBuilder, private rest: RestService) {}
 
-  ngOnInit() { this.loadList(); $('#modal-new-user').modal('show'); }
+  ngOnInit() { this.loadList(); }
   newUser() { $('#modal-new-user').modal('show'); }
   alertDelete() { $('#modal-alert').modal('show'); }
 
@@ -49,8 +49,6 @@ export class UserManagerComponent implements OnInit {
     if (this.valueRadioButton.teacherSelected != null) { $('#modal-teacher-edit').modal('show'); } else
     if (this.valueRadioButton.userSelected != null) { $('#modal-user-edit').modal('show'); }
   }
-
-
 
   confirmDelete($event: boolean) {
     if ($event) {

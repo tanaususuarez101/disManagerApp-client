@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {FormBuilder, Validators} from '@angular/forms';
 import {RestService} from '../../../services/rest.service';
 
@@ -13,6 +13,8 @@ export class NewUserComponent implements OnInit {
   private signInForm: any;
   private isTeacher = false;
   private submitted: boolean;
+
+  @Output() request = new EventEmitter();
 
   constructor(private formBuilder: FormBuilder, private rest: RestService) { }
 
@@ -59,6 +61,7 @@ export class NewUserComponent implements OnInit {
       .subscribe(
         resp => {
           alert('Usuario guardado');
+          this.request.emit('User saved');
         },
         err => {
           console.log(err);

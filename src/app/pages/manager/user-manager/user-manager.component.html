@@ -98,5 +98,5 @@
 
 <app-user-edit [user]="valueRadioButton?.userSelected" [teacherList]="availableTeacherList" (request)="loadList()"></app-user-edit>
 <app-teacher-edit [teacher]="valueRadioButton?.teacherSelected" (request)="loadList()"></app-teacher-edit>
-<app-new-user></app-new-user>
+<app-new-user (request)="loadList()"></app-new-user>
 <app-modal-alert (request)="confirmDelete($event)" ></app-modal-alert>

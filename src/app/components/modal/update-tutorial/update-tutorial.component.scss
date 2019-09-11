@@ -1,0 +1,11 @@
+.row { margin-top: .3rem; margin-right: 0; }
+
+
+.container-hours {
+  margin-left: .8rem;
+  margin-top: .2rem;
+  margin-bottom: .4rem;
+  .badge { margin-right: .1rem; background: #466b99; color: white; }
+  .circle { font-size: 1rem; padding: .1rem .2rem .1rem .2rem; border-radius: 50%; }
+  .circle:hover { cursor: pointer; color: black; }
+}
