@@ -92,17 +92,6 @@ export class RestService {
     return this.http.get(this.endpoint + '/groups', httpOptions);
   }
 
-  getAvailableGroups(): Observable<any> {
-    const httpOptions = {
-      headers: new HttpHeaders({
-        'Access-Control-Allow-Origin': '*',
-        'Content-Type': 'application/json',
-        'x-access-token': this.auth.getToken()
-      })
-    };
-    return this.http.get(this.endpoint + '/groups/available', httpOptions);
-  }
-
   getGroup(groupCod, subjectCod, areaCod): Observable<any> {
     const httpOptions = {
       headers: new HttpHeaders({
@@ -118,6 +107,7 @@ export class RestService {
    * SUBJECT
    * */
 
+
   getSubjects() {
     const httpOptions = {
       headers: new HttpHeaders({
@@ -127,6 +117,17 @@ export class RestService {
       })
     };
     return this.http.get(this.endpoint + '/subjects', httpOptions);
+  }
+
+  getSubject(subjectCod: any, areaCod: any) {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Access-Control-Allow-Origin': '*',
+        'Content-Type': 'application/json',
+        'x-access-token': this.auth.getToken()
+      })
+    };
+    return this.http.get(this.endpoint + '/subject/' + subjectCod + '/' + areaCod, httpOptions);
   }
 
   getPDAs(): Observable<any> {
@@ -143,7 +144,7 @@ export class RestService {
       );
   }
 
-  getSubjectCoordinator(): Observable<any> {
+  getSubjectCoordinators(): Observable<any> {
     const httpOptions = {
       headers: new HttpHeaders({
         'Access-Control-Allow-Origin': '*',
@@ -151,13 +152,32 @@ export class RestService {
         'x-access-token': this.auth.getToken()
       })
     };
-    return this.http.get(this.endpoint + '/subject/coordinator', httpOptions)
-      .pipe(
-        map(data => data)
-      );
+    return this.http.get(this.endpoint + '/subject/coordinator', httpOptions);
   }
 
-  getSubjectResponsible(): Observable<any> {
+  getSubjectCoordinator(dni: any) {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Access-Control-Allow-Origin': '*',
+        'Content-Type': 'application/json',
+        'x-access-token': this.auth.getToken()
+      })
+    };
+    return this.http.get(this.endpoint + '/subject/coordinator/' + dni, httpOptions);
+  }
+
+  createSubjectCoordinator(dni, data) {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Access-Control-Allow-Origin': '*',
+        'Content-Type': 'application/json',
+        'x-access-token': this.auth.getToken()
+      })
+    };
+    return this.http.post(this.endpoint + '/subject/coordinator/' + dni, JSON.stringify(data), httpOptions);
+  }
+
+  getSubjectResponsibles(): Observable<any> {
     const httpOptions = {
       headers: new HttpHeaders({
         'Access-Control-Allow-Origin': '*',
@@ -168,7 +188,7 @@ export class RestService {
     return this.http.get(this.endpoint + '/subject/responsible', httpOptions);
   }
 
-  createCoordinatorAndResponsible(data): Observable<any> {
+  getSubjectResponsible(dni: any): Observable<any> {
     const httpOptions = {
       headers: new HttpHeaders({
         'Access-Control-Allow-Origin': '*',
@@ -176,7 +196,18 @@ export class RestService {
         'x-access-token': this.auth.getToken()
       })
     };
-    return this.http.post(this.endpoint + '/subject/coordinator', JSON.stringify(data), httpOptions);
+    return this.http.get(this.endpoint + '/subject/responsible/' + dni, httpOptions);
+  }
+
+  createSubjectResponsible(dni, data) {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Access-Control-Allow-Origin': '*',
+        'Content-Type': 'application/json',
+        'x-access-token': this.auth.getToken()
+      })
+    };
+    return this.http.post(this.endpoint + '/subject/responsible/' + dni, JSON.stringify(data), httpOptions);
   }
 
   /**
@@ -231,7 +262,7 @@ export class RestService {
   }
 
   // tslint:disable-next-line:variable-name
-  updateLoadTeacher(area_cod, subject_cod, group_cod, hours) {
+  updateLoadTeacher(area_cod, subject_cod, group_cod, data) {
     const httpOptions = {
       headers: new HttpHeaders({
         'Access-Control-Allow-Origin': '*',
@@ -239,7 +270,7 @@ export class RestService {
         'x-access-token': this.auth.getToken()
       })
     };
-    return this.http.put(this.endpoint + '/teacher_load/' + area_cod + '/' + subject_cod + '/' + group_cod, JSON.stringify(hours),
+    return this.http.put(this.endpoint + '/teacher_load/' + area_cod + '/' + subject_cod + '/' + group_cod, JSON.stringify(data),
       httpOptions);
   }
 
@@ -336,7 +367,7 @@ export class RestService {
     return this.http.get(this.endpoint + '/teacher/tutorial/' + dni, httpOptions);
   }
 
-  createTutorial(data): Observable<any> {
+  createTutorial(data, dni): Observable<any> {
     const httpOptions = {
       headers: new HttpHeaders({
         'Access-Control-Allow-Origin': '*',
@@ -344,8 +375,10 @@ export class RestService {
         'x-access-token': this.auth.getToken()
       })
     };
-    return this.http.post(this.endpoint + '/teacher/tutorial', JSON.stringify(data), httpOptions);
+    return this.http.post(this.endpoint + '/teacher/tutorial/' + dni, JSON.stringify(data), httpOptions);
   }
+
+
 
   /**
    * USER
@@ -459,6 +492,8 @@ export class RestService {
   /**
    * VENIAS
    * */
+
+
   getVeniaType1(dni: number): Observable<any> {
     const httpOptions = {
       headers: new HttpHeaders({

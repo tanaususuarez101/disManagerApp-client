@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {RestService} from '../../../services/rest.service';
 import {Router} from '@angular/router';
+import {map} from 'rxjs/operators';
+import {TeacherDemandComponent} from '../teacher-demand/teacher-demand.component';
 
 @Component({
   selector: 'app-subject-coordinator',
@@ -9,36 +11,27 @@ import {Router} from '@angular/router';
 })
 export class SubjectCoordinatorComponent implements OnInit {
 
-  fields = ['Titulación', 'Asignatura', 'Área de conocimiento', 'Tipo', 'Semestre', 'Coordinador'];
+  fields = ['Titulación',  'Asignatura', 'Área de conocimiento', 'Tipo', 'Semestre', 'Coordinador'];
+  title = 'Coordinadores';
+
   coordinator = [];
   responsible = [];
-  title = 'Coordinadores';
 
 
   constructor(public rest: RestService, private router: Router) { }
 
   ngOnInit() {
-    this.rest.getSubjectCoordinator().subscribe(
-      data => {
-        console.log(data);
-        this.coordinator = data;
-      },
-      err => {
-        if (err.status === '401') {
-          this.router.navigate(['/login']);
-        }
-      }
-    );
-    this.rest.getSubjectResponsible().subscribe(
-      data => {
-        this.responsible = data;
-      },
-      err => {
-        if (err.status === '401') {
-          this.router.navigate(['/login']);
-        }
-      }
-    );
+    this.rest.getSubjectCoordinators()
+      .subscribe(subjects =>  this.coordinator = subjects.map(subject => {
+        subject.area_acronym = TeacherDemandComponent.typeOfArea(subject.area_cod);
+        return subject;
+      }));
+
+    this.rest.getSubjectResponsibles()
+      .subscribe(subjects =>  this.responsible = subjects.map(subject => {
+        subject.area_acronym = TeacherDemandComponent.typeOfArea(subject.area_cod);
+        return subject;
+      }));
   }
 
 }

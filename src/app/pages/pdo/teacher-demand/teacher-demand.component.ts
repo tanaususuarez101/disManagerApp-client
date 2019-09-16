@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {Router} from '@angular/router';
 import {RestService} from '../../../services/rest.service';
 import {AuthenticationService} from '../../../services/authentication.service';
+import {map} from 'rxjs/operators';
 
 @Component({
   selector: 'app-teacher-demand',
@@ -10,12 +11,12 @@ import {AuthenticationService} from '../../../services/authentication.service';
 })
 export class TeacherDemandComponent implements OnInit {
 
+  constructor(public rest: RestService, private  auth: AuthenticationService) { }
+
   title = 'Demanda docente';
-  fields = ['Titulación', 'Área', 'Asignatura', 'Curso', 'Semestre', 'Grupo', 'Tipo', 'Horas', 'Horas sin cubrir'];
+  fields = ['Titulación', 'Asignatura', 'Área de conocimiento', 'Curso', 'Semestre', 'Grupo', 'Tipo', 'Horas', 'Horas sin cubrir'];
 
   teacherDemands = [];
-  teacherDemandsOrigin = [];
-
   filterSubject: any;
 
   orderHours = [
@@ -24,15 +25,36 @@ export class TeacherDemandComponent implements OnInit {
     {id: 'radioHours3', name: 'Cubiertas', value: 'cover', checked: false },
   ];
 
-  orderArea = [
-    {id: 'radioArea1', name: 'Arq. y tec. de Computadores', value: 'ATC', checked: false },
-    {id: 'radioArea2', name: 'Ciencia de la Comp. e Intel. Artificial', value: 'CCIA', checked: false },
-    {id: 'radioArea3', name: 'Len. y sis. Informáticos', value: 'LSI', checked: false },
-  ];
+  orderArea: any;
 
-  constructor(public rest: RestService, private router: Router, private auth: AuthenticationService) { }
+  static typeOfArea(areaCod: string | number): string {
+    switch (areaCod) {
+      case '35':
+        return 'ATC';
+      case '75':
+        return 'CCIA';
+      case '570':
+        return 'LSI';
+    }
+  }
+
+  static orderMyArea(areaCod: string | number) {
+    const orderArea = [
+      {id: 'radioArea1', name: 'ATC', value: 'ATC', areaCod: '35', checked: false },
+      {id: 'radioArea2', name: 'CCIA', value: 'CCIA', areaCod: '75', checked: false },
+      {id: 'radioArea3', name: 'LSI', value: 'LSI', areaCod: '570', checked: false },
+    ];
+    for (const order of orderArea) {  if (order.areaCod === areaCod) { order.checked = true; } }
+    return orderArea;
+  }
 
   ngOnInit() {
-    this.rest.getGroups() .subscribe(subjects => { this.teacherDemands = subjects; this.teacherDemandsOrigin = subjects; });
+    this.orderArea = TeacherDemandComponent.orderMyArea(this.auth.getUser().area_cod);
+    this.rest.getGroups()
+      .pipe(map(data => {
+        for ( const subject of data) { subject.area_acronym = TeacherDemandComponent.typeOfArea(subject.area_cod); }
+        return data;
+      }))
+      .subscribe(subjects => this.teacherDemands = subjects);
   }
 }

@@ -10,15 +10,12 @@ export class SearchFilterPipe implements PipeTransform {
     if (args == null || args === '' || args.length < 3) {
       return value;
     }
-    const resultSubjects = [];
-    for (const post of value) {
-      if (post.subject_name.toLowerCase().indexOf(args.toLowerCase()) > -1) {
-        resultSubjects.push(post);
-      } else if (post.university_name.toLowerCase().indexOf(args.toLowerCase()) > -1) {
-        resultSubjects.push(post);
-      }
-    }
-    return resultSubjects;
+
+    return value.filter(val => {
+      return (val.subject_name.toLowerCase().indexOf(args.toLowerCase()) > -1) ||
+        (val.university_name.toLowerCase().indexOf(args.toLowerCase()) > -1) ||
+        (val.university_acronym.toLowerCase().indexOf(args.toLowerCase()) > -1);
+    });
   }
 
 }

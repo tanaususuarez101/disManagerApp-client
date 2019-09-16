@@ -7,6 +7,12 @@ $siderbar-secondary: white;
   background: white;
   height: 100%;
 
+  #userSubMenu,
+  #managerSubMenu,
+  #pdaSubMenu {
+    margin-top: .5rem;
+  }
+
   .sidebar-header {
     padding-top: 1rem;
     padding-bottom: 1rem;

@@ -3,6 +3,7 @@ import {map} from 'rxjs/operators';
 import {RestService} from '../../../services/rest.service';
 import {AuthenticationService} from '../../../services/authentication.service';
 import {forkJoin} from 'rxjs';
+import {TeacherDemandComponent} from '../../pdo/teacher-demand/teacher-demand.component';
 
 @Component({
   selector: 'app-user-request',
@@ -30,6 +31,7 @@ export class UserRequestComponent implements OnInit {
       this.rest.getVeniaType2(this.user.teacher_dni)
     ).subscribe( data => {
       this.teacherGroupsConfirm = data[0];
+      for ( const subject of this.teacherGroupsConfirm) { subject.area_acronym = TeacherDemandComponent.typeOfArea(subject.area_cod); }
       this.listVeniasI = data[1];
       this.listVeniasII = data[2];
       this.calculatorHoursImpart();

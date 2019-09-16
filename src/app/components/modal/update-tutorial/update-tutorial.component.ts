@@ -30,10 +30,13 @@ export class UpdateTutorialComponent implements OnInit {
 
   sendTutorialDay() {
 
-    this.rest.createTutorial(this.formTutorial).subscribe( data => {
-      $('#tutorialModal').modal('hide');
-      this.request.emit(true);
-    },err => alert('Error: ' + err.message) );
+    this.rest.createTutorial(this.formTutorial, this.user.teacher_dni)
+      .subscribe(
+      data => {
+          $('#tutorialModal').modal('hide');
+          this.request.emit(true);
+        },
+      err => alert('Error: ' + err.message) );
 
   }
 

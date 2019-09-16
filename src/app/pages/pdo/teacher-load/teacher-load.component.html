@@ -23,7 +23,7 @@
 <div class="row">
   <div class="col">
     <div class="tableFixHead">
-      <table class="table table-hover">
+      <table class="table table-hover table-sm">
         <thead>
         <tr>
           <th *ngFor="let field of fields" scope="col" >{{field}}</th>
@@ -33,10 +33,10 @@
           <tr *ngFor="let item of teacherloads | searchTeacher: filterTeacher | areaFilter: orderArea"
               routerLink="/dashboard/teacher-load-details/{{item.teacher_dni}}" >
             <td>{{item?.teacher_surnames}}, {{item?.teacher_name}}</td>
-            <td>{{item?.area_name}}</td>
+            <td>{{item?.area_acronym}}</td>
             <td>{{item?.teacher_potential}}</td>
             <td>{{item?.cover_hours}}</td>
-            <td>{{item?.cover_hours}}</td>
+            <td>{{item?.other_teaching}}</td>
             <td [ngClass]="{
               'p-3 mb-2 bg-danger text-white': item?.unassigned_hours < 0,
               'p-3 mb-2 bg-success text-white': item?.unassigned_hours == 0,

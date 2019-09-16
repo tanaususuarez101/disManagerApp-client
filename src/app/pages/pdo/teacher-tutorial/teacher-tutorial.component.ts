@@ -1,13 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 import {RestService} from '../../../services/rest.service';
 import {Router} from '@angular/router';
+import {map} from 'rxjs/operators';
+import {TeacherDemandComponent} from '../teacher-demand/teacher-demand.component';
+import {AuthenticationService} from '../../../services/authentication.service';
 
 @Component({
-  selector: 'app-tutorial',
-  templateUrl: './tutorial.component.html',
-  styleUrls: ['./tutorial.component.scss']
+  selector: 'app-teacher-tutorial',
+  templateUrl: './teacher-tutorial.component.html',
+  styleUrls: ['./teacher-tutorial.component.scss']
 })
-export class TutorialComponent implements OnInit {
+export class TeacherTutorialComponent implements OnInit {
 
   title = 'Tutorías';
   fields = ['Profesor', 'Área de conocimiento', 'Horas totales', 'Horas cubiertas', 'Horas sin cubrir'];
@@ -21,10 +24,16 @@ export class TutorialComponent implements OnInit {
     {id: 'radioArea3', name: 'Len. y sis. Informáticos', value: 'LSI', checked: false },
   ];
 
-  constructor(public rest: RestService, private router: Router) { }
+  constructor(public rest: RestService, private router: Router, private auth: AuthenticationService) { }
 
   ngOnInit() {
-    this.rest.getListTutorial().subscribe(
+    this.orderArea = TeacherDemandComponent.orderMyArea(this.auth.getUser().area_cod);
+    this.rest.getListTutorial()
+      .pipe(map(data => {
+        for ( const subject of data) { subject.area_acronym = TeacherDemandComponent.typeOfArea(subject.area_cod); }
+        return data;
+      }))
+      .subscribe(
       data => this.teachertutorial = data,
       err => {
         if (err.status === 401) {

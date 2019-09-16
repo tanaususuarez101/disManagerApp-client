@@ -10,7 +10,7 @@ import { TeacherDemandComponent } from './pages/pdo/teacher-demand/teacher-deman
 import {RouterModule} from '@angular/router';
 import { NavegationComponent } from './components/common/navegation/navegation.component';
 import { TeacherLoadComponent } from './pages/pdo/teacher-load/teacher-load.component';
-import { TutorialComponent } from './pages/pdo/tutorial/tutorial.component';
+import { TeacherTutorialComponent } from './pages/pdo/teacher-tutorial/teacher-tutorial.component';
 import { SubjectCoordinatorComponent } from './pages/pdo/subject-coordinator/subject-coordinator.component';
 import { TeacherDemandDetailsComponent } from './pages/pdo/teacher-demand-details/teacher-demand-details.component';
 import { TeacherLoadDetailsComponent } from './pages/pdo/teacher-load-details/teacher-load-details.component';
@@ -27,12 +27,10 @@ import { MySubjectComponent } from './pages/user/user-subject/user-subject.compo
 import { UserRequestComponent } from './pages/user/user-request/user-request.component';
 import { OrdenBySubjectPipe } from './pipes/orden-by-subject.pipe';
 import { UserCoordinatorComponent } from './pages/user/user-coordinator/user-coordinator.component';
-import { UserTutorialComponent } from './pages/user/user-tutorial/user-tutorial.component';
 import { LoadSchemeComponent } from './components/form/load-scheme/load-scheme.component';
 import { UserManagerComponent } from './pages/manager/user-manager/user-manager.component';
 import { LoadPdaComponent } from './components/form/load-pda/load-pda.component';
 import { DatabaseManagerComponent } from './pages/manager/database-manager/database-manager.component';
-import { TutorialDetailsComponent } from './pages/pdo/tutorial-details/tutorial-details.component';
 import { UserEditComponent } from './components/modal/user-edit/user-edit.component';
 import { NewUserComponent } from './components/modal/new-user/new-user.component';
 import { TeacherEditComponent } from './components/modal/teacher-edit/teacher-edit.component';
@@ -48,6 +46,9 @@ import { LoadTeacherComponent } from './components/form/load-teacher/load-teache
 import { SidebarComponent } from './components/common/sidebar/sidebar.component';
 import { AreaFilterPipe } from './pipes/area-filter.pipe';
 import { UpdateTutorialComponent } from './components/modal/update-tutorial/update-tutorial.component';
+import { UserTutorialComponent } from './pages/user/user-tutorial/user-tutorial.component';
+import { TeacherTutorialDetailsComponent } from './pages/pdo/teacher-tutorial-details/teacher-tutorial-details.component';
+import { ChangePasswordComponent } from './components/modal/change-password/change-password.component';
 
 @NgModule({
   declarations: [
@@ -56,7 +57,7 @@ import { UpdateTutorialComponent } from './components/modal/update-tutorial/upda
     TeacherDemandComponent,
     NavegationComponent,
     TeacherLoadComponent,
-    TutorialComponent,
+    TeacherTutorialComponent,
     SubjectCoordinatorComponent,
     TeacherPDAComponent,
     TeacherDemandDetailsComponent,
@@ -72,12 +73,10 @@ import { UpdateTutorialComponent } from './components/modal/update-tutorial/upda
     UserRequestComponent,
     OrdenBySubjectPipe,
     UserCoordinatorComponent,
-    UserTutorialComponent,
     LoadSchemeComponent,
     UserManagerComponent,
     LoadPdaComponent,
     DatabaseManagerComponent,
-    TutorialDetailsComponent,
     UserEditComponent,
     NewUserComponent,
     TeacherEditComponent,
@@ -93,6 +92,9 @@ import { UpdateTutorialComponent } from './components/modal/update-tutorial/upda
     SidebarComponent,
     AreaFilterPipe,
     UpdateTutorialComponent,
+    UserTutorialComponent,
+    TeacherTutorialDetailsComponent,
+    ChangePasswordComponent,
   ],
   imports: [
     BrowserModule,

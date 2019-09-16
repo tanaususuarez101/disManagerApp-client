@@ -24,39 +24,44 @@
         </tr>
         </thead>
         <tbody>
-        <tr *ngFor="let subject of subjects" class="select-row content-align">
-          <td>{{subject?.university_name}}</td>
+        <tr *ngFor="let subject of subjectlist" class="select-row content-align">
+
+          <td>{{subject?.university_acronym}}</td>
           <td>{{subject?.subject_name}}</td>
-          <td>{{subject?.area_name}}</td>
+          <td>{{subject?.area_acronym}}</td>
           <td>{{subject?.subject_semester}}</td>
+          <td>
+            <input  *ngIf="subject?.coordinator_dni && subject?.coordinator_dni === user?.teacher_dni"
+                    type="checkbox" name="radioCoordinator" [(ngModel)]="subject.coordinator"
+                    [checked]="subject.coordinator"
+            >
 
-          <td *ngIf="subject?.coordinator_dni">
-            <ng-container *ngIf="subject?.coordinator_dni === user?.teacher_dni">
-              <input type="checkbox" name="radioCoordinator" (change)="selectedCoordinator($event.target, subject)" checked>
-            </ng-container>
-            <ng-container *ngIf="subject?.coordinator_dni != user?.teacher_dni">
-              <input type="checkbox" name="radioCoordinator" checked disabled>
-            </ng-container>
+            <input  *ngIf="subject?.coordinator_dni && subject?.coordinator_dni !== user?.teacher_dni"
+                    type="checkbox" name="radioCoordinator" [checked]="true" [disabled]="true"
+            >
+
+            <input  *ngIf="!subject?.coordinator_dni"
+                    type="checkbox" name="radioCoordinator" [(ngModel)]="subject.coordinator"
+                    [checked]="subject.coordinator"
+            >
+
           </td>
+          <td>
+            <input  *ngIf="subject?.responsible_dni && subject?.responsible_dni === user?.teacher_dni"
+                    type="checkbox" name="radioResponsible" [(ngModel)]="subject.responsible"
+                    [checked]="subject.responsible"
+            >
 
-          <td *ngIf="!subject?.coordinator_dni">
-            <input type="checkbox" name="radioCoordinator" (change)="selectedCoordinator($event.target, subject)">
+            <input  *ngIf="subject?.responsible_dni && subject?.responsible_dni !== user?.teacher_dni"
+                    type="checkbox" name="radioResponsible" [checked]="true" [disabled]="true"
+            >
+
+            <input  *ngIf="!subject?.responsible_dni"
+                    type="checkbox" name="radioResponsible" [(ngModel)]="subject.responsible"
+                    [checked]="subject.responsible"
+            >
+
           </td>
-
-
-          <td *ngIf="subject?.responsible_dni">
-            <ng-container *ngIf="subject?.responsible_dni === user?.teacher_dni">
-              <input type="checkbox" name="radioResponsible" (change)="selectedResponsible($event.target, subject)" checked>
-            </ng-container>
-            <ng-container *ngIf="subject?.responsible_dni != user?.teacher_dni">
-              <input type="checkbox" name="radioResponsible" checked disabled>
-            </ng-container>
-          </td>
-
-          <td *ngIf="!subject?.responsible_dni">
-            <input type="checkbox" name="radioResponsible" (change)="selectedResponsible($event.target, subject)">
-          </td>
-
         </tr>
         </tbody>
       </table>

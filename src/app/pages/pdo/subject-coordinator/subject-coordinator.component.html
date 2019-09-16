@@ -5,7 +5,7 @@
 <div class="row">
   <div class="col-12">
     <div class="tableFixHead">
-      <table class="table table-hover">
+      <table class="table table-hover table-sm">
         <thead>
         <tr >
           <th *ngFor="let field of fields" scope="col" >{{field}}</th>
@@ -13,12 +13,13 @@
         </thead>
         <tbody>
           <tr *ngFor="let item of coordinator" class="select-row content-align">
-            <td>{{item?.university_name}}</td>
+            <td>{{item?.university_acronym}}</td>
             <td>{{item?.subject_name}}</td>
-            <td>{{item?.area_name}}</td>
+            <td>{{item?.area_acronym}}</td>
             <td>{{item?.subject_type}}</td>
             <td>{{item?.subject_semester}}</td>
-            <td>{{item?.teacher_surnames}}, {{item?.teacher_name}}</td>
+            <td *ngIf="item?.teacher_name" >{{item?.teacher_surnames}}, {{item?.teacher_name}}</td>
+            <td *ngIf="!item?.teacher_name" [ngClass]="{ 'p-3 mb-2 bg-danger text-white': !item?.teacher_name}"> - </td>
           </tr>
         </tbody>
       </table>
@@ -26,12 +27,12 @@
   </div>
 </div>
 
-<h4 class="m-2">Coordinador de Prácticas</h4>
+<h4 class="m-2">Responsable de Prácticas</h4>
 
 <div class="row">
   <div class="col">
     <div class="content-coordinator tableFixHead">
-      <table class="table table-hover">
+      <table class="table table-hover table-sm">
         <thead>
         <tr class="content-align">
           <th *ngFor="let field of fields" scope="col" class="content-vertical">{{field}}</th>
@@ -39,12 +40,13 @@
         </thead>
         <tbody>
         <tr *ngFor="let item of responsible" class="select-row content-align">
-          <td>{{item?.university_name}}</td>
+          <td>{{item?.university_acronym}}</td>
           <td>{{item?.subject_name}}</td>
-          <td>{{item?.area_name}}</td>
+          <td>{{item?.area_acronym}}</td>
           <td>{{item?.subject_type}}</td>
           <td>{{item?.subject_semester}}</td>
-          <td>{{item?.teacher_surnames}}, {{item?.teacher_name}}</td>
+          <td *ngIf="item?.teacher_name" >{{item?.teacher_surnames}}, {{item?.teacher_name}}</td>
+          <td *ngIf="!item?.teacher_name" [ngClass]="{ 'p-3 mb-2 bg-danger text-white': !item?.teacher_name}"> - </td>
         </tr>
         </tbody>
       </table>

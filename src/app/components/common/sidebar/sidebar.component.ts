@@ -12,16 +12,9 @@ export class SidebarComponent implements OnInit {
 
   user: any;
 
-  PDOlink = [
-    {name: 'Demanda docente', path: '/dashboard/teacher-demand'},
-    {name: 'Carga docente', path: '/dashboard/teacher-load'},
-    {name: 'Tutorías', path: '/dashboard/tutorial'},
-    {name: 'Coordinador de Asignatura', path: '/dashboard/subject-coordinator'},
-    {name: 'Proyecto docente', path: '/dashboard/teacher-PDA'},
-  ];
   userlink = [
-    {name: 'Mi Tutoría', path: '/dashboard/user-tutorial'},
     {name: 'Mi Solicitud', path: '/dashboard/user-request'},
+    {name: 'Mi Tutorias', path: '/dashboard/user-tutorial'},
     {name: 'Mi Coordinación', path: '/dashboard/user-coordinator'},
     {name: 'Mi Carga docente', path: '/dashboard/user-subject'}
   ];
@@ -29,6 +22,14 @@ export class SidebarComponent implements OnInit {
     {name: 'Base de Datos', path: '/dashboard/database-manager'},
     {name: 'Usuario', path: '/dashboard/user-manager'},
     {name: 'Solicitudes', path: '/dashboard/request-manager'},
+  ];
+
+  PDOlink = [
+    {name: 'Demanda docente', path: '/dashboard/teacher-demand'},
+    {name: 'Carga docente', path: '/dashboard/teacher-load'},
+    {name: 'Tutorías', path: '/dashboard/teacher-tutorial'},
+    {name: 'Coordinador de Asignatura', path: '/dashboard/subject-coordinator'},
+    {name: 'Proyecto docente', path: '/dashboard/teacher-PDA'},
   ];
 
   constructor(private auth: AuthenticationService) { }

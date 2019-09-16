@@ -5,6 +5,8 @@ import {AuthenticationService} from '../../../services/authentication.service';
 import {concatAll, concatMap, map} from 'rxjs/operators';
 import {forkJoin, from, Observable, of} from 'rxjs';
 import {subscribeToObservable, subscribeToPromise} from 'rxjs/internal-compatibility';
+import {TeacherDemandComponent} from '../../pdo/teacher-demand/teacher-demand.component';
+import {send} from 'q';
 
 declare const $: any;
 
@@ -24,30 +26,30 @@ export class MySubjectComponent implements OnInit {
 
   private groups: any = [];
   private teacherGroupsConfirm = [];
+
   private selectedHours = 0;
   private allSelected = false;
+  private filterSubject: any;
+
   private deleteBtnAvailable = false;
   private loadDeleterIcon = false;
   private loadSaveIcon = false;
 
-  filterSubject: any;
 
-  orderHours = [
+
+  private orderHours = [
     {id: 'radioHours1', name: 'Sin cubrir', value: 'uncovered', checked: false },
     {id: 'radioHours2', name: 'Excedidas', value: 'exceeded', checked: false },
     {id: 'radioHours3', name: 'Cubiertas', value: 'cover', checked: false },
   ];
 
-  orderArea = [
-    {id: 'radioArea1', name: 'Arq. y tec. de Computadores', value: 'ATC', checked: false },
-    {id: 'radioArea2', name: 'Ciencia de la Comp. e Intel. Artificial', value: 'CCIA', checked: false },
-    {id: 'radioArea3', name: 'Len. y sis. Informáticos', value: 'LSI', checked: false },
-  ];
+  private orderArea: any;
 
   constructor(private rest: RestService, private router: Router, private auth: AuthenticationService) { }
 
   ngOnInit() {
     this.user = this.auth.getUser();
+    this.orderArea = TeacherDemandComponent.orderMyArea(this.user.area_cod);
     this.loadData();
   }
 
@@ -56,31 +58,21 @@ export class MySubjectComponent implements OnInit {
       this.loadGroups(),
       this.loadTeacher()
     )
-    .subscribe(
-      value => {
-      this.groups = value[0];
-      this.teacherGroupsConfirm = value[1];
-
-      console.log(this.groups);
-
-      this.groups = this.groups.filter(teacherGroups => {
-        for (const group of this.teacherGroupsConfirm) {
-          if (group.area_cod === teacherGroups.area_cod && group.subject_cod === teacherGroups.subject_cod
-            && group.group_cod === teacherGroups.group_cod) { return false; }
-        }
-        return true;
-      });
-      this.loadDeleterIcon = false;
-      this.calculatorHoursImpart();
+    .subscribe(value => {
+        this.teacherGroupsConfirm = value[1];
+        this.groups = value[0].filter(teaGrp => !this.teacherGroupsConfirm.find(val => this.compareGroup(val, teaGrp)) );
+        this.loadDeleterIcon = false;
+        this.calculatorHoursImpart();
     });
   }
 
   private loadGroups() {
-    return this.rest.getAvailableGroups()
+    return this.rest.getGroups()
       .pipe(
         map(data => {
           // tslint:disable-next-line:no-shadowed-variable
           return data.map(element => {
+            element.area_acronym = TeacherDemandComponent.typeOfArea(element.area_cod);
             element.impart_hours = 0;
             element.cover_hours_provitional = +element.group_cover_hours;
             return element;
@@ -95,6 +87,7 @@ export class MySubjectComponent implements OnInit {
         map(data => {
           // tslint:disable-next-line:no-shadowed-variable
           return data.groups.map(element => {
+            element.area_acronym = TeacherDemandComponent.typeOfArea(element.area_cod);
             element.impart_hours = +element.assigned_hours;
             return element;
           });
@@ -102,7 +95,12 @@ export class MySubjectComponent implements OnInit {
       );
   }
 
-  private clickChanger($event) {
+  private clickChanger($event, item) {
+    if ($event.value > $event.max) {
+      $event.value = $event.max;
+      item.impart_hours = $event.max;
+    }
+
     for (const group of this.groups) { group.cover_hours_provitional = +group.group_cover_hours + +group.impart_hours; }
     this.calculatorHoursImpart();
   }
@@ -118,18 +116,20 @@ export class MySubjectComponent implements OnInit {
    * */
 
   private deleteGroup() {
-    this.loadDeleterIcon = true; this.deleteBtnAvailable = false; this.allSelected = false; const listDelete = [];
-    for ( const group of this.teacherGroupsConfirm) {
-      if (group.activedChanger) { listDelete.push({area_cod: group.area_cod, subject_cod: group.subject_cod, group_cod: group.group_cod}); }
-    }
-    this.deleteGroupOfTeacherLoad(listDelete).subscribe(res => { this.loadData(); this.loadDeleterIcon = false });
+    this.loadDeleterIcon = true; this.deleteBtnAvailable = false; this.allSelected = false;
 
-  }
+    const listDelete = this.teacherGroupsConfirm
+      .filter(val => val.activedChanger)
+      .map(val => {
+        return {
+          area_cod: val.area_cod,
+          subject_cod: val.subject_cod,
+          group_cod: val.group_cod
+        };
+      });
 
-  deleteGroupOfTeacherLoad(dataForSend): Observable<any> {
-    return from(dataForSend).pipe(
-      concatMap(data => this.rest.deleteLoadTeacher(data['area_cod'], data['subject_cod'], data['group_cod']))
-    );
+    this.sendDeleteGroup(listDelete).subscribe(res => { this.loadData(); this.loadDeleterIcon = false; });
+
   }
 
   private updateChange() {
@@ -138,37 +138,58 @@ export class MySubjectComponent implements OnInit {
     this.updateGroup();
   }
 
-  private requestVenia() { $('#modal-request-venia').modal('show'); }
-
   /*
    * auxiliary function
    * */
 
-  // TODO - Susutituir lista por elementos uno a uno
-
   private confirmSelection() {
     const sendData = this.groups
-      .filter(value => value.impart_hours > 0 )
+      .filter(value => value.impart_hours > 0.1 )
       .map(value => {
-        return {
-          area_cod: value.area_cod,
-          subject_cod: value.subject_cod,
-          group_cod: value.group_cod,
-          impart_hours: value.impart_hours
-        };
+        return { area_cod: value.area_cod, subject_cod: value.subject_cod, group_cod: value.group_cod, impart_hours: value.impart_hours };
       });
-    this.rest.createTeacherLoad(sendData).subscribe( result => {this.loadSaveIcon = false; this.loadData(); },
-        err => this.loadSaveIcon = false);
+    this.sendSelectionGroups(sendData)
+      .subscribe(
+        val => this.loadData(),
+        err => alert('ERROR al confirmar los grupos'),
+        () => this.loadSaveIcon = false
+      );
   }
 
   private updateGroup() {
-    // tslint:disable-next-line:no-shadowed-variable
-    for ( const element of this.teacherGroupsConfirm) {
-      if (element.impart_hours < 0.5) { continue; }
-      element.updateActiveLoad = true;
-      this.rest.updateLoadTeacher(element.area_cod, element.subject_cod, element.group_cod, {hours: element.impart_hours})
-        .subscribe( data => this.loadData(), err =>  alert('Error al guardar') );
-    }
+    const dataForSend = this.teacherGroupsConfirm
+      .filter(val => val.impart_hours > 0.1)
+      .map(val => {
+        return { area_cod: val.area_cod, subject_cod: val.subject_cod, group_cod: val.group_cod, impart_hours: val.impart_hours };
+      });
+
+    this.sendUpdateGroups(dataForSend)
+      .subscribe(
+        res => this.loadData(),
+        err => alert('Error al actualizar los datos: ' + err.message),
+        () => this.loadSaveIcon = false
+      );
+  }
+
+  private sendSelectionGroups(dataForSend): Observable<any> {
+    return from(dataForSend).pipe( concatMap(value => this.rest.createTeacherLoad(value)) );
+  }
+
+  private sendDeleteGroup(dataForSend): Observable<any> {
+    return from(dataForSend).pipe(
+      concatMap(data => this.rest.deleteLoadTeacher(data['area_cod'], data['subject_cod'], data['group_cod']))
+    );
+  }
+
+  private sendUpdateGroups(dataForSend): Observable<any> {
+    return from(dataForSend).pipe(
+      concatMap(val =>
+        this.rest.updateLoadTeacher(val['area_cod'], val['subject_cod'], val['group_cod'], {impart_hours: val['impart_hours']}))
+    );
+  }
+
+  private compareGroup(g1, g2): boolean {
+    return g1.area_cod === g2.area_cod && g1.subject_cod === g2.subject_cod && g1.group_cod === g2.group_cod;
   }
 
   /*
@@ -178,20 +199,24 @@ export class MySubjectComponent implements OnInit {
   private selectedAll($event) {
     this.deleteBtnAvailable = $event.target.checked;
     this.allSelected = $event.target.checked;
-    for (const group of this.teacherGroupsConfirm) { group.activedChanger = $event.target.checked; }
+    this.teacherGroupsConfirm = this.teacherGroupsConfirm.map(val => {val.activedChanger = $event.target.checked; return val; });
+    // for (const group of this.teacherGroupsConfirm) { group.activedChanger = $event.target.checked; }
   }
 
   private changeCheckboxItem($event) {
     if (!$event.target.checked && this.allSelected) { this.allSelected = !this.allSelected; }
-    if (this.checkedAllInput()) { this.allSelected = true; }
-    for (const group of this.teacherGroupsConfirm) {
-      if (group.activedChanger) { this.deleteBtnAvailable = true; break; } else { this.deleteBtnAvailable = false; } }
+    if (this.activedAllInput()) { this.allSelected = true; }
+
+    const value = this.teacherGroupsConfirm.find(val => val.activedChanger);
+    this.deleteBtnAvailable = !!value;
+
+    // for (const group of this.teacherGroupsConfirm) {
+    //   if (group.activedChanger) { this.deleteBtnAvailable = true; break; } else { this.deleteBtnAvailable = false; } }
   }
 
-  private checkedAllInput(): boolean {
-    for (const group of this.teacherGroupsConfirm) { if (!group.activedChanger) { return false; } }
-    return true;
+  private activedAllInput(): boolean {
+    const value = this.teacherGroupsConfirm.find(val => !val.activedChanger );
+    return !value;
   }
-
 
 }

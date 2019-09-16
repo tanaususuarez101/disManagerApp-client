@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {RestService} from '../../../services/rest.service';
 import {Router} from '@angular/router';
+import {map} from 'rxjs/operators';
+import {TeacherDemandComponent} from '../teacher-demand/teacher-demand.component';
 
 @Component({
   selector: 'app-teacher-pda',
@@ -17,6 +19,10 @@ export class TeacherPDAComponent implements OnInit {
 
   ngOnInit() {
     this.rest.getPDAs()
+      .pipe(map(data => {
+        for ( const subject of data) { subject.area_acronym = TeacherDemandComponent.typeOfArea(subject.area_cod); }
+        return data;
+      }))
       .subscribe(
       data => this.teacherHistory = data,
         err => {

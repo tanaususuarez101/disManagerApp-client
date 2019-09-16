@@ -14,7 +14,7 @@ export class RequestManagerComponent implements OnInit {
   private fields = ['Cód. grupo', 'Cód. Asignatura', 'Cód. Área de conocimiento', 'Profesor', 'Cód. Área Profesor', 'Horas', 'Venia',
     'Estado'];
   private fieldVeniaI = ['Código de area', 'Profesor', 'Estado'];
-  private fieldVeniaII = ['Código Área', 'Código Asignatura', 'Profesor','Estado'];
+  private fieldVeniaII = ['Código Área', 'Código Asignatura', 'Profesor', 'Estado'];
 
   private teacherRequest = [];
   private listVeniasI = [];

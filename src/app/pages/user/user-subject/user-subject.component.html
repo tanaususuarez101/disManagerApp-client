@@ -3,19 +3,15 @@
 <app-request-venia></app-request-venia>
 
 <div class="btn-group btn-group-sm" role="group">
-  <button type="button" class="btn btn-outline-primary" (click)="updateChange()">
+  <button type="button" class="btn btn-outline-success" (click)="updateChange()">
     <i *ngIf="!loadSaveIcon" class="fa fa-save"></i>
     <i *ngIf="loadSaveIcon" class="fa fa-spinner fa-spin" ></i>
     Guardar
   </button>
-  <button type="button" class="btn btn-outline-primary" (click)="deleteGroup()" [disabled]="!deleteBtnAvailable">
+  <button type="button" class="btn btn-outline-danger" (click)="deleteGroup()" [disabled]="!deleteBtnAvailable">
     <i *ngIf="!loadDeleterIcon" class="fa fa-trash" ></i>
     <i *ngIf="loadDeleterIcon" class="fa fa-spinner fa-spin" ></i>
     Eliminar
-  </button>
-  <button type="button" class="btn btn-outline-primary" (click)="requestVenia()">
-    <i class="fa fa-inbox" ></i>
-    Solicitar Venias
   </button>
 </div>
 
@@ -44,7 +40,7 @@
 <div class="row" *ngIf="teacherGroupsConfirm.length > 0">
   <div class="col-12">
     <div class="tableFixHead">
-      <table class="table table-striped ">
+      <table class="table table-striped table-sm">
         <thead>
           <tr class="content-align">
             <th class="align-middle">
@@ -68,8 +64,11 @@
                 >
               </td>
               <td>{{item?.university_acronym}}</td>
-              <td>{{item?.area_name}}</td>
-              <td>{{item?.subject_name}}</td>
+              <td>{{item?.area_acronym}}</td>
+              <td>
+                {{item?.subject_name}}
+                <p *ngIf="item?.area_cod !== user.area_cod" class="text-danger">(Es necesario solicitar venia)</p>
+              </td>
               <td>{{item?.group_cod}}</td>
               <td>{{item?.group_type}}</td>
               <td>{{item?.group_hours}}</td>
@@ -86,7 +85,7 @@
                        min="0.00" max="{{item?.group_hours}}"
                        [value]="item?.impart_hours"
                        [(ngModel)]="item.impart_hours"
-                       (change)="clickChanger($event.target)"
+                       (change)="clickChanger($event.target, item)"
                 >
               </td>
               <td *ngIf="item.approved">Aprobado</td>
@@ -138,7 +137,7 @@
     </div>
 
     <div class="tableFixHead">
-      <table class="table table-striped ">
+      <table class="table table-striped table-sm">
 
         <thead>
         <tr class="content-align">
@@ -149,8 +148,8 @@
         <tbody>
         <tr *ngFor="let item of groups | ordenBySubject | searchFilter: filterSubject | hoursFilter: orderHours |
           areaFilter: orderArea">
-          <td class="align-middle">{{item?.university_name}}</td>
-          <td class="align-middle">{{item?.area_name}}</td>
+          <td class="align-middle">{{item?.university_acronym}}</td>
+          <td class="align-middle">{{item?.area_acronym}}</td>
           <td class="align-middle">{{item?.subject_name}}</td>
           <td class="align-middle">{{item?.subject_course}}</td>
           <td class="align-middle">{{item?.subject_semester}}</td>
@@ -169,7 +168,7 @@
                    step='1'
                    value="{{item?.impart_hours}}" min="0" max="{{item?.group_hours}}"
                    [(ngModel)]="item.impart_hours"
-                   (change)="clickChanger($event.target)">
+                   (change)="clickChanger($event.target, item)">
           </td>
         </tr>
         </tbody>

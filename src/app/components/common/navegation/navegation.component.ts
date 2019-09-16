@@ -16,12 +16,12 @@ export class NavegationComponent implements OnInit {
   PDOlink = [
     {name: 'Demanda docente', path: '/dashboard/teacher-demand'},
     {name: 'Carga docente', path: '/dashboard/teacher-load'},
-    {name: 'Tutorías', path: '/dashboard/tutorial'},
+    {name: 'Tutorías', path: '/dashboard/teacher-tutorial'},
     {name: 'Coordinador de Asignatura', path: '/dashboard/subject-coordinator'},
     {name: 'Proyecto docente', path: '/dashboard/teacher-PDA'},
   ];
   userlink = [
-    {name: 'Mi Tutoría', path: '/dashboard/user-tutorial'},
+    {name: 'Mi Tutoría', path: '/dashboard/user-teacher-tutorial'},
     {name: 'Mi Solicitud', path: '/dashboard/user-request'},
     {name: 'Mi Coordinación', path: '/dashboard/user-coordinator'},
     {name: 'Mi Carga docente', path: '/dashboard/user-subject'}

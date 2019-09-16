@@ -1,12 +1,5 @@
 <h3 class="text-muted">{{title}}</h3>
 
-<div class="btn-group btn-group-sm" role="group">
-  <button type="button" class="btn btn-outline-primary" (click)="showTutorialModal()">
-    <i class="fa fa-pencil"></i>
-    Editar
-    <span class="badge badge-outline-primary">{{hoursSelected}} / {{user.tutorial_hours}} horas</span>
-  </button>
-</div>
 
 <div class="row">
   <div class="col-12">
@@ -77,5 +70,3 @@
     </table>
   </div>
 </div>
-
-<app-update-tutorial (request)="loadData()" ></app-update-tutorial>
