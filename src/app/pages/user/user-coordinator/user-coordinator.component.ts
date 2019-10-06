@@ -36,20 +36,18 @@ export class UserCoordinatorComponent implements OnInit {
       this.rest.getSubjectCoordinator(dni),
       this.rest.getSubjectResponsible(dni)
     )
-      .subscribe(array => {
+    .subscribe(array => {
+      const impartSubjects = this.setArray(array[0]);
+      this.subjectlist = array[1]
+        .filter(sub => impartSubjects.find(subImp => this.equals(subImp, sub)))
+        .map(subject => {
+          subject.area_acronym = TeacherDemandComponent.typeOfArea(subject.area_cod);
+          subject.coordinator = this.subjectSelected(array[2], subject);
+          subject.responsible = this.subjectSelected(array[3], subject);
+          return subject;
+        });
 
-        const impartSubjects = this.setArray(array[0]);
-        this.subjectlist = array[1]
-          .filter(sub => impartSubjects.find(subImp => this.equals(subImp, sub)))
-          .map(subject => {
-            console.log(subject);
-            subject.area_acronym = TeacherDemandComponent.typeOfArea(subject.area_cod);
-            subject.coordinator = this.subjectSelected(array[2], subject);
-            subject.responsible = this.subjectSelected(array[3], subject);
-            return subject;
-          });
-
-      });
+    });
   }
 
   private subjectSelected(data: any = [], subject: any) {
@@ -67,7 +65,6 @@ export class UserCoordinatorComponent implements OnInit {
   private equals(s1: any, s2: any) {
     return (s1.area_cod === s2.area_cod) && (s1.subject_cod === s2.subject_cod);
   }
-
 
   private saveData() {
 

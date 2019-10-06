@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {RestService} from '../../../services/rest.service';
+import {TeacherDemandComponent} from '../teacher-demand/teacher-demand.component';
+import {map} from 'rxjs/operators';
 
 @Component({
   selector: 'app-teacher-load-details',
@@ -9,8 +11,9 @@ import {RestService} from '../../../services/rest.service';
 })
 export class TeacherLoadDetailsComponent implements OnInit {
 
-  teacherLoads = [];
-  fields = ['Titulación', 'Asignatura', 'Curso', 'Tipo', 'Semestre', 'Tipo de grupo', 'Nº Grupo', 'Horas en solicitud'];
+  fields = ['Titulación', 'Asignatura', 'Áreas de conocimietnos', 'Curso', 'Tipo', 'Semestre', 'Tipo de grupo', 'Nº Grupo', 'Horas en solicitud'];
+  teacher = {teacher_name: '', teacher_surnames: ''};
+  groups = [];
 
   constructor(private route: ActivatedRoute, public rest: RestService) { }
 
@@ -20,11 +23,14 @@ export class TeacherLoadDetailsComponent implements OnInit {
 
   private teacherLoad() {
     const id = +this.route.snapshot.paramMap.get('id');
-    this.rest.getTeacherLoad(id).subscribe(
-      data => {
-        this.teacherLoads = data;
-        console.log(data);
-      }
-    );
+    this.rest.getTeacherLoad(id)
+      .subscribe(data => {
+        this.teacher.teacher_name = data.teacher_name;
+        this.teacher.teacher_surnames = data.teacher_surnames;
+        this.groups = data.groups.map(group => {
+          group.area_acronym = TeacherDemandComponent.typeOfArea(group.area_cod);
+          return group;
+        });
+      });
   }
 }

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {FormBuilder, Validators} from '@angular/forms';
 import {AuthenticationService} from '../../../services/authentication.service';
+import {RestService} from '../../../services/rest.service';
 
 @Component({
   selector: 'app-change-password',
@@ -13,10 +14,12 @@ export class ChangePasswordComponent implements OnInit {
   private submitted = false;
   private message: string;
   private classAlert: string;
+  private user: any;
 
-  constructor(private  formBuilder: FormBuilder, private auth: AuthenticationService) { }
+  constructor(private  formBuilder: FormBuilder, private auth: AuthenticationService, private rest: RestService) { }
 
   ngOnInit() {
+    this.user = this.auth.getUser();
     this.createLoginForm();
   }
 
@@ -31,7 +34,7 @@ export class ChangePasswordComponent implements OnInit {
       return;
     }
 
-    this.auth.updateCurrentUser({'password': this.passwordForm.value[ 'password' ]})
+    this.rest.updateUser(this.user.username, {'password': this.passwordForm.value[ 'password' ]})
       .subscribe(
         data => {
           this.message = 'Contraseña guardada satisfactoriamente';

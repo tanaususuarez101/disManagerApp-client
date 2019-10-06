@@ -32,6 +32,10 @@ $siderbar-secondary: white;
 
   //Componentes del cuerpo
   .sidebar-body {
+    .list-group-item {
+      padding: .55rem 1.05rem;
+    }
+
     li {
       margin: 0;
       font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,

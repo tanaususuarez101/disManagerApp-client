@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import { map } from 'rxjs/operators';
 import {Observable} from 'rxjs';
+import {HeaderService} from './header.service';
 
 const endpoint = 'http://localhost:5000';
 const httpOptions = {
@@ -30,17 +31,11 @@ export class AuthenticationService {
   logout() {
     this.removeTokenandUser();
   }
-
+/*
   updateCurrentUser(user) {
-    const httpHeaderToken = {
-      headers: new HttpHeaders({
-        'Access-Control-Allow-Origin': '*',
-        'Content-Type': 'application/json',
-        'x-access-token': this.getToken()
-      })
-    };
-    return this.http.put(endpoint + '/currentUser', user, httpHeaderToken);
+    return this.http.put(endpoint + '/currentUser', user, {headers: this.header.buildHeaderToken()});
   }
+*/
 
   getCurrent(token): Observable<any> {
     const httpHeaderToken = {

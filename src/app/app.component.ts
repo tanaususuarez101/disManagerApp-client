@@ -1,6 +1,5 @@
-import {Component, OnChanges, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 
-declare const $: any;
 
 @Component({
   selector: 'app-root',

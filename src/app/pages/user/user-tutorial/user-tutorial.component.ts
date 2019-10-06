@@ -33,7 +33,6 @@ export class UserTutorialComponent implements OnInit {
   loadData() {
     this.rest.getTutorial(this.user.teacher_dni)
       .subscribe(rest => {
-        console.log(rest);
         this.firstSemester = rest.first_semester;
         this.secondSemester = rest.second_semester;
         this.hoursSelected = rest.hours;

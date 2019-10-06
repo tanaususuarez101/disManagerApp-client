@@ -24,16 +24,10 @@ export class TeacherLoadComponent implements OnInit {
   ngOnInit() {
     this.orderArea = TeacherDemandComponent.orderMyArea(this.auth.getUser().area_cod);
     this.rest.getTeacherLoads()
-      .pipe(map(data => {
-        for ( const subject of data) { subject.area_acronym = TeacherDemandComponent.typeOfArea(subject.area_cod); }
-        console.log(data);
-        return data;
-      }))
-      .subscribe(
-      data =>  this.teacherloads = data,
-      err => { if (err.status == 401) { this.router.navigate(['/login']); }
-      }
-    );
+      .subscribe(data =>  this.teacherloads = data.map(sub => {
+        sub.area_acronym = TeacherDemandComponent.typeOfArea(sub.area_cod);
+        return sub;
+      }));
   }
 
 }

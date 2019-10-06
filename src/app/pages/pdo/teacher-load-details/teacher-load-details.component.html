@@ -1,24 +1,25 @@
-<h3 class="text-muted">{{teacherLoads?.teacher_name}} {{teacherLoads?.teacher_surnames}}</h3>
+<h3 class="text-muted">{{teacher?.teacher_name}} {{teacher?.teacher_surnames}}</h3>
 
 <div class="row">
   <div class="col-12">
     <div class="tableFixHead">
-      <table class="table">
+      <table class="table table-sm table-hover">
       <thead class="thead-light">
-      <tr >
-        <th *ngFor="let field of fields" scope="col" class="align-middle">{{field}}</th>
+      <tr>
+        <th *ngFor="let field of fields" >{{field}}</th>
       </tr>
       </thead>
       <tbody>
-      <tr *ngFor="let item of teacherLoads?.groups | ordenBySubject" >
-        <td class="align-middle">{{item?.university_name}}</td>
-        <td class="align-middle">{{item?.subject_name}}</td>
-        <td class="align-middle">{{item?.subject_course}}</td>
-        <td class="align-middle">{{item?.subject_type}}</td>
-        <td class="align-middle">{{item?.subject_semester}}</td>
-        <td class="align-middle">{{item?.group_type}}</td>
-        <td class="align-middle">{{item?.group_cod}}</td>
-        <td class="align-middle">{{item?.assigned_hours}}</td>
+      <tr *ngFor="let group of groups | ordenBySubject" >
+        <td>{{group?.university_acronym}}</td>
+        <td>{{group?.subject_name}}</td>
+        <td>{{group?.area_acronym}}</td>
+        <td>{{group?.subject_course}}</td>
+        <td>{{group?.subject_type}}</td>
+        <td>{{group?.subject_semester}}</td>
+        <td>{{group?.group_type}}</td>
+        <td>{{group?.group_cod}}</td>
+        <td>{{group?.assigned_hours}}</td>
       </tr>
       </tbody>
     </table>

@@ -36,9 +36,6 @@ import { NewUserComponent } from './components/modal/new-user/new-user.component
 import { TeacherEditComponent } from './components/modal/teacher-edit/teacher-edit.component';
 import { ModalAlertComponent } from './components/modal/modal-alert/modal-alert.component';
 import { LogOutComponent } from './components/modal/log-out/log-out.component';
-import { RequestVeniaComponent } from './components/modal/request-venia/request-venia.component';
-import { FormVenia1Component } from './components/form/form-venia1/form-venia1.component';
-import { FormVenia2Component } from './components/form/form-venia2/form-venia2.component';
 import { RequestManagerComponent } from './pages/manager/request-manager/request-manager.component';
 import { DetailsSchemeComponent } from './components/modal/details-scheme/details-scheme.component';
 import { DetailsPdaComponent } from './components/modal/details-pda/details-pda.component';
@@ -82,9 +79,6 @@ import { ChangePasswordComponent } from './components/modal/change-password/chan
     TeacherEditComponent,
     ModalAlertComponent,
     LogOutComponent,
-    RequestVeniaComponent,
-    FormVenia1Component,
-    FormVenia2Component,
     RequestManagerComponent,
     DetailsSchemeComponent,
     DetailsPdaComponent,

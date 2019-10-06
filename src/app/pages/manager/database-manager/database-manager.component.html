@@ -31,18 +31,19 @@
     </div>
   </div>
   </div>
+
   <div class="col-12">
     <div class="card border-danger">
       <div class="card-body text-danger">
-        <h5 class="card-title">Eliminar</h5>
+        <h5 class="card-title">Eliminar esquemas</h5>
         <p>
           ¡Tenga cuidado esta acción elimina todo el contenido de la base de datos!. Antes de realizar esta acción se le
           recomienda que haga una copia.
         </p>
         <button type="button" class="btn btn-link" (click)="availableDelete()">Eliminar base de datos</button>
-        <div id="delete-database"></div>
       </div>
     </div>
   </div>
+
 </div>
 <app-modal-alert (request)="deleteDataBases($event)"></app-modal-alert>

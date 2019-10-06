@@ -56,7 +56,9 @@
       <tr *ngFor="let teacher of groupDetails?.teacher">
         <td>{{teacher?.teacher_surnames}}, {{teacher?.teacher_name}}</td>
         <td>{{teacher?.assigned_hours}}</td>
-        <td>{{teacher?.status}}</td>
+        <td *ngIf="teacher.approved">Aprobado</td>
+        <td *ngIf="teacher.rejected">Rechazado</td>
+        <td *ngIf="!teacher.approved && !teacher.rejected">Pendiente</td>
       </tr>
       </tbody>
     </table>
