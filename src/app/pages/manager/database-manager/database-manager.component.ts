@@ -24,7 +24,7 @@ export class DatabaseManagerComponent implements OnInit {
   availableDelete() { $('#modal-alert').modal('show'); }
 
   deleteDataBases(b: boolean) {
-    if (!b) return;
+    if (!b) { return; }
     const messageDataBase = document.getElementById('delete-database');
     messageDataBase.innerHTML = '<p style="color: #212529">Eliminando todo el contenido... <i class="fa fa-spinner fa-spin"></i></p>';
     this.rest.deleteScheme()

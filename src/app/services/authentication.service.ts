@@ -31,11 +31,6 @@ export class AuthenticationService {
   logout() {
     this.removeTokenandUser();
   }
-/*
-  updateCurrentUser(user) {
-    return this.http.put(endpoint + '/currentUser', user, {headers: this.header.buildHeaderToken()});
-  }
-*/
 
   getCurrent(token): Observable<any> {
     const httpHeaderToken = {

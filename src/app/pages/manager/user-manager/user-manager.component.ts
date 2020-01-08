@@ -59,6 +59,4 @@ export class UserManagerComponent implements OnInit {
       }
     }
   }
-
-  update() { this.loadList(); }
 }

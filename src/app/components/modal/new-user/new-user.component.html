@@ -25,12 +25,11 @@
 
           <div class="form-row">
             <div class="form-group col-md-6">
-              <input type="text" class="form-control" id="inputEmail4" placeholder="Nombre de usuario"
+              <input type="text" class="form-control" id="inputEmail4" placeholder="Nombre de usuario" formControlName="username"
                      [ngClass]="{
                      'is-invalid': submitted && f.username?.errors,
                      'is-valid': submitted && !f.username?.errors
-                     }"
-                     formControlName="username">
+                     }">
               <div *ngIf="submitted && f.username?.errors" class="invalid-feedback">
                 Introduzca un nombre de usuario
               </div>
@@ -38,7 +37,8 @@
             <div class="form-group col-md-6">
               <input type="password" class="form-control" id="inputPassword4" placeholder="Contraseña"
                      formControlName="password"
-                     [ngClass]="{ 'is-invalid': submitted && f.password?.errors,
+                     [ngClass]="{
+                     'is-invalid': submitted && f.password?.errors,
                      'is-valid': submitted && !f.password?.errors }">
               <div *ngIf="submitted && f.password?.errors" class="invalid-feedback">
                 Introduzca una contraseña
@@ -47,17 +47,31 @@
           </div>
 
           <ng-container *ngIf="isTeacher" >
+            <!--
             <div class="alert alert-light" role="alert">
               Si el profesor ya está registrado, solo es necesario rellenar el campo <strong>DNI.</strong>
             </div>
+            -->
             <div class="form-row">
               <div class="form-group col-md-5">
                 <label for="inputName">Nombre</label>
-                <input type="text" class="form-control" id="inputName" formControlName="name">
+                <input type="text" class="form-control" id="inputName" formControlName="name"
+                       [ngClass]="{
+                       'is-invalid': submitted && f.name?.errors,
+                       'is-valid': submitted && !f.name?.errors}">
+                <div *ngIf="submitted && f.name?.errors" class="invalid-feedback">
+                  Introduzca un nombre
+                </div>
               </div>
               <div class="form-group col-md-5">
                 <label for="inputSurnames">Apellidos</label>
-                <input type="text" class="form-control" id="inputSurnames" formControlName="surnames">
+                <input type="text" class="form-control" id="inputSurnames" formControlName="surnames"
+                       [ngClass]="{
+                       'is-invalid': submitted && f.surnames?.errors,
+                       'is-valid': submitted && !f.surnames?.errors}">
+                <div *ngIf="submitted && f.surnames?.errors" class="invalid-feedback">
+                  Introduzca los apellidos
+                </div>
               </div>
               <div class="form-group col-md-2">
                 <label for="inputDni">DNI</label>
@@ -75,21 +89,39 @@
             <div class="form-row">
               <div class="form-group col-md-3">
                 <label for="inputPotential">Potencial</label>
-                <input type="text" class="form-control" id="inputPotential" formControlName="potential">
+                <input type="text" class="form-control" id="inputPotential" formControlName="potential"
+                       [ngClass]="{
+                       'is-invalid': submitted && f.potential?.errors,
+                       'is-valid': submitted && !f.potential?.errors}">
+                <div *ngIf="submitted && f.potential?.errors" class="invalid-feedback">
+                  Introduzca el potencial
+                </div>
               </div>
 
               <div class="form-group col-md-3">
                 <label for="inputhourstutorial">Horas de tutorias</label>
-                <input type="text" class="form-control" id="inputhourstutorial" formControlName="tutorial_hours">
+                <input type="text" class="form-control" id="inputhourstutorial" formControlName="tutorial_hours"
+                       [ngClass]="{
+                       'is-invalid': submitted && f.tutorial_hours?.errors,
+                       'is-valid': submitted && !f.tutorial_hours?.errors}">
+                <div *ngIf="submitted && f.tutorial_hours?.errors" class="invalid-feedback">
+                  Introduzca horas de tutorías
+                </div>
               </div>
 
               <div class="form-group col-md-6">
                 <label for="inputKnowledgeArea">Área de Conocimiento</label>
-                <select id="inputKnowledgeArea" class="form-control" formControlName="area_cod">
+                <select id="inputKnowledgeArea" class="form-control" formControlName="area_cod"
+                        [ngClass]="{
+                       'is-invalid': submitted && f.area_cod?.errors,
+                       'is-valid': submitted && !f.area_cod?.errors}">
                   <option value="35" selected>Arquitectura Y Tecnología de Computadores(35)</option>
                   <option value="75">Ciencia De La Comp. E Intel. Artificial (75)</option>
                   <option value="570">Lenguajes Y Sistemas Informáticos (570)</option>
                 </select>
+                <div *ngIf="submitted && f.area_cod?.errors" class="invalid-feedback">
+                  Seleccione el área de conocimiento
+                </div>
               </div>
             </div>
           </ng-container>

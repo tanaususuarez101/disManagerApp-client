@@ -33,11 +33,11 @@ export class NewUserComponent implements OnInit {
         username: ['', Validators.required],
         password: ['', Validators.required],
         dni: ['', Validators.required],
-        name: [''],
-        surnames: [''],
-        area_cod: [''],
-        potential: [''],
-        tutorial_hours: [''],
+        name: ['', Validators.required],
+        surnames: ['', Validators.required],
+        area_cod: ['', Validators.required],
+        potential: ['', [Validators.required, Validators.pattern(/^[0-9]+(\.?[0-9]+)?$/)]],
+        tutorial_hours: ['', [Validators.required, Validators.pattern(/^[0-9]+(\.?[0-9]+)?$/)]],
         admin: false
       });
     } else {
@@ -70,4 +70,6 @@ export class NewUserComponent implements OnInit {
       );
   }
   get f() { return this.signInForm.controls; }
+
 }
+

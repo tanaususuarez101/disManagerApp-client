@@ -210,8 +210,6 @@ export class MySubjectComponent implements OnInit {
     const value = this.teacherGroupsConfirm.find(val => val.activedChanger);
     this.deleteBtnAvailable = !!value;
 
-    // for (const group of this.teacherGroupsConfirm) {
-    //   if (group.activedChanger) { this.deleteBtnAvailable = true; break; } else { this.deleteBtnAvailable = false; } }
   }
 
   private activedAllInput(): boolean {

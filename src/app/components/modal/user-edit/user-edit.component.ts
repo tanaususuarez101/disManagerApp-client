@@ -25,20 +25,18 @@ export class UserEditComponent implements OnInit, OnChanges {
   }
 
   private initUser() {
-    /*console.log('Init User: ', this.user);*/
-    if (!this.user) this.user = {username: '', password: '', teacher_dni: '', isAdmin: false};
+    if (!this.user) { this.user = {username: '', password: '', teacher_dni: '', isAdmin: false}; }
   }
 
   updateUser() {
     if (this.user != null ) {
-      if (!this.user.password) this.user.password = '';
-      console.log(this.user);
+      if (!this.user.password) { this.user.password = ''; }
       this.rest.updateUser(this.user.username, this.user)
         .subscribe(
         data => {
             $('#modal-user-edit').modal('hide');
             this.request.emit(true);
-        },err => alert('Error al guardar usuario'));
+        }, err => { alert('Error al guardar usuario'); });
     }
   }
 

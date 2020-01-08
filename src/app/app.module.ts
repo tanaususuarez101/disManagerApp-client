@@ -8,7 +8,6 @@ import { HeaderComponent } from './components/common/header/header.component';
 import {AppRoutingModule} from './app-routing.module';
 import { TeacherDemandComponent } from './pages/pdo/teacher-demand/teacher-demand.component';
 import {RouterModule} from '@angular/router';
-import { NavegationComponent } from './components/common/navegation/navegation.component';
 import { TeacherLoadComponent } from './pages/pdo/teacher-load/teacher-load.component';
 import { TeacherTutorialComponent } from './pages/pdo/teacher-tutorial/teacher-tutorial.component';
 import { SubjectCoordinatorComponent } from './pages/pdo/subject-coordinator/subject-coordinator.component';
@@ -52,7 +51,6 @@ import { ChangePasswordComponent } from './components/modal/change-password/chan
     AppComponent,
     HeaderComponent,
     TeacherDemandComponent,
-    NavegationComponent,
     TeacherLoadComponent,
     TeacherTutorialComponent,
     SubjectCoordinatorComponent,
